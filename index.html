@@ -201,6 +201,12 @@ body.zon .zona{display:block}
 .cv .w1,.cv .w2{transition:clip-path .45s cubic-bezier(.6,0,.2,1)}
 .cv .veu,.cv .blur{transition:opacity .35s}
 html.sem-trans .cv,html.sem-trans .cv *{transition:none!important}
+.ap-concluir{font:inherit;font-weight:800;font-size:13px;background:#fff;color:#000;border:0;border-radius:8px;padding:8px 14px;cursor:pointer}
+.ap-fim{display:flex;justify-content:center;padding:48px 0 96px}.ap-fim .ap-concluir{font-size:16px;padding:14px 28px}
+#fim-dlg{max-width:560px;width:calc(100% - 32px);background:#141414;color:#eee;border:1px solid #333;border-radius:16px;padding:28px}
+#fim-dlg::backdrop{background:#000b}#fim-dlg h2{margin:0 0 12px;font-size:22px}#fim-dlg p{line-height:1.5;margin:8px 0}
+#fim-dlg ul{margin:8px 0 16px;padding-left:20px;max-height:220px;overflow:auto}#fim-dlg a{color:#FADF4B}
+#fim-dlg .ok{color:#5be37f;font-weight:800}#fim-dlg .faltam{color:#f5c84b;font-weight:800}
 </style>
 
 <svg width="0" height="0" style="position:absolute"><filter id="distorce"><feTurbulence type="fractalNoise" baseFrequency="0.008 0.02" numOctaves="2" seed="3"><animate attributeName="baseFrequency" dur="8s" values="0.008 0.02;0.014 0.03;0.008 0.02" repeatCount="indefinite"/></feTurbulence><feDisplacementMap in="SourceGraphic" scale="60"/></filter>
@@ -211,6 +217,7 @@ html.sem-trans .cv,html.sem-trans .cv *{transition:none!important}
     <div class="ap-filtros" id="filtros" role="group" aria-label="Mostrar peças"></div>
     <div class="ap-cores" id="cores" role="group" aria-label="Cor de destaque">Destaque</div>
     <label class="ap-nome" for="nome">Seu nome <input id="nome" maxlength="60" autocomplete="name" placeholder="Para votar"></label>
+    <button type="button" class="ap-concluir" onclick="concluir()">Concluir revisão</button>
   </div>
   <div class="ap-barra" id="barra" aria-hidden="true"></div>
 </div>
@@ -222,7 +229,9 @@ html.sem-trans .cv,html.sem-trans .cv *{transition:none!important}
   </div>
   <nav class="ap-nav" id="nav" aria-label="Seções"></nav>
   <div id="pecas"></div>
+  <div class="ap-fim"><button type="button" class="ap-concluir" onclick="concluir()">Concluir revisão</button></div>
 </main>
+<dialog id="fim-dlg"><div id="fim-txt"></div><button type="button" class="ap-concluir" onclick="document.getElementById('fim-dlg').close()">Fechar</button></dialog>
 
 <script>
 const PUBLICO={"api":"https://script.google.com/macros/s/AKfycbxRqFlNalYDBRXFZYEIL7WZoQMdvUwAX0qMfaa9sdXzvbt8sWSx-DoYO63Cbr923hWn/exec"};
@@ -676,6 +685,29 @@ if(PUBLICO){
   if(nomeEl){nomeEl.value=ler("nome")||"";nomeEl.addEventListener("change",()=>{guardar("nome",nomeEl.value.trim());mostrarPublico()})}
   if(PUBLICO.api){carregarVotos();setInterval(()=>{if(!document.hidden)carregarVotos()},30000)}
   else{avisar("A votação ainda não foi ligada nesta página.",true);mostrarPublico()}
+}
+
+// ---------- concluir revisão: só mostra um resumo; nada é gravado aqui ----------
+function concluir(){
+  const dlg=document.getElementById("fim-dlg"),txt=document.getElementById("fim-txt");
+  const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"})[c]);
+  const nomePeca=p=>document.querySelector("#"+p.id+" h3")?.textContent||p.id;
+  let html;
+  if(PUBLICO){
+    const nome=(nomeEl?.value||"").trim();
+    if(!nome){html="<h2>Falta o seu nome</h2><p>Escreva seu nome no alto da página. É ele que liga os votos e comentários a você.</p>"}
+    else{
+      const eu=chaveNome(nome);
+      const votadas=PECAS.filter(p=>decisoes[p.id]?.meu),faltam=PECAS.filter(p=>!decisoes[p.id]?.meu);
+      const coment=votos.filter(v=>v.comentario&&chaveNome(v.nome)==eu).length;
+      html=`<h2>Revisão de ${esc(nome)}</h2><p class="ok">Tudo o que você marcou já está salvo na planilha. Cada clique grava na hora.</p><p>Você votou em <b>${votadas.length} de ${PECAS.length}</b> peças e deixou <b>${coment}</b> comentário${coment==1?"":"s"}.</p>`+
+        (faltam.length?`<p class="faltam">Faltam ${faltam.length}:</p><ul>${faltam.map(p=>`<li><a href="#${p.id}" onclick="document.getElementById('fim-dlg').close()">${esc(nomePeca(p))}</a></li>`).join("")}</ul>`:"<p>Você passou por todas as peças. Obrigado!</p>")+
+        "<p>Pode fechar a página. Se mudar de ideia, volte e clique de novo: vale o último voto.</p>";
+    }
+  }else{
+    const c=contar();html=`<h2>Resumo da equipe</h2><p class="ok">As decisões são salvas ao vivo.</p><p>${c.aprovada} aprovadas · ${c.ajustar} para ajustar · ${c.refazer} para refazer · ${c.sem} sem decisão.</p>`;
+  }
+  txt.innerHTML=html;dlg.showModal();
 }
 
 if(location.hash){const alvo=document.getElementById(location.hash.slice(1));if(alvo)setTimeout(()=>alvo.scrollIntoView(),50)}
