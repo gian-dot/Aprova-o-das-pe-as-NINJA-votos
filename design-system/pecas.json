@@ -1,0 +1,1438 @@
+{
+  "versao": "1 — promovido do laboratório em 02/11/2026",
+  "como_ler": "Cada peça lista as variáveis que a editora pode mudar. tipo: texto (uma linha), texto_longo (várias linhas), foto, video, midia (foto ou vídeo), logo_veiculo, opcao (escolha de lista), sim_nao, numero, data, lista (itens repetidos), tabela (dados de gráfico), srt (vem da aba Legenda), foco (ponto da imagem). limite: linhas e caracteres por linha medidos no tamanho de letra da regra; acima disso a peça avisa em vez de diminuir a letra. muda_9x16: o que a derivação 16x9 → 9x16 faz sozinha. limite pode trazer valores próprios de um formato (ex.: \"16x9\": { \"car_linha\": 24 }), que valem no lugar dos gerais naquele formato.",
+  "comuns": [
+    {
+      "id": "formato",
+      "rotulo": "Formato",
+      "tipo": "opcao",
+      "opcoes": [
+        "16x9",
+        "9x16",
+        "os dois"
+      ],
+      "padrao": "os dois"
+    },
+    {
+      "id": "derivar_9x16",
+      "rotulo": "Derivar 9x16 do 16x9",
+      "tipo": "sim_nao",
+      "padrao": true,
+      "ajuda": "Quando ligado, o 9x16 usa os mesmos textos e mídias e só reorganiza o layout."
+    },
+    {
+      "id": "cor_destaque",
+      "rotulo": "Cor de destaque da cobertura",
+      "tipo": "opcao",
+      "opcoes": [
+        "amarelo #FADF4B",
+        "verde #75FB4C",
+        "magenta #EA33F7"
+      ],
+      "padrao": "amarelo #FADF4B",
+      "ajuda": "Definida uma vez por vídeo; não por peça."
+    },
+    {
+      "id": "duracao",
+      "rotulo": "Duração na tela (s)",
+      "tipo": "numero",
+      "ajuda": "Calculada sozinha: caracteres ÷ 15 + 1 s, dentro do mínimo e máximo de cada peça; a editora pode ajustar."
+    },
+    {
+      "id": "versao",
+      "rotulo": "Versão",
+      "tipo": "numero",
+      "padrao": 1,
+      "ajuda": "Botão 'gerar versão 2': guarda o histórico e substitui o arquivo atual no Premiere."
+    }
+  ],
+  "pecas": [
+    {
+      "id": "manchete_central",
+      "nome": "Manchete central (modelo de vídeo do Canva)",
+      "duracao": [
+        3,
+        7
+      ],
+      "variaveis": [
+        {
+          "id": "chapeu",
+          "rotulo": "Chapéu",
+          "tipo": "texto",
+          "obrigatorio": false,
+          "limite": {
+            "linhas": 1,
+            "car_linha": 28
+          },
+          "ajuda": "Caixa alta automática."
+        },
+        {
+          "id": "manchete",
+          "rotulo": "Manchete",
+          "tipo": "texto_longo",
+          "obrigatorio": true,
+          "limite": {
+            "linhas": 3,
+            "car_linha": 15,
+            "16x9": {
+              "car_linha": 24
+            }
+          },
+          "ajuda": "TipoNinja caixa alta. Quebra de linha sugerida pelo sentido."
+        },
+        {
+          "id": "palavra_destaque",
+          "rotulo": "Palavra em destaque",
+          "tipo": "texto",
+          "obrigatorio": false,
+          "ajuda": "Uma palavra ou expressão da manchete na cor de destaque."
+        },
+        {
+          "id": "fundo",
+          "rotulo": "Vídeo ou foto de fundo",
+          "tipo": "midia",
+          "obrigatorio": true,
+          "ajuda": "Do Drive (02 IMG) ou trecho do vídeo."
+        },
+        {
+          "id": "foco",
+          "rotulo": "Ponto de foco",
+          "tipo": "foco",
+          "ajuda": "Para enquadrar a mídia nos dois formatos."
+        },
+        {
+          "id": "tratamento",
+          "rotulo": "Tratamento do fundo",
+          "tipo": "opcao",
+          "opcoes": [
+            "degradê + base preta (Canva)",
+            "véu 55%",
+            "desfoque + véu"
+          ],
+          "padrao": "degradê + base preta (Canva)"
+        },
+        {
+          "id": "modo",
+          "rotulo": "Modo",
+          "tipo": "opcao",
+          "opcoes": [
+            "normal",
+            "ao vivo"
+          ],
+          "padrao": "normal",
+          "ajuda": "Ao vivo troca o chapéu para vermelho com ●."
+        },
+        {
+          "id": "faixa_marcas",
+          "rotulo": "Faixa de marcas",
+          "tipo": "sim_nao",
+          "padrao": true
+        },
+        {
+          "id": "selo",
+          "rotulo": "Selo da cobertura",
+          "tipo": "opcao",
+          "opcoes": [
+            "nenhum",
+            "ELEIÇÕES 26",
+            "outro (PNG)"
+          ],
+          "padrao": "nenhum"
+        },
+        {
+          "id": "credito",
+          "rotulo": "Crédito",
+          "tipo": "texto",
+          "limite": {
+            "linhas": 1,
+            "car_linha": 48
+          },
+          "padrao": "VÍDEO: REPRODUÇÃO REDES SOCIAIS"
+        }
+      ],
+      "muda_9x16": "Limite real medido (02/11): 9x16 até 3 linhas de ~15 caracteres (TipoNinja 104 px em 914 px); 16x9 até 3 linhas de ~24. O bloco cresce para cima a partir da faixa de marcas. Se não couber, avisa e sugere corte."
+    },
+    {
+      "id": "pergunta_gancho",
+      "nome": "Pergunta-gancho / título em tarja",
+      "duracao": [
+        3,
+        7
+      ],
+      "variaveis": [
+        {
+          "id": "texto",
+          "rotulo": "Texto",
+          "tipo": "texto_longo",
+          "obrigatorio": true,
+          "limite": {
+            "linhas": 3,
+            "car_linha": 20
+          }
+        },
+        {
+          "id": "palavra_destaque",
+          "rotulo": "Palavra em destaque",
+          "tipo": "texto"
+        },
+        {
+          "id": "cor_tarja",
+          "rotulo": "Cor da tarja",
+          "tipo": "opcao",
+          "opcoes": [
+            "preta",
+            "branca"
+          ],
+          "padrao": "preta"
+        },
+        {
+          "id": "fundo",
+          "rotulo": "Vídeo de fundo",
+          "tipo": "video",
+          "obrigatorio": true
+        }
+      ],
+      "muda_9x16": "9x16: Aktiv 72 px, até 3 linhas de ~20 caracteres, sobre o peito (y ~60%)."
+    },
+    {
+      "id": "manchete_veiculo",
+      "nome": "Manchete de outro veículo",
+      "duracao": [
+        2,
+        4
+      ],
+      "variaveis": [
+        {
+          "id": "aplicacao",
+          "rotulo": "Aplicação",
+          "tipo": "opcao",
+          "opcoes": [
+            "cartão com fita",
+            "cartão no terço de cima",
+            "cascata de veículos"
+          ],
+          "padrao": "cartão com fita"
+        },
+        {
+          "id": "veiculo",
+          "rotulo": "Veículo",
+          "tipo": "logo_veiculo",
+          "obrigatorio": true,
+          "ajuda": "Escolher do banco (14 logos) ou subir PNG; a fita branca padroniza."
+        },
+        {
+          "id": "titulo",
+          "rotulo": "Título da matéria",
+          "tipo": "texto_longo",
+          "obrigatorio": true,
+          "limite": {
+            "linhas": 3,
+            "car_linha": 30
+          }
+        },
+        {
+          "id": "grifo",
+          "rotulo": "Trecho grifado",
+          "tipo": "texto",
+          "ajuda": "2–3 palavras do título."
+        },
+        {
+          "id": "data",
+          "rotulo": "Data",
+          "tipo": "data"
+        },
+        {
+          "id": "print",
+          "rotulo": "Print real da matéria (opcional)",
+          "tipo": "foto"
+        },
+        {
+          "id": "itens_cascata",
+          "rotulo": "Veículos da cascata",
+          "tipo": "lista",
+          "limite": {
+            "max": 4
+          },
+          "campos": [
+            "veiculo",
+            "titulo"
+          ]
+        }
+      ],
+      "muda_9x16": "Cartão vai para o terço de cima no 9x16."
+    },
+    {
+      "id": "capitulo",
+      "nome": "Marcador de capítulo",
+      "duracao": [
+        3,
+        5
+      ],
+      "variaveis": [
+        {
+          "id": "versao_peca",
+          "rotulo": "Versão",
+          "tipo": "opcao",
+          "opcoes": [
+            "tela de capítulo",
+            "etiqueta permanente"
+          ],
+          "padrao": "tela de capítulo"
+        },
+        {
+          "id": "numero",
+          "rotulo": "Número",
+          "tipo": "numero",
+          "obrigatorio": true
+        },
+        {
+          "id": "titulo",
+          "rotulo": "Título do capítulo",
+          "tipo": "texto_longo",
+          "obrigatorio": true,
+          "limite": {
+            "linhas": 2,
+            "car_linha": 20
+          }
+        },
+        {
+          "id": "fundo",
+          "rotulo": "Fundo",
+          "tipo": "midia"
+        }
+      ]
+    },
+    {
+      "id": "etiqueta_tema",
+      "nome": "Etiqueta de tema / série",
+      "duracao": [
+        6,
+        null
+      ],
+      "variaveis": [
+        {
+          "id": "tema",
+          "rotulo": "Tema",
+          "tipo": "texto",
+          "obrigatorio": true,
+          "limite": {
+            "linhas": 1,
+            "car_linha": 24
+          }
+        },
+        {
+          "id": "estilo",
+          "rotulo": "Estilo",
+          "tipo": "opcao",
+          "opcoes": [
+            "fita recortada",
+            "cabeçalho fixo"
+          ],
+          "padrao": "fita recortada"
+        },
+        {
+          "id": "ano",
+          "rotulo": "Ano (cabeçalho fixo)",
+          "tipo": "texto",
+          "limite": {
+            "linhas": 1,
+            "car_linha": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "palavra_conceito",
+      "nome": "Palavra-conceito",
+      "duracao": [
+        2,
+        4
+      ],
+      "variaveis": [
+        {
+          "id": "palavra",
+          "rotulo": "Palavra",
+          "tipo": "texto",
+          "obrigatorio": true,
+          "limite": {
+            "linhas": 1,
+            "car_linha": 12
+          }
+        },
+        {
+          "id": "estilo",
+          "rotulo": "Estilo",
+          "tipo": "opcao",
+          "opcoes": [
+            "grifo",
+            "contorno"
+          ],
+          "padrao": "grifo"
+        },
+        {
+          "id": "apoio",
+          "rotulo": "Linha de apoio",
+          "tipo": "texto",
+          "limite": {
+            "linhas": 1,
+            "car_linha": 40
+          }
+        },
+        {
+          "id": "fundo",
+          "rotulo": "Fundo",
+          "tipo": "midia",
+          "obrigatorio": true
+        }
+      ]
+    },
+    {
+      "id": "tarja_nome",
+      "nome": "Tarja de nome e cargo",
+      "duracao": [
+        3,
+        5
+      ],
+      "variaveis": [
+        {
+          "id": "nome",
+          "rotulo": "Nome",
+          "tipo": "texto",
+          "obrigatorio": true,
+          "limite": {
+            "linhas": 1,
+            "car_linha": 24
+          }
+        },
+        {
+          "id": "cargo",
+          "rotulo": "Cargo / função",
+          "tipo": "texto",
+          "limite": {
+            "linhas": 1,
+            "car_linha": 36
+          }
+        },
+        {
+          "id": "arroba",
+          "rotulo": "@ de rede (no lugar do cargo)",
+          "tipo": "texto",
+          "limite": {
+            "linhas": 1,
+            "car_linha": 24
+          }
+        },
+        {
+          "id": "variacao",
+          "rotulo": "Variação",
+          "tipo": "opcao",
+          "opcoes": [
+            "evolução da atual",
+            "fio de destaque"
+          ],
+          "padrao": "evolução da atual"
+        },
+        {
+          "id": "lado",
+          "rotulo": "Lado",
+          "tipo": "opcao",
+          "opcoes": [
+            "esquerda",
+            "direita"
+          ],
+          "padrao": "esquerda"
+        }
+      ],
+      "muda_9x16": "Sobe para logo acima da faixa de legenda."
+    },
+    {
+      "id": "localizacao",
+      "nome": "Localização",
+      "duracao": [
+        4,
+        5
+      ],
+      "variaveis": [
+        {
+          "id": "local",
+          "rotulo": "Cidade, UF ou país",
+          "tipo": "texto",
+          "obrigatorio": true,
+          "limite": {
+            "linhas": 1,
+            "car_linha": 28
+          }
+        },
+        {
+          "id": "data",
+          "rotulo": "Data",
+          "tipo": "data"
+        }
+      ]
+    },
+    {
+      "id": "linha_tempo",
+      "nome": "Linha do tempo",
+      "duracao": [
+        2,
+        10
+      ],
+      "variaveis": [
+        {
+          "id": "versao_peca",
+          "rotulo": "Versão",
+          "tipo": "opcao",
+          "opcoes": [
+            "parada (Intercept)",
+            "espinha (Vox)",
+            "eixo + caixa de evento (Nexo)"
+          ],
+          "padrao": "parada (Intercept)"
+        },
+        {
+          "id": "marcos",
+          "rotulo": "Marcos",
+          "tipo": "lista",
+          "obrigatorio": true,
+          "limite": {
+            "max": 6
+          },
+          "campos": [
+            "data (ano ou dia)",
+            "título (≤ 24 car.)",
+            "texto (≤ 120 car.)",
+            "foto (opcional)"
+          ]
+        },
+        {
+          "id": "destaque",
+          "rotulo": "Marco em destaque",
+          "tipo": "numero",
+          "ajuda": "Qual marco ganha a cor de destaque."
+        }
+      ],
+      "muda_9x16": "Eixo continua horizontal; texto do marco vai para a caixa de evento embaixo."
+    },
+    {
+      "id": "documento",
+      "nome": "Documento com grifo",
+      "duracao": [
+        4,
+        6
+      ],
+      "variaveis": [
+        {
+          "id": "aplicacao",
+          "rotulo": "Aplicação",
+          "tipo": "opcao",
+          "opcoes": [
+            "zoom + grifo",
+            "escurece + frase-chave",
+            "página flutuante",
+            "pilha com datas"
+          ],
+          "padrao": "zoom + grifo"
+        },
+        {
+          "id": "imagem",
+          "rotulo": "Imagem do documento",
+          "tipo": "foto",
+          "obrigatorio": true,
+          "ajuda": "PDF convertido ou print, do Drive."
+        },
+        {
+          "id": "area_grifo",
+          "rotulo": "Área a grifar",
+          "tipo": "foco",
+          "ajuda": "Marcar na imagem as linhas do trecho."
+        },
+        {
+          "id": "frase_chave",
+          "rotulo": "Frase-chave",
+          "tipo": "texto_longo",
+          "limite": {
+            "linhas": 3,
+            "car_linha": 28
+          }
+        },
+        {
+          "id": "fonte",
+          "rotulo": "Fonte (nome, página)",
+          "tipo": "texto",
+          "obrigatorio": true,
+          "limite": {
+            "linhas": 1,
+            "car_linha": 36
+          }
+        },
+        {
+          "id": "datas_pilha",
+          "rotulo": "Documentos da pilha",
+          "tipo": "lista",
+          "limite": {
+            "max": 4
+          },
+          "campos": [
+            "imagem",
+            "ano"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "post_rede",
+      "nome": "Post de rede social",
+      "duracao": [
+        3,
+        6
+      ],
+      "variaveis": [
+        {
+          "id": "rede",
+          "rotulo": "Rede",
+          "tipo": "opcao",
+          "opcoes": [
+            "X",
+            "Instagram",
+            "Facebook",
+            "TikTok (mosaico de vídeos)"
+          ],
+          "padrao": "X"
+        },
+        {
+          "id": "foto_perfil",
+          "rotulo": "Foto do perfil",
+          "tipo": "foto"
+        },
+        {
+          "id": "nome",
+          "rotulo": "Nome",
+          "tipo": "texto",
+          "obrigatorio": true,
+          "limite": {
+            "linhas": 1,
+            "car_linha": 28
+          }
+        },
+        {
+          "id": "arroba",
+          "rotulo": "@",
+          "tipo": "texto",
+          "obrigatorio": true
+        },
+        {
+          "id": "verificado",
+          "rotulo": "Verificado",
+          "tipo": "sim_nao",
+          "padrao": false
+        },
+        {
+          "id": "texto",
+          "rotulo": "Texto do post",
+          "tipo": "texto_longo",
+          "obrigatorio": true,
+          "limite": {
+            "linhas": 5,
+            "car_linha": 34
+          },
+          "ajuda": "Como foi publicado, sem corrigir."
+        },
+        {
+          "id": "grifo",
+          "rotulo": "Trecho grifado",
+          "tipo": "texto"
+        },
+        {
+          "id": "imagem",
+          "rotulo": "Imagem do post",
+          "tipo": "foto"
+        },
+        {
+          "id": "data",
+          "rotulo": "Data",
+          "tipo": "data"
+        },
+        {
+          "id": "numeros",
+          "rotulo": "Comentários / compartilhamentos / curtidas",
+          "tipo": "texto"
+        },
+        {
+          "id": "videos",
+          "rotulo": "Vídeos do mosaico",
+          "tipo": "lista",
+          "limite": {
+            "max": 3
+          },
+          "campos": [
+            "vídeo",
+            "visualizações"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "audio_obtido",
+      "nome": "Áudio obtido",
+      "duracao": [
+        4,
+        null
+      ],
+      "variaveis": [
+        {
+          "id": "encaixe",
+          "rotulo": "Tipo de imagem",
+          "tipo": "opcao",
+          "opcoes": [
+            "foto da pessoa (P&B)",
+            "foto desfocada",
+            "print de WhatsApp",
+            "sem imagem",
+            "tela dividida"
+          ],
+          "padrao": "foto da pessoa (P&B)"
+        },
+        {
+          "id": "imagem",
+          "rotulo": "Imagem",
+          "tipo": "midia"
+        },
+        {
+          "id": "audio",
+          "rotulo": "Arquivo de áudio",
+          "tipo": "midia",
+          "obrigatorio": true,
+          "ajuda": "A onda é desenhada a partir do áudio real."
+        },
+        {
+          "id": "transcricao",
+          "rotulo": "Transcrição",
+          "tipo": "srt",
+          "obrigatorio": true,
+          "ajuda": "Gerada na aba Legenda; blocos de até 2 linhas."
+        },
+        {
+          "id": "quem",
+          "rotulo": "Quem fala",
+          "tipo": "texto",
+          "limite": {
+            "linhas": 1,
+            "car_linha": 40
+          }
+        },
+        {
+          "id": "origem",
+          "rotulo": "Origem do áudio",
+          "tipo": "texto",
+          "padrao": "Áudio obtido pela NINJA"
+        }
+      ]
+    },
+    {
+      "id": "print_tela",
+      "nome": "Print / gravação de tela",
+      "duracao": [
+        3,
+        null
+      ],
+      "variaveis": [
+        {
+          "id": "moldura",
+          "rotulo": "Moldura",
+          "tipo": "opcao",
+          "opcoes": [
+            "navegador",
+            "celular"
+          ],
+          "padrao": "navegador"
+        },
+        {
+          "id": "midia",
+          "rotulo": "Print ou gravação",
+          "tipo": "midia",
+          "obrigatorio": true
+        },
+        {
+          "id": "endereco",
+          "rotulo": "Endereço (URL)",
+          "tipo": "texto",
+          "limite": {
+            "linhas": 1,
+            "car_linha": 40
+          }
+        },
+        {
+          "id": "area_grifo",
+          "rotulo": "Trecho em destaque",
+          "tipo": "foco"
+        },
+        {
+          "id": "credito",
+          "rotulo": "Crédito",
+          "tipo": "texto"
+        }
+      ]
+    },
+    {
+      "id": "tela_dividida",
+      "nome": "Tela dividida (2, 3, 4) e grid de fotos",
+      "duracao": [
+        3,
+        11
+      ],
+      "variaveis": [
+        {
+          "id": "quantidade",
+          "rotulo": "Quantidade",
+          "tipo": "opcao",
+          "opcoes": [
+            "2",
+            "3",
+            "4"
+          ],
+          "padrao": "2"
+        },
+        {
+          "id": "divisao",
+          "rotulo": "Divisão",
+          "tipo": "opcao",
+          "opcoes": [
+            "partes iguais",
+            "grande em cima + terço inferior",
+            "terço superior + grande embaixo",
+            "1 grande + 2 pequenas"
+          ],
+          "padrao": "partes iguais"
+        },
+        {
+          "id": "midias",
+          "rotulo": "Imagens / vídeos",
+          "tipo": "lista",
+          "obrigatorio": true,
+          "limite": {
+            "max": 4
+          },
+          "campos": [
+            "mídia",
+            "ponto de foco",
+            "zoom final (%)",
+            "duração do zoom",
+            "crédito"
+          ]
+        },
+        {
+          "id": "fio",
+          "rotulo": "Fio na cor de destaque",
+          "tipo": "sim_nao",
+          "padrao": true
+        }
+      ],
+      "muda_9x16": "Colunas viram faixas empilhadas; a legenda sobe para a emenda."
+    },
+    {
+      "id": "numero",
+      "nome": "Número em destaque",
+      "duracao": [
+        3,
+        5
+      ],
+      "variaveis": [
+        {
+          "id": "aplicacao",
+          "rotulo": "Aplicação",
+          "tipo": "opcao",
+          "opcoes": [
+            "gigante",
+            "número + comparação",
+            "sobre foto"
+          ],
+          "padrao": "gigante"
+        },
+        {
+          "id": "numero",
+          "rotulo": "Número",
+          "tipo": "texto",
+          "obrigatorio": true,
+          "limite": {
+            "linhas": 1,
+            "car_linha": 6
+          }
+        },
+        {
+          "id": "unidade",
+          "rotulo": "Unidade (%, mil, km²…)",
+          "tipo": "texto",
+          "limite": {
+            "linhas": 1,
+            "car_linha": 12
+          }
+        },
+        {
+          "id": "frase",
+          "rotulo": "Frase",
+          "tipo": "texto_longo",
+          "obrigatorio": true,
+          "limite": {
+            "linhas": 2,
+            "car_linha": 32
+          }
+        },
+        {
+          "id": "contagem_de",
+          "rotulo": "Contar a partir de",
+          "tipo": "numero",
+          "ajuda": "Opcional; a contagem dura ~1 s."
+        },
+        {
+          "id": "comparar_com",
+          "rotulo": "Número de comparação + rótulo",
+          "tipo": "texto"
+        },
+        {
+          "id": "fonte",
+          "rotulo": "Fonte",
+          "tipo": "texto",
+          "obrigatorio": true
+        }
+      ]
+    },
+    {
+      "id": "numero_video",
+      "nome": "Número sobre o vídeo",
+      "duracao": [
+        2,
+        3
+      ],
+      "variaveis": [
+        {
+          "id": "ligacao",
+          "rotulo": "Ligado a",
+          "tipo": "opcao",
+          "opcoes": [
+            "pessoa (tarja)",
+            "objeto (seta)"
+          ],
+          "padrao": "pessoa (tarja)"
+        },
+        {
+          "id": "rotulo",
+          "rotulo": "Rótulo (nome ou objeto)",
+          "tipo": "texto",
+          "obrigatorio": true,
+          "limite": {
+            "linhas": 1,
+            "car_linha": 24
+          }
+        },
+        {
+          "id": "numero",
+          "rotulo": "Número com unidade",
+          "tipo": "texto",
+          "obrigatorio": true,
+          "limite": {
+            "linhas": 1,
+            "car_linha": 24
+          }
+        },
+        {
+          "id": "alvo",
+          "rotulo": "Ponto que a seta aponta",
+          "tipo": "foco"
+        }
+      ]
+    },
+    {
+      "id": "grafico",
+      "nome": "Sistema de gráficos",
+      "duracao": [
+        4,
+        11
+      ],
+      "variaveis": [
+        {
+          "id": "tipo_grafico",
+          "rotulo": "Tipo",
+          "tipo": "opcao",
+          "opcoes": [
+            "colunas",
+            "barras / ranking",
+            "comparação com fotos",
+            "linha com eventos",
+            "rosca"
+          ],
+          "padrao": "colunas"
+        },
+        {
+          "id": "titulo",
+          "rotulo": "Título",
+          "tipo": "texto_longo",
+          "obrigatorio": true,
+          "limite": {
+            "linhas": 2,
+            "car_linha": 40
+          }
+        },
+        {
+          "id": "unidade",
+          "rotulo": "Unidade",
+          "tipo": "texto",
+          "obrigatorio": true
+        },
+        {
+          "id": "dados",
+          "rotulo": "Dados",
+          "tipo": "tabela",
+          "obrigatorio": true,
+          "limite": {
+            "max": 12
+          },
+          "campos": [
+            "rótulo",
+            "valor",
+            "foto (comparação)",
+            "evento (linha)"
+          ],
+          "ajuda": "Colar da planilha. O desenho sai dos valores; eixo sempre no zero."
+        },
+        {
+          "id": "destaque",
+          "rotulo": "Item em destaque",
+          "tipo": "opcao",
+          "ajuda": "Escolher um rótulo dos dados."
+        },
+        {
+          "id": "casas",
+          "rotulo": "Casas decimais",
+          "tipo": "numero",
+          "padrao": 1
+        },
+        {
+          "id": "fonte",
+          "rotulo": "Fonte",
+          "tipo": "texto",
+          "obrigatorio": true
+        },
+        {
+          "id": "conferido",
+          "rotulo": "Dados conferidos por",
+          "tipo": "texto",
+          "obrigatorio": true,
+          "ajuda": "Não gera sem isso."
+        }
+      ]
+    },
+    {
+      "id": "comparacao",
+      "nome": "Comparação",
+      "duracao": [
+        4,
+        12
+      ],
+      "variaveis": [
+        {
+          "id": "modo",
+          "rotulo": "Modo",
+          "tipo": "opcao",
+          "opcoes": [
+            "fala contra fala",
+            "antes e depois",
+            "versus"
+          ],
+          "padrao": "fala contra fala"
+        },
+        {
+          "id": "lado1",
+          "rotulo": "Lado 1",
+          "tipo": "midia",
+          "obrigatorio": true
+        },
+        {
+          "id": "rotulo1",
+          "rotulo": "Rótulo do lado 1",
+          "tipo": "texto",
+          "limite": {
+            "linhas": 1,
+            "car_linha": 20
+          }
+        },
+        {
+          "id": "lado2",
+          "rotulo": "Lado 2",
+          "tipo": "midia",
+          "obrigatorio": true
+        },
+        {
+          "id": "rotulo2",
+          "rotulo": "Rótulo do lado 2",
+          "tipo": "texto",
+          "limite": {
+            "linhas": 1,
+            "car_linha": 20
+          }
+        },
+        {
+          "id": "troca",
+          "rotulo": "Momento da troca (s)",
+          "tipo": "numero",
+          "ajuda": "Fala contra fala: quando o lado 1 congela em P&B e o 2 ganha cor e play."
+        }
+      ]
+    },
+    {
+      "id": "sabe_nao_sabe",
+      "nome": "O que se sabe / o que não se sabe",
+      "duracao": [
+        5,
+        10
+      ],
+      "variaveis": [
+        {
+          "id": "sabe",
+          "rotulo": "O que se sabe",
+          "tipo": "lista",
+          "obrigatorio": true,
+          "limite": {
+            "max": 3
+          },
+          "campos": [
+            "item (≤ 40 car.)"
+          ]
+        },
+        {
+          "id": "nao_sabe",
+          "rotulo": "O que não se sabe",
+          "tipo": "lista",
+          "obrigatorio": true,
+          "limite": {
+            "max": 3
+          },
+          "campos": [
+            "item (≤ 40 car.)"
+          ]
+        }
+      ],
+      "muda_9x16": "Cartões lado a lado viram empilhados."
+    },
+    {
+      "id": "checagem",
+      "nome": "Selo de checagem",
+      "duracao": [
+        3,
+        5
+      ],
+      "variaveis": [
+        {
+          "id": "frase",
+          "rotulo": "Frase checada",
+          "tipo": "texto_longo",
+          "obrigatorio": true,
+          "limite": {
+            "linhas": 3,
+            "car_linha": 30
+          }
+        },
+        {
+          "id": "veredito",
+          "rotulo": "Veredito",
+          "tipo": "opcao",
+          "opcoes": [
+            "falso",
+            "enganoso",
+            "fora de contexto",
+            "sem provas",
+            "verdadeiro"
+          ],
+          "obrigatorio": true
+        },
+        {
+          "id": "riscar",
+          "rotulo": "Riscar a frase",
+          "tipo": "sim_nao",
+          "padrao": "automático quando falso"
+        },
+        {
+          "id": "print_original",
+          "rotulo": "Print do original (opcional)",
+          "tipo": "foto"
+        },
+        {
+          "id": "fonte",
+          "rotulo": "Fonte da checagem",
+          "tipo": "texto",
+          "obrigatorio": true
+        }
+      ]
+    },
+    {
+      "id": "citacao",
+      "nome": "Citação",
+      "duracao": [
+        2,
+        6
+      ],
+      "variaveis": [
+        {
+          "id": "aplicacao",
+          "rotulo": "Aplicação",
+          "tipo": "opcao",
+          "opcoes": [
+            "com foto",
+            "fragmento",
+            "documento",
+            "legenda de terceiro"
+          ],
+          "padrao": "com foto"
+        },
+        {
+          "id": "frase",
+          "rotulo": "Frase",
+          "tipo": "texto_longo",
+          "obrigatorio": true,
+          "limite": {
+            "linhas": 3,
+            "car_linha": 28
+          },
+          "ajuda": "Fragmento: até 3 palavras."
+        },
+        {
+          "id": "autor",
+          "rotulo": "Autor",
+          "tipo": "texto",
+          "obrigatorio": true
+        },
+        {
+          "id": "cargo",
+          "rotulo": "Cargo / data",
+          "tipo": "texto"
+        },
+        {
+          "id": "foto",
+          "rotulo": "Foto",
+          "tipo": "midia"
+        }
+      ]
+    },
+    {
+      "id": "credito",
+      "nome": "Crédito",
+      "duracao": [
+        null,
+        null
+      ],
+      "variaveis": [
+        {
+          "id": "texto",
+          "rotulo": "Crédito",
+          "tipo": "texto",
+          "obrigatorio": true,
+          "limite": {
+            "linhas": 1,
+            "car_linha": 48
+          }
+        },
+        {
+          "id": "posicao",
+          "rotulo": "Posição",
+          "tipo": "opcao",
+          "opcoes": [
+            "vertical na borda",
+            "mini no topo"
+          ],
+          "padrao": "vertical na borda"
+        }
+      ],
+      "muda_9x16": "Dura o plano inteiro."
+    },
+    {
+      "id": "transicao",
+      "nome": "Transição — fita NINJA",
+      "duracao": [
+        0.4,
+        0.6
+      ],
+      "variaveis": [
+        {
+          "id": "fita",
+          "rotulo": "Fita",
+          "tipo": "opcao",
+          "opcoes": [
+            "diagonal tipográfica",
+            "código de barras",
+            "estrelas",
+            "cortina com olhos"
+          ],
+          "padrao": "diagonal tipográfica"
+        },
+        {
+          "id": "direcao",
+          "rotulo": "Direção",
+          "tipo": "opcao",
+          "opcoes": [
+            "esquerda→direita",
+            "direita→esquerda",
+            "baixo→cima"
+          ],
+          "padrao": "esquerda→direita"
+        }
+      ]
+    },
+    {
+      "id": "fundo",
+      "nome": "Fundos",
+      "duracao": [
+        null,
+        null
+      ],
+      "variaveis": [
+        {
+          "id": "estilo",
+          "rotulo": "Estilo",
+          "tipo": "opcao",
+          "opcoes": [
+            "neutro",
+            "letras fluidas",
+            "tipografia correndo",
+            "estrela respirando"
+          ],
+          "padrao": "neutro"
+        },
+        {
+          "id": "velocidade",
+          "rotulo": "Velocidade",
+          "tipo": "opcao",
+          "opcoes": [
+            "lenta",
+            "média"
+          ],
+          "padrao": "lenta"
+        }
+      ]
+    },
+    {
+      "id": "legenda",
+      "nome": "Legenda",
+      "duracao": [
+        null,
+        null
+      ],
+      "variaveis": [
+        {
+          "id": "srt",
+          "rotulo": "Legenda",
+          "tipo": "srt",
+          "obrigatorio": true
+        },
+        {
+          "id": "estilo",
+          "rotulo": "Estilo",
+          "tipo": "opcao",
+          "opcoes": [
+            "frase em caixa",
+            "palavra destacada"
+          ],
+          "padrao": "frase em caixa"
+        },
+        {
+          "id": "falantes",
+          "rotulo": "Falas de terceiros",
+          "tipo": "lista",
+          "campos": [
+            "trecho",
+            "estilo terceiro (itálico + cor)"
+          ]
+        }
+      ],
+      "muda_9x16": "Faixa de legenda em y 1190–1500; sobe para a emenda na tela dividida."
+    },
+    {
+      "id": "cta",
+      "nome": "CTA",
+      "duracao": [
+        4,
+        7
+      ],
+      "variaveis": [
+        {
+          "id": "tipo_cta",
+          "rotulo": "Tipo",
+          "tipo": "opcao",
+          "opcoes": [
+            "zap",
+            "telegram",
+            "loja",
+            "membros",
+            "inscreva-se",
+            "doe (Pix)"
+          ],
+          "obrigatorio": true
+        },
+        {
+          "id": "chapeu",
+          "rotulo": "Chapéu",
+          "tipo": "texto",
+          "limite": {
+            "linhas": 1,
+            "car_linha": 28
+          }
+        },
+        {
+          "id": "texto",
+          "rotulo": "Texto",
+          "tipo": "texto_longo",
+          "limite": {
+            "linhas": 3,
+            "car_linha": 15
+          }
+        },
+        {
+          "id": "ligacao_assunto",
+          "rotulo": "Ligação com o assunto do vídeo",
+          "tipo": "texto",
+          "ajuda": "Opcional."
+        },
+        {
+          "id": "posicao",
+          "rotulo": "Momento no vídeo",
+          "tipo": "numero",
+          "ajuda": "Só na segunda metade; no máximo 1 por Short."
+        }
+      ]
+    },
+    {
+      "id": "cartao_final",
+      "nome": "Cartão final de ponte",
+      "duracao": [
+        4,
+        20
+      ],
+      "variaveis": [
+        {
+          "id": "destino",
+          "rotulo": "Destino",
+          "tipo": "opcao",
+          "opcoes": [
+            "vídeo completo",
+            "reportagem no site",
+            "próximo vídeo"
+          ],
+          "padrao": "vídeo completo"
+        },
+        {
+          "id": "texto",
+          "rotulo": "Texto",
+          "tipo": "texto_longo",
+          "limite": {
+            "linhas": 2,
+            "car_linha": 20
+          }
+        },
+        {
+          "id": "area_clicaveis",
+          "rotulo": "Reservar área da tela final do YouTube (16x9)",
+          "tipo": "sim_nao",
+          "padrao": true
+        }
+      ]
+    }
+  ]
+}
