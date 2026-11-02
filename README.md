@@ -1,5 +1,7 @@
 # Aprovação das peças NINJA
 
+> **Página temporária**, só para os primeiros feedbacks. O design system principal da Mídia NINJA agora é o **NINJA Design System, do Thiago**, num repositório próprio. As mudanças de design são feitas lá, e não aqui.
+
 Página aberta onde a equipe da Mídia NINJA vê, em loop, cada peça gráfica dos vídeos (manchete, tarja, crédito, linha do tempo, gráficos…) e decide se ela está **aprovada**, se **precisa de ajuste** ou se tem que ser **refeita**.
 
 **Página:** https://gian-dot.github.io/Aprova-o-das-pe-as-NINJA-votos/

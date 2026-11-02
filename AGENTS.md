@@ -1,5 +1,7 @@
 # Guia para agentes de IA
 
+> **Aviso (02/11/2026): este repositório é temporário.** Ele serve só para colher os primeiros votos e comentários da equipe. O design system principal da Mídia NINJA passa a ser o **NINJA Design System, do Thiago**, num repositório próprio. A Máquina de Vídeos e os outros apps vão se adaptar a ele. **Não proponha mudanças de design aqui:** faça no repositório do Thiago. Use este repositório só para ler os votos e os comentários (veja "Como ler os votos") e para entender as peças. O resto deste guia descreve o fluxo antigo e fica como referência.
+
 Leia este arquivo antes de mexer em qualquer coisa aqui. Ele vale para qualquer agente (o do Thiago, o Codex, o Claude).
 
 ## O que é este repositório
