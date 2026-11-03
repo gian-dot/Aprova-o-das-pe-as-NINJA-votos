@@ -2,6 +2,8 @@
 
 > **Página temporária**, só para os primeiros feedbacks. O design system principal da Mídia NINJA agora é o **NINJA Design System, do Thiago**, num repositório próprio. As mudanças de design são feitas lá, e não aqui.
 
+**Versão 5 (03/11/2026):** peças refeitas com o NINJA Design System do Thiago (versão 1.0.0: cores, TipoNinja + Manrope Medium, chapéu, áreas seguras) e com os comentários de 02/11. Os ids das peças não mudaram: os votos de 02/11 continuam valendo; o CTA saiu da página (vai ter um fluxo próprio).
+
 Página aberta onde a equipe da Mídia NINJA vê, em loop, cada peça gráfica dos vídeos (manchete, tarja, crédito, linha do tempo, gráficos…) e decide se ela está **aprovada**, se **precisa de ajuste** ou se tem que ser **refeita**.
 
 **Página:** https://gian-dot.github.io/Aprova-o-das-pe-as-NINJA-votos/
@@ -22,9 +24,9 @@ Os votos e comentários ficam numa Planilha Google do Gian (aba `votos`). Não p
 |---|---|
 | `index.html` | a página (gerada; não editar à mão) |
 | `catalogo.json` | a lista das peças: o `id` usado nos votos, a seção, a ficha e as variações |
-| `design-system/` | cópia do design system da Máquina de Vídeos: tokens, fichas das peças, regras e os componentes das peças que já estão no app |
+| `design-system/` | cópia da camada da Máquina de Vídeos (tokens de vídeo, fichas, componentes das peças do app) ; o NINJA Design System do Thiago é privado e não vem para cá (a versão usada está em `design-system/ninja.versao.json`) |
 | `urna/votos.gs` | o código da planilha que recebe os votos (Google Apps Script) |
-| `fontes/`, `logos/`, `quadros/`, `veiculos/` | fontes, logos da NINJA, quadros de referência e logos de veículos usados na página |
+| `fontes/`, `recursos/`, `fotos/`, `logos/`, `quadros/`, `veiculos/` | fontes, logos da NINJA, quadros de referência e logos de veículos usados na página |
 | `AGENTS.md` | o guia para agentes de IA (o do Thiago, o Claude) lerem e proporem mudanças do jeito certo |
 
 ## Como uma mudança chega aqui

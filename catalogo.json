@@ -1,48 +1,39 @@
 {
+  "versao": "v5 — NINJA Design System 1.0.0",
   "como_ler": "Uma entrada por peça da página. \"id\" é o que aparece no campo \"peca\" dos votos; \"ficha\" é o id em design-system/pecas.json.",
   "pecas": [
     {
       "id": "manchete-central-modelo-de-video-do-canva",
-      "nome": "Manchete central (modelo de vídeo do Canva)",
+      "mudou_no_v5": "Modular: sem crédito, sem logo e sem faixa de marcas (são peças separadas); logo de eleições removido; chapéu como módulo com posição própria; com véu ou desfoque a chamada vai para o centro da tela; tamanho da letra se ajusta ao texto (regra do Thiago); motion novo.",
+      "nome": "Chamada central (modelo de vídeo do Canva)",
       "secao": "Abrir",
       "situacao": "principal",
-      "ficha": "manchete_central",
+      "ficha": "chamada_central",
       "no_app": true,
       "variacoes_app": [
-        "Degradê + base preta (Canva)",
-        "Véu 55% + selo",
-        "Ao vivo"
+        "Degradê (chamada na base)",
+        "Véu 55% (chamada no centro)",
+        "Desfoque + ao vivo",
+        "Sem chapéu",
+        "Chapéu deslocado"
       ],
-      "variacoes_estudio": [
-        "Canva fiel",
-        "Véu (foto clara)",
-        "Desfoque (foto poluída)",
-        "Ao vivo",
-        "Palavra em destaque"
-      ],
-      "descricao": "Reconstruída com as medidas reais do modelo do Thiago no Canva: chapéu Manrope ExtraBold em caixa branca, manchete TipoNinja 112/104 centralizada, degradê até a base preta sólida (y 1629), faixa de marcas NINJA · selo · olhos, crédito na base. Variações de tratamento do fundo para quando o degradê não segura.",
-      "variaveis": "chapéu, manchete (1–3 linhas), vídeo, tratamento do fundo, selo da cobertura, crédito",
+      "variacoes_estudio": [],
+      "descricao": "Só a chamada e o chapéu (opcional), cada um com ajuste de posição próprio. Crédito, logo e faixa de marcas viraram peças separadas. Chapéu e chamada no padrão do NINJA Design System (TipoNinja, caixa branca 15 × 9, 20 px entre eles). Tamanho da chamada ajustado ao texto, como manda o design system.",
+      "variaveis": "chapéu (opcional), chamada, palavra em destaque, tratamento do fundo, posição do bloco, deslocar chapéu",
       "referencias": [
         {
           "quadro": "quadros/economist-short_titulo-gancho_0001.jpg",
           "legenda": "Economist: gancho já no quadro 0, meio da tela"
         },
         {
-          "quadro": "quadros/vox-short_titulo-tarja-amarela_0002.jpg",
-          "legenda": "Vox: tarja chapada no meio"
-        },
-        {
           "quadro": "quadros/intercept-short_pergunta-gancho-tarja_0006.jpg",
           "legenda": "Intercept: pergunta com palavra em destaque"
-        },
-        {
-          "quadro": "quadros/bbcbrasil-short_manchete-cartao-topo_0001.jpg",
-          "legenda": "BBC: cartão no terço de cima"
         }
       ]
     },
     {
       "id": "pergunta-gancho-titulo-em-tarja",
+      "mudou_no_v5": "Entrada refinada: as linhas sobem uma a uma de dentro da própria tarja; grifo depois que o texto para; saída suave. Nova variação com chapéu.",
       "nome": "Pergunta-gancho / título em tarja",
       "secao": "Abrir",
       "situacao": "atualizar",
@@ -51,18 +42,15 @@
       "variacoes_app": [],
       "variacoes_estudio": [
         "Tarja preta",
-        "Tarja branca"
+        "Tarja branca",
+        "Com chapéu"
       ],
-      "descricao": "Para Shorts de repórter: a pergunta ou título em tarja chapada sobre o peito, palavra-chave na cor de destaque. Nunca texto solto.",
-      "variaveis": "texto, palavra destacada, cor da tarja (preta/branca)",
+      "descricao": "Cada linha é uma tarja que mede o próprio texto, empilhadas. Elas sobem uma a uma de dentro da própria linha; a palavra-chave ganha o grifo depois que o texto para.",
+      "variaveis": "texto (quebras da editora), palavras grifadas, cor da tarja (preta/branca), posição",
       "referencias": [
         {
           "quadro": "quadros/intercept-short_pergunta-gancho-tarja_0006.jpg",
           "legenda": "Intercept: tarja preta arredondada, palavra amarela"
-        },
-        {
-          "quadro": "quadros/ajplus-short_etiqueta-tema-e-pergunta_0001.jpg",
-          "legenda": "AJ+: balão branco + etiqueta de tema"
         },
         {
           "quadro": "quadros/vox-short_titulo-tarja-amarela_0002.jpg",
@@ -72,6 +60,7 @@
     },
     {
       "id": "manchete-de-outro-veiculo",
+      "mudou_no_v5": "Grifos em sequência, vários e não seguidos; data menor alinhada à direita do cartão; três larguras de cartão; nova versão com manchete + lead; entrada do cartão mais suave.",
       "nome": "Manchete de outro veículo",
       "secao": "Abrir",
       "situacao": "atualizar",
@@ -79,12 +68,13 @@
       "no_app": false,
       "variacoes_app": [],
       "variacoes_estudio": [
-        "Cartão com fita",
-        "Cartão no terço de cima (Short)",
+        "Cartão médio",
+        "Manchete + lead",
+        "Cartão compacto (canto)",
         "Cascata de veículos"
       ],
-      "descricao": "Banco de logos (14 veículos tirados do .mogrt) ou PNG enviado; a fita branca padroniza qualquer logo. Três aplicações.",
-      "variaveis": "veículo (banco ou PNG), título, data, palavras grifadas",
+      "descricao": "Cartão com logo do veículo (banco ou PNG), o texto real e trechos grifados — vários, mesmo que não sejam seguidos — que se marcam em sequência depois que o texto aparece. Data pequena, alinhada à direita do cartão. Três larguras de cartão e versão com manchete + lead.",
+      "variaveis": "jornal (banco de logos ou PNG), manchete, lead (opcional), trechos grifados (vários), data, largura do cartão (compacto/médio/largo), posição",
       "referencias": [
         {
           "quadro": "quadros/vox_manchete-marcatexto_0022.jpg",
@@ -97,15 +87,12 @@
         {
           "quadro": "quadros/bbcbrasil-short_manchete-cartao-topo_0001.jpg",
           "legenda": "BBC: cartão com filete de cor"
-        },
-        {
-          "quadro": "quadros/meteoro_print-materia-com-camera_0310.jpg",
-          "legenda": "Meteoro: página do veículo inteira"
         }
       ]
     },
     {
       "id": "marcador-de-capitulo",
+      "mudou_no_v5": "Sombra opcional (nova variação com a regra geral de sombra); números e títulos em TipoNinja; entrada por linhas.",
       "nome": "Marcador de capítulo",
       "secao": "Abrir",
       "situacao": "nova",
@@ -114,10 +101,11 @@
       "variacoes_app": [],
       "variacoes_estudio": [
         "Tela",
-        "Etiqueta permanente"
+        "Etiqueta permanente",
+        "Etiqueta com sombra"
       ],
-      "descricao": "Duas versões: tela de capítulo (corte) e etiqueta permanente no canto enquanto o bloco dura.",
-      "variaveis": "número, título, (tema)",
+      "descricao": "Duas versões: tela de capítulo e etiqueta permanente no canto enquanto o bloco dura. Sombra opcional (caixa de seleção), pela regra geral de sombra.",
+      "variaveis": "número, título, sombra (sim/não)",
       "referencias": [
         {
           "quadro": "quadros/johnnyharris_mapa-palavra-conceito_0101.jpg",
@@ -126,15 +114,12 @@
         {
           "quadro": "quadros/aljazeera_titulo-episodio_0055.jpg",
           "legenda": "Al Jazeera: título de episódio depois do cold open"
-        },
-        {
-          "quadro": "quadros/intercept_vinheta-titulo_0001.jpg",
-          "legenda": "Intercept: título da série com textura"
         }
       ]
     },
     {
       "id": "etiqueta-de-tema-serie",
+      "mudou_no_v5": "Motion refinado: varredura suave em vez de aparecer brusco; cabeçalho com degradê (sem barra chapada); alinhado às áreas do design system.",
       "nome": "Etiqueta de tema / série",
       "secao": "Abrir",
       "situacao": "nova",
@@ -145,25 +130,22 @@
         "Fita recortada",
         "Cabeçalho fixo"
       ],
-      "descricao": "Rótulo que diz a pauta durante o bloco. Inspirada na tira colada do AJ+, aplicada com Microgramma e borda recortada.",
-      "variaveis": "tema",
+      "descricao": "Rótulo que diz a pauta durante o bloco. A fita varre da esquerda (0,6 s, curva suave) em vez de aparecer de uma vez.",
+      "variaveis": "tema, posição",
       "referencias": [
         {
           "quadro": "quadros/ajplus-short_etiqueta-tema-e-pergunta_0001.jpg",
-          "legenda": "AJ+: tira de papel rasgado colada no topo"
+          "legenda": "AJ+: tira colada no topo"
         },
         {
           "quadro": "quadros/brut_cabecalho-fixo-e-contexto_0001.jpg",
           "legenda": "Brut: cabeçalho fixo com ano"
-        },
-        {
-          "quadro": "quadros/economist_etiqueta-local-remoto_0121.jpg",
-          "legenda": "Economist: etiqueta mini no canto"
         }
       ]
     },
     {
       "id": "palavra-conceito",
+      "mudou_no_v5": "Motion refinado; subtítulo opcional na primeira; duas opções novas bem diferentes (palavra vazada na foto e letra a letra).",
       "nome": "Palavra-conceito",
       "secao": "Abrir",
       "situacao": "nova",
@@ -171,66 +153,54 @@
       "no_app": false,
       "variacoes_app": [],
       "variacoes_estudio": [
-        "Grifo",
-        "Contorno"
+        "Grifo + subtítulo",
+        "Contorno",
+        "Vazada na foto",
+        "Letra a letra"
       ],
-      "descricao": "Uma palavra-chave sobre a cena desfocada; o destaque é só o grifo. Bloco de cor cheia reprovado.",
-      "variaveis": "palavra",
+      "descricao": "Uma palavra-chave sobre a cena; o destaque é só o grifo. Quatro caminhos: grifo com subtítulo opcional, contorno, palavra vazada na foto e letra a letra.",
+      "variaveis": "palavra, subtítulo (opcional), estilo",
       "referencias": [
         {
           "quadro": "quadros/johnnyharris_mapa-palavra-conceito_0101.jpg",
-          "legenda": "Johnny Harris: termo serifado sobre o mapa"
+          "legenda": "Johnny Harris: termo sobre o mapa"
         },
         {
           "quadro": "quadros/aljazeera_mapa-coropletico-legenda_0244.jpg",
           "legenda": "Al Jazeera: 'TRIFECTA' sobre o mapa"
-        },
-        {
-          "quadro": "quadros/ajplus-short_etiqueta-tema-e-pergunta_0001.jpg",
-          "legenda": "AJ+: palavra em caixa no meio"
         }
       ]
     },
     {
       "id": "tarja-de-nome-e-cargo",
+      "mudou_no_v5": "Agora sobre foto (dá para ver a caixa branca); entrada e saída; fontes do design system; as variações confusas do “estúdio” saíram — fica só a do app.",
       "nome": "Tarja de nome e cargo",
       "secao": "Situar",
       "situacao": "atualizar",
       "ficha": "tarja_nome",
       "no_app": true,
       "variacoes_app": [
-        "Evolução da atual",
+        "Nome + cargo",
         "Fio de destaque",
         "@ de rede, à direita"
       ],
-      "variacoes_estudio": [
-        "Evolução da atual",
-        "Fio de destaque",
-        "@ de rede"
-      ],
-      "descricao": "Evolução da tarja atual do .mogrt: nome em caixa branca + cargo em caixa preta, ambas medindo o texto. No 9x16 fica logo acima da legenda. Entra 0,2 s depois do corte com varredura da esquerda (0,4 s).",
-      "variaveis": "nome, cargo ou @",
+      "variacoes_estudio": [],
+      "descricao": "Evolução da tarja atual do .mogrt: nome em caixa branca (TipoNinja) + cargo em caixa preta (Manrope Medium), cada uma medindo o texto. Entra com varredura e sai antes do corte. Só a versão do app: as do estúdio saíram.",
+      "variaveis": "nome, cargo ou @, variação, lado",
       "referencias": [
         {
           "quadro": "quadros/ajplus-short_lowerthird-9x16_0015.jpg",
-          "legenda": "AJ+ Short: nome em tarja + @ em tarja preta, acima da legenda"
+          "legenda": "AJ+ Short: nome em tarja + @ em tarja preta"
         },
         {
           "quadro": "quadros/bbcbrasil-short_lowerthird-9x16_0006.jpg",
-          "legenda": "BBC Short: tarja vermelha + cargo escuro"
-        },
-        {
-          "quadro": "quadros/ajplus_lowerthird-junto-ao-rosto_0233.jpg",
-          "legenda": "AJ+: tarja junto ao rosto"
-        },
-        {
-          "quadro": "quadros/meteoro_lowerthird-nome-arroba_0005.jpg",
-          "legenda": "Meteoro: nome · @"
+          "legenda": "BBC Short: tarja + cargo escuro"
         }
       ]
     },
     {
       "id": "localizacao",
+      "mudou_no_v5": "Refeita na grade: as caixas se alinham pela mesma borda; segunda e terceira linhas opcionais; varredura em cascata e saída.",
       "nome": "Localização",
       "secao": "Situar",
       "situacao": "atualizar",
@@ -238,18 +208,16 @@
       "no_app": false,
       "variacoes_app": [],
       "variacoes_estudio": [
-        "Pino"
+        "Só cidade",
+        "Cidade + estado",
+        "Cidade + estado + data"
       ],
-      "descricao": "Pino + cidade; opcional data. No canto superior esquerdo da área.",
-      "variaveis": "cidade, UF/país, data",
+      "descricao": "Pino + cidade, alinhados pela mesma borda. As duas linhas de baixo são opcionais (caixas de seleção): estado/país e data.",
+      "variaveis": "cidade, estado/país (opcional), data (opcional), posição",
       "referencias": [
         {
           "quadro": "quadros/ajplus_vinheta-serie-local_0115.jpg",
           "legenda": "AJ+: pino + 'NEVADA, U.S.'"
-        },
-        {
-          "quadro": "quadros/vox_localizacao-mapa_0141.jpg",
-          "legenda": "Vox: rótulo amarelo sobre mapa antigo"
         },
         {
           "quadro": "quadros/economist_etiqueta-local-remoto_0121.jpg",
@@ -259,6 +227,7 @@
     },
     {
       "id": "linha-do-tempo",
+      "mudou_no_v5": "Virou sistema: lista de anos com módulo de informação por ano, escolha de qual começa marcado e para qual passa (com transição); 9x16 vertical; parada grande reenquadrada no 16x9; motion novo.",
       "nome": "Linha do tempo",
       "secao": "Situar",
       "situacao": "nova",
@@ -266,37 +235,30 @@
       "no_app": false,
       "variacoes_app": [],
       "variacoes_estudio": [
-        "Parada (Intercept)",
-        "Espinha (Vox)",
-        "9x16 com caixa de evento (Nexo)"
+        "Espinha com passagem (2019 → 2021)",
+        "Espinha com passagem (2023 → 2026)",
+        "Parada grande (foto + texto)"
       ],
-      "descricao": "Duas versões das refs: espinha curta recorrente (Vox) e parada grande estilo Intercept (ano em caixa, foto, texto). No 9x16 o eixo segue horizontal, com caixa de evento embaixo (Nexo).",
-      "variaveis": "datas, títulos, textos, fotos",
+      "descricao": "Um sistema: a editora digita os anos e os fatos, escolhe qual começa marcado e para qual passa. A marcação anda até o próximo ano e o módulo de informação troca junto — serve para passagem de capítulos e pode voltar várias vezes no vídeo, cada vez marcando outro ano. 16x9 horizontal, 9x16 vertical.",
+      "variaveis": "anos e fatos (lista), começa marcado em, passa para, título, posição",
       "referencias": [
         {
           "quadro": "quadros/vox_linha-do-tempo_0145.jpg",
-          "legenda": "Vox: espinha fina, ano serifado, recortes"
+          "legenda": "Vox: espinha fina, ano, recortes"
         },
         {
           "quadro": "quadros/intercept_linha-do-tempo-foto-texto_0100.jpg",
-          "legenda": "Intercept: ano grande em caixa + foto + texto"
-        },
-        {
-          "quadro": "quadros/intercept_linha-do-tempo-ano_0028.jpg",
-          "legenda": "Intercept: parada só com texto"
+          "legenda": "Intercept: ano grande + foto + texto"
         },
         {
           "quadro": "quadros/nexo-short_grafico-linha-com-eventos_0013.jpg",
-          "legenda": "Nexo 9x16: eixo horizontal + caixa de evento"
-        },
-        {
-          "quadro": "quadros/ajplus_pilha-documentos-anos_0419.jpg",
-          "legenda": "AJ+: documentos com etiqueta de ano"
+          "legenda": "Nexo 9x16: eixo + caixa de evento"
         }
       ]
     },
     {
       "id": "documento-com-grifo",
+      "mudou_no_v5": "Texto entra por linha e os grifos depois; vários grifos; opção de o grifo vir à frente com o resto desfocado; logo oficial opcional; “escurece + frase-chave” saiu; entrada e saída refinadas.",
       "nome": "Documento com grifo",
       "secao": "Provar",
       "situacao": "nova",
@@ -304,21 +266,18 @@
       "no_app": false,
       "variacoes_app": [],
       "variacoes_estudio": [
-        "Zoom + grifo",
-        "Escurece + frase-chave",
-        "Página flutuante",
+        "Página: linhas + grifos",
+        "Página: grifo em destaque",
+        "Flutuante + logo oficial",
+        "Flutuante + grifo em destaque",
         "Pilha com datas"
       ],
-      "descricao": "Família com 4 aplicações. Tempos medidos: corte direto pro trecho, grifo começa 0,3 s depois, 0,35 s por linha, segura 2 s. Página sempre de frente. Faltam refs do Fantástico para o v5.",
-      "variaveis": "imagem do documento (Drive), trecho, frase-chave, fonte",
+      "descricao": "O texto do documento aparece por linha; os grifos vêm depois (um ou vários). Opcional: o trecho grifado vem para a frente e cresce enquanto o resto desfoca. Página flutuante sobre o vídeo, com logo oficial opcional. Pilha de páginas para sequência de documentos.",
+      "variaveis": "imagem ou texto do documento, trechos grifados (vários), destacar grifo (sim/não), logo oficial (opcional), fonte",
       "referencias": [
         {
           "quadro": "quadros/vox_documento-marcatexto_0152.jpg",
           "legenda": "Vox: zoom no trecho + marca-texto"
-        },
-        {
-          "quadro": "quadros/aljazeera_documento-escurece-frase_0436.jpg",
-          "legenda": "Al Jazeera: tudo escurece e a frase-chave entra em tarja"
         },
         {
           "quadro": "quadros/ajplus_documento-flutuante_0410.jpg",
@@ -327,15 +286,12 @@
         {
           "quadro": "quadros/ajplus_pilha-documentos-anos_0419.jpg",
           "legenda": "AJ+: pilha com etiquetas de ano"
-        },
-        {
-          "quadro": "quadros/johnnyharris_documento-citacao-flutuante_0334.jpg",
-          "legenda": "Johnny Harris: citação de documento em tarja"
         }
       ]
     },
     {
       "id": "post-de-rede-social",
+      "mudou_no_v5": "Prevê texto longo; versões com foto e com vídeo; números ocultáveis; mosaico de vídeos saiu.",
       "nome": "Post de rede social",
       "secao": "Provar",
       "situacao": "nova",
@@ -343,16 +299,15 @@
       "no_app": false,
       "variacoes_app": [],
       "variacoes_estudio": [
-        "X / Twitter",
-        "Mosaico de vídeos"
+        "X · texto curto",
+        "X · texto longo",
+        "X · com foto",
+        "Instagram · com vídeo",
+        "Sem números"
       ],
-      "descricao": "Recriado legível a partir do modelo de tweet do Canva, com medidas fixas. Para vídeo de rede, o formato certo é o mosaico de vídeos (Vox), não o cartão.",
-      "variaveis": "rede, foto, nome, @, verificado, texto, imagem, data, números",
+      "descricao": "Cartão de post legível, preparado para texto longo, com foto ou vídeo no lugar certo e os números (curtidas, compartilhamentos) opcionais. O mosaico de vídeos saiu.",
+      "variaveis": "rede (X, Instagram, TikTok), foto de perfil, nome, @, texto, imagem/vídeo (opcional), mostrar números (sim/não), data",
       "referencias": [
-        {
-          "quadro": "quadros/vox_mosaico-videos-sociais_0101.jpg",
-          "legenda": "Vox: vídeos verticais lado a lado, legenda original"
-        },
         {
           "quadro": "quadros/meteoro_comentario-chat-na-tela_0128.jpg",
           "legenda": "Meteoro: comentário na tela"
@@ -361,6 +316,7 @@
     },
     {
       "id": "audio-obtido",
+      "mudou_no_v5": "Onda de áudio animada em loop; módulos opcionais em todas as opções; fala em TipoNinja entrando por linha; enquadramento nas áreas do design system.",
       "nome": "Áudio obtido",
       "secao": "Provar",
       "situacao": "atualizar",
@@ -374,16 +330,12 @@
         "Sem imagem",
         "Tela dividida"
       ],
-      "descricao": "Peça-chave da NINJA. Cinco encaixes, um para cada tipo de imagem disponível. Transcrição sincronizada em blocos (da aba Legenda), onda na cor de destaque. Faltam refs de áudio vazado (Intercept) para o v5.",
-      "variaveis": "quem fala, tipo de imagem, transcrição, fonte do áudio",
+      "descricao": "Cinco encaixes, um para cada tipo de imagem disponível. A onda de áudio se mexe em loop; cada módulo (selo, onda, fala, identificação) é opcional.",
+      "variaveis": "quem fala (opcional), tipo de imagem, transcrição, fonte do áudio (opcional), mostrar onda (sim/não)",
       "referencias": [
         {
-          "quadro": "quadros/intercept-short_arte-colagem-terco_0021.jpg",
-          "legenda": "Intercept: arte-colagem da reportagem como imagem"
-        },
-        {
           "quadro": "quadros/economist-short_recorte-pessoa-pb_0005.jpg",
-          "legenda": "Economist: pessoa recortada sobre fundo P&B"
+          "legenda": "Economist: pessoa sobre fundo P&B"
         },
         {
           "quadro": "quadros/johnnyharris_citacao-papel-rasgado_0408.jpg",
@@ -393,6 +345,7 @@
     },
     {
       "id": "print-gravacao-de-tela",
+      "mudou_no_v5": "Sem espaço vazio: o entorno é preenchido pela própria imagem desfocada, de forma responsiva ao tamanho do print; zoom opcional no trecho grifado.",
       "nome": "Print / gravação de tela",
       "secao": "Provar",
       "situacao": "nova",
@@ -400,15 +353,16 @@
       "no_app": false,
       "variacoes_app": [],
       "variacoes_estudio": [
-        "Navegador",
-        "Celular"
+        "Navegador (entorno desfocado)",
+        "Navegador + zoom no trecho",
+        "Celular (entorno desfocado)"
       ],
-      "descricao": "Moldura grande (quase sangrando), barra com a identidade NINJA (preto + Microgramma), grifo no trecho e zoom.",
-      "variaveis": "imagem/vídeo de tela (Drive), endereço, trecho",
+      "descricao": "O print fica no tamanho dele, com sombra, e o espaço em volta é preenchido pela própria imagem ampliada e desfocada — some o vazio do navegador, em qualquer proporção de print. O trecho importante ganha grifo e zoom.",
+      "variaveis": "imagem ou vídeo de tela (Drive), trecho grifado, zoom no trecho (sim/não), endereço (opcional)",
       "referencias": [
         {
           "quadro": "quadros/aljazeera_print-site-destaque_0115.jpg",
-          "legenda": "Al Jazeera: página flutuante com destaque laranja"
+          "legenda": "Al Jazeera: página flutuante com destaque"
         },
         {
           "quadro": "quadros/meteoro_print-materia-com-camera_0310.jpg",
@@ -418,6 +372,7 @@
     },
     {
       "id": "tela-dividida-2-3-4",
+      "mudou_no_v5": "Novas divisões em 4 (colunas verticais no 9x16, grade 2 × 2 no 16x9); entrada em cascata; crédito mini dentro da área segura.",
       "nome": "Tela dividida (2, 3, 4)",
       "secao": "Provar",
       "situacao": "nova",
@@ -427,24 +382,16 @@
       "variacoes_estudio": [
         "2",
         "3",
-        "4",
-        "Pessoa no terço inferior (grande em cima)",
+        "4 (faixas)",
+        "4 · 9x16 em colunas / 16x9 em grade 2 × 2",
         "Prova no terço superior"
       ],
-      "descricao": "Família única com o grid. Padrão 9x16 = prova em cima, pessoa embaixo (estrutura mais usada nos Shorts), fio de 4 px na cor de destaque, crédito mini no topo de cada imagem.",
-      "variaveis": "imagens (2–4), crédito por imagem, proporção",
+      "descricao": "Família única com o grid. Novas: no 9x16, quatro imagens verticais lado a lado cortando a tela em 4; no 16x9, quatro telas 16x9 em grade 2 × 2. As imagens entram em cascata.",
+      "variaveis": "imagens (2–4), crédito por imagem, divisão",
       "referencias": [
         {
           "quadro": "quadros/ajplus-short_tela-dividida-legenda_0009.jpg",
           "legenda": "AJ+: pessoa em cima, imagem embaixo, fio amarelo"
-        },
-        {
-          "quadro": "quadros/intercept-short_tela-dividida-terco-superior_0009.jpg",
-          "legenda": "Intercept: prova no terço de cima"
-        },
-        {
-          "quadro": "quadros/intercept-short_duas-fotos-terco_0035.jpg",
-          "legenda": "Intercept: duas fotos no terço"
         },
         {
           "quadro": "quadros/economist-short_tela-dividida-2-clipes_0043.jpg",
@@ -454,6 +401,7 @@
     },
     {
       "id": "numero-em-destaque",
+      "mudou_no_v5": "Sobre foto, com a regra geral de sombra; comparação com dois números e momento de troca do destaque escolhido pela editora; contagem animada.",
       "nome": "Número em destaque",
       "secao": "Explicar",
       "situacao": "nova",
@@ -461,29 +409,26 @@
       "no_app": false,
       "variacoes_app": [],
       "variacoes_estudio": [
-        "Gigante",
-        "Número + comparação",
-        "Sobre foto"
+        "Gigante (contagem)",
+        "Comparação com troca de destaque",
+        "Sobre foto (canto)"
       ],
-      "descricao": "Rediagramado. O % e unidades em Aktiv (a TipoNinja não tem o caractere). Quatro aplicações.",
-      "variaveis": "número, unidade, frase, fonte, (valor inicial da contagem)",
+      "descricao": "Mostrado sobre foto (para ver a sombra, que segue a regra geral). Na comparação, dois números lado a lado e a editora escolhe o momento em que o destaque muda de um para o outro, acompanhando a locução. O número conta até o valor.",
+      "variaveis": "número, unidade, frase, fonte; na comparação: número 1, número 2, momento da troca (s)",
       "referencias": [
         {
           "quadro": "quadros/ajplus_numero-destaque_0505.jpg",
-          "legenda": "AJ+: número gigante condensado, contagem em 1 s"
+          "legenda": "AJ+: número gigante, contagem em 1 s"
         },
         {
           "quadro": "quadros/vox_dado-em-frase_0042.jpg",
-          "legenda": "Vox: dado escrito em frase + seta"
-        },
-        {
-          "quadro": "quadros/vox_pictograma-percentual_0258.jpg",
-          "legenda": "Vox: pictograma com %"
+          "legenda": "Vox: dado escrito em frase"
         }
       ]
     },
     {
       "id": "numero-sobre-o-video",
+      "mudou_no_v5": "Modular (pessoa, objeto, canto) com posição própria; seta se desenha; contador; motion novo.",
       "nome": "Número sobre o vídeo",
       "secao": "Explicar",
       "situacao": "nova",
@@ -492,27 +437,25 @@
       "variacoes_app": [],
       "variacoes_estudio": [
         "Ligado à pessoa",
-        "Seta para o objeto"
+        "Seta para o objeto",
+        "Contador no canto"
       ],
-      "descricao": "Não flutua mais: preso ao canto inferior esquerdo como a BBC, ligado a quem/o que aparece (nome + número), ou apontado com seta para o objeto.",
-      "variaveis": "rótulo, número, (alvo da seta)",
+      "descricao": "Modular: o número sempre pertence a algo na imagem — à pessoa (junto da tarja), ao objeto (seta desenhada) ou ao plano inteiro (contador no canto). Cada módulo tem posição própria.",
+      "variaveis": "rótulo, número, ligar a (pessoa / objeto / canto), posição do rótulo, posição da seta",
       "referencias": [
         {
           "quadro": "quadros/bbcbrasil_rotulo-numero-sobre-video_0059.jpg",
           "legenda": "BBC: nome + número em tarjas empilhadas"
         },
         {
-          "quadro": "quadros/bbcbrasil_rotulo-numero-libras_0235.jpg",
-          "legenda": "BBC: mesmo padrão com outro dado"
-        },
-        {
           "quadro": "quadros/ajplus-short_seta-nome-na-multidao_0209.jpg",
-          "legenda": "AJ+: seta desenhada apontando a pessoa"
+          "legenda": "AJ+: seta apontando a pessoa"
         }
       ]
     },
     {
       "id": "sistema-de-graficos",
+      "mudou_no_v5": "Montagem nova (linha de base → barras uma a uma → valores); 9x16 centralizado; comparação com fotos alinhada no mesmo x; rosca em fita.",
       "nome": "Sistema de gráficos",
       "secao": "Explicar",
       "situacao": "nova",
@@ -525,8 +468,8 @@
         "Comparação com fotos",
         "Rosca"
       ],
-      "descricao": "Gerados a partir dos dados digitados (as alturas abaixo são calculadas dos valores, nada à mão). Eixo no zero, valor escrito em cada barra, fonte sempre visível, destaque só no dado da notícia. Tipos: colunas, barras/ranking, comparação com fotos, linha com eventos, rosca.",
-      "variaveis": "título, tabela de dados, unidade, fonte, item em destaque",
+      "descricao": "Gerados a partir dos dados digitados. Montagem: a linha de base aparece primeiro, depois cada barra cresce uma de cada vez, os valores vêm em seguida. No 9x16 o padrão é o centro da tela. Na comparação com fotos, todas as barras começam no mesmo x. A rosca usa a mesma montagem em fita.",
+      "variaveis": "título, tabela de dados, unidade, fonte, item em destaque, posição do gráfico",
       "referencias": [
         {
           "quadro": "quadros/bbcbrasil_grafico-colunas-destaque_0115.jpg",
@@ -537,14 +480,6 @@
           "legenda": "BBC: ranking horizontal"
         },
         {
-          "quadro": "quadros/bbcbrasil_barras-comparacao-turnos_0039.jpg",
-          "legenda": "BBC: comparação com fotos"
-        },
-        {
-          "quadro": "quadros/nexo-short_grafico-linha-com-eventos_0013.jpg",
-          "legenda": "Nexo: linha + caixa de evento"
-        },
-        {
           "quadro": "quadros/economist-short_grafico-barras-horizontais_0015.jpg",
           "legenda": "Economist: barras em tela cheia no 9x16"
         }
@@ -552,6 +487,7 @@
     },
     {
       "id": "comparacao",
+      "mudou_no_v5": "Propósito de cada versão explicado; fala contra fala mostra a frase de cada lado; versus refeito em tela cheia (antes estava pequeno e espremido).",
       "nome": "Comparação",
       "secao": "Explicar",
       "situacao": "nova",
@@ -561,23 +497,20 @@
       "variacoes_estudio": [
         "Fala contra fala",
         "Antes e depois",
-        "Versus"
+        "Versus (tela cheia)"
       ],
-      "descricao": "Três versões. A nova “fala contra fala”: o lado 1 roda em cor enquanto o 2 fica congelado em P&B; depois inverte (loop de 6 s no quadro).",
-      "variaveis": "dois vídeos/fotos, rótulos (data/local), quem fala",
+      "descricao": "Cada versão com um propósito: fala contra fala (a mesma pessoa em dois momentos: um lado roda em cor, o outro fica em P&B, e inverte — com a frase de cada lado), antes e depois (o mesmo lugar) e versus (duas pessoas, em tamanho cheio, com o dado de cada uma).",
+      "variaveis": "dois vídeos/fotos, rótulos (data/local), frase de cada lado, dado de cada lado (versus)",
       "referencias": [
         {
           "quadro": "quadros/aljazeera_versus-candidatos_0445.jpg",
           "legenda": "Al Jazeera: versus de retratos"
-        },
-        {
-          "quadro": "quadros/bbcbrasil_barras-comparacao-turnos_0039.jpg",
-          "legenda": "BBC: comparação em barras"
         }
       ]
     },
     {
       "id": "o-que-se-sabe-o-que-nao-se-sabe",
+      "mudou_no_v5": "Mais espaço e mais cenários: duas colunas com 3 itens, lista longa até 6 itens, um item por vez; itens entram em sequência.",
       "nome": "O que se sabe / o que não se sabe",
       "secao": "Explicar",
       "situacao": "nova",
@@ -585,23 +518,22 @@
       "no_app": false,
       "variacoes_app": [],
       "variacoes_estudio": [
-        "Cartões"
+        "Duas colunas",
+        "Lista longa",
+        "Um por vez"
       ],
-      "descricao": "Rediagramado em dois cartões: um claro (sabe) e um escuro com borda (não sabe). Ícones desenhados, texto no tamanho da regra, cada item entra em sequência.",
-      "variaveis": "itens confirmados, itens em aberto",
+      "descricao": "Preparado para mais texto e mais cenários: duas colunas (até 3 itens cada), lista longa (até 6 itens, texto em duas linhas) e um item por vez em cartão grande. Cada item entra em sequência.",
+      "variaveis": "itens confirmados, itens em aberto, formato (duas colunas / lista / um por vez)",
       "referencias": [
         {
           "quadro": "quadros/johnnyharris_cartao-tratado-texto_0230.jpg",
-          "legenda": "Johnny Harris: cartão de lista, tópicos entram um a um"
-        },
-        {
-          "quadro": "quadros/nexo_cartao-pergunta_0013.jpg",
-          "legenda": "Nexo: cartão com moldura e pergunta"
+          "legenda": "Johnny Harris: cartão de lista, tópicos um a um"
         }
       ]
     },
     {
       "id": "selo-de-checagem",
+      "mudou_no_v5": "Animação em tempos: frase → risco → carimbo que bate e assenta; carimbo em TipoNinja; cores do design system.",
       "nome": "Selo de checagem",
       "secao": "Explicar",
       "situacao": "nova",
@@ -615,21 +547,18 @@
         "Verdadeiro",
         "Sobre o print"
       ],
-      "descricao": "Cinco vereditos, carimbo com textura de tinta (inspirado no “VETO” da Al Jazeera), frase checada riscada quando falsa, opção de selo sobre o print original. Vermelho/verde são semânticos; laranja e cinza para os intermediários.",
+      "descricao": "Animação cadenciada: a frase entra e é lida; depois, se for falsa, o risco se desenha; por último o carimbo bate (com textura de tinta) e assenta. Vermelho e verde são cores com significado; amarelo para enganoso, branco para sem provas.",
       "variaveis": "frase checada, veredito, fonte da checagem, (print original)",
       "referencias": [
         {
           "quadro": "quadros/aljazeera_carimbo-veto_0218.jpg",
-          "legenda": "Al Jazeera: carimbo 'VETO' girando sobre a cena"
-        },
-        {
-          "quadro": "quadros/aljazeera_explicativo-figuras_0212.jpg",
-          "legenda": "Al Jazeera: YES/NO em tarjas"
+          "legenda": "Al Jazeera: carimbo 'VETO' sobre a cena"
         }
       ]
     },
     {
       "id": "grid-de-fotos",
+      "mudou_no_v5": "Fotos reais; entrada em cascata; fio na cor de destaque.",
       "nome": "Grid de fotos",
       "secao": "Explicar",
       "situacao": "já existe",
@@ -638,16 +567,16 @@
       "variacoes_app": [],
       "variacoes_estudio": [
         "2",
-        "4",
         "3 iguais",
-        "1+2 (secundária)"
+        "1 + 2 (secundária)"
       ],
-      "descricao": "Padrão 16x9 de 3 fotos = três colunas iguais. Uma grande + duas pequenas fica como opção secundária. Foco por foto no app.",
+      "descricao": "Padrão 16x9 de 3 fotos = três colunas iguais. As fotos entram em cascata (varredura), o fio de destaque por último.",
       "variaveis": "fotos (Drive), ponto de foco, zoom",
       "referencias": []
     },
     {
       "id": "citacao",
+      "mudou_no_v5": "Desdobramentos com variáveis editáveis no painel; fragmento entra palavra a palavra; tarja de fala entra por linha; saídas.",
       "nome": "Citação",
       "secao": "Citar e creditar",
       "situacao": "atualizar",
@@ -656,20 +585,16 @@
       "variacoes_app": [],
       "variacoes_estudio": [
         "Com foto",
-        "Fragmento",
+        "Fragmento palavra a palavra",
         "Documento",
         "Legenda de terceiro"
       ],
-      "descricao": "Quatro aplicações, sem fundo chapado: com foto (tarja de fala), fragmento curto cinético (Vox), citação-documento (Johnny Harris) e legenda de terceiro (Economist/Intercept).",
-      "variaveis": "frase, autor, cargo, data, foto",
+      "descricao": "Quatro desdobramentos, todos editáveis no painel (frase, autor, cargo, data, foto, palavras em destaque, posição): com foto (tarja de fala), fragmento que entra palavra a palavra, citação-documento e legenda de terceiro.",
+      "variaveis": "frase, autor, cargo, data, foto, palavras em destaque, estilo, posição",
       "referencias": [
         {
           "quadro": "quadros/vox_citacao-cinetica_0201.jpg",
-          "legenda": "Vox: fragmento curto entre aspas, letra a letra"
-        },
-        {
-          "quadro": "quadros/vox_citacao-cinetica-apresentador_0203.jpg",
-          "legenda": "Vox: fragmento sobre o apresentador"
+          "legenda": "Vox: fragmento curto, letra a letra"
         },
         {
           "quadro": "quadros/johnnyharris_citacao-papel-rasgado_0408.jpg",
@@ -678,15 +603,12 @@
         {
           "quadro": "quadros/economist-short_legenda-italico-fonte_0021.jpg",
           "legenda": "Economist: itálico = fala de terceiro"
-        },
-        {
-          "quadro": "quadros/intercept-short_pergunta-gancho-tarja_0006.jpg",
-          "legenda": "Intercept: legenda amarela para o político"
         }
       ]
     },
     {
       "id": "credito",
+      "mudou_no_v5": "Sobre foto (dá para ver); menor e colado nas bordas; sem animação (entra e sai com o corte).",
       "nome": "Crédito",
       "secao": "Citar e creditar",
       "situacao": "já existe",
@@ -696,87 +618,51 @@
         "Vertical na borda",
         "Mini no topo"
       ],
-      "variacoes_estudio": [
-        "Vertical",
-        "Mini no topo"
-      ],
-      "descricao": "Duas posições: vertical na borda (padrão Canva) e mini no topo esquerdo por plano (padrão de 9 em 16 referências).",
-      "variaveis": "fonte",
+      "variacoes_estudio": [],
+      "descricao": "Menor e colado nas bordas, sem animação: cortou para a imagem, o crédito já está lá; cortou para outra, já é outro. Vertical na borda direita ou mini no topo.",
+      "variaveis": "texto, posição (vertical / mini no topo)",
       "referencias": [
         {
           "quadro": "quadros/economist-short_legenda-italico-fonte_0021.jpg",
           "legenda": "Economist: 'Source:' mini no topo"
-        },
-        {
-          "quadro": "quadros/intercept-short_tela-dividida-terco-superior_0009.jpg",
-          "legenda": "Intercept: 'Reprodução: YouTube / G1'"
         }
       ]
     },
     {
       "id": "transicoes-fitas-ninja",
+      "mudou_no_v5": "Em espera: serão refeitas numa sessão específica.",
       "nome": "Transições — fitas NINJA",
       "secao": "Ritmo e fechamento",
-      "situacao": "animada",
+      "situacao": "em espera",
       "ficha": "transicao",
       "no_app": false,
       "variacoes_app": [],
       "variacoes_estudio": [
-        "Fita diagonal",
-        "Código de barras",
-        "Estrelas",
-        "Cortina olhos"
+        "Em espera"
       ],
-      "descricao": "Família de fitas com os grafismos do painel da marca. Animadas em loop: veja o movimento no quadro. Todas ≤ 0,6 s no vídeo final (aqui estão em câmera lenta).",
-      "variaveis": "tipo de fita, direção, cor",
-      "referencias": [
-        {
-          "quadro": "quadros/bbcbrasil_transicao-cortina-vermelha_0108.jpg",
-          "legenda": "BBC: cortina de cor de baixo para cima, 0,4 s"
-        },
-        {
-          "quadro": "quadros/meteoro_transicao-papel-rasgado_0028.jpg",
-          "legenda": "Meteoro: papel rasgado com estrelas"
-        },
-        {
-          "quadro": "quadros/meteoro_vinheta-plantao_0027.jpg",
-          "legenda": "Meteoro: padrão de estrelas da marca"
-        }
-      ]
+      "descricao": "Reprovadas em 02/11 (“todas ruins”). Ficam em espera para uma sessão específica com o Gian.",
+      "variaveis": "—",
+      "referencias": []
     },
     {
       "id": "fundos",
+      "mudou_no_v5": "Em espera: serão refeitos numa sessão específica.",
       "nome": "Fundos",
       "secao": "Ritmo e fechamento",
-      "situacao": "animada",
+      "situacao": "em espera",
       "ficha": "fundo",
       "no_app": false,
       "variacoes_app": [],
       "variacoes_estudio": [
-        "Letras fluidas",
-        "Tipografia correndo",
-        "Estrela respirando",
-        "Neutro"
+        "Em espera"
       ],
-      "descricao": "Sem retroceder: neutros para peças calmas e grafismos cinéticos de alto nível — tipografia correndo, letras fluidas com distorção, estrelas girando. Em loop no quadro.",
-      "variaveis": "tipo, cor, velocidade",
-      "referencias": [
-        {
-          "quadro": "quadros/meteoro_vinheta-plantao_0027.jpg",
-          "legenda": "Meteoro: padrão da marca como fundo"
-        },
-        {
-          "quadro": "quadros/intercept_vinheta-titulo_0001.jpg",
-          "legenda": "Intercept: textura + tipografia"
-        },
-        {
-          "quadro": "quadros/vox-short_cartao-final-video-completo_0134.jpg",
-          "legenda": "Vox: tipografia gigante cinza"
-        }
-      ]
+      "descricao": "Reprovados em 02/11. Ficam em espera para uma sessão específica.",
+      "variaveis": "—",
+      "referencias": []
     },
     {
       "id": "legenda",
+      "mudou_no_v5": "Marcada como opcional; o padrão é a legenda atual.",
       "nome": "Legenda",
       "secao": "Ritmo e fechamento",
       "situacao": "nova",
@@ -784,10 +670,10 @@
       "no_app": false,
       "variacoes_app": [],
       "variacoes_estudio": [
-        "Frase em caixa",
-        "Palavra destacada"
+        "Frase em caixa (opcional)",
+        "Palavra destacada (opcional)"
       ],
-      "descricao": "Dois estilos: frase em caixa escura (AJ+/BBC) e palavra falada destacada (Vox), mais o estilo de fala de terceiro (itálico na cor de destaque). Faixa de legenda em y 1190–1500 no 9x16; sobe para a emenda na tela dividida.",
+      "descricao": "Opcional, para casos específicos. O padrão continua a legenda já usada hoje.",
       "variaveis": "(vem do SRT da aba Legenda)",
       "referencias": [
         {
@@ -796,49 +682,13 @@
         },
         {
           "quadro": "quadros/vox-short_legenda-palavra-destacada_0037.jpg",
-          "legenda": "Vox: palavra falada em caixinha amarela"
-        },
-        {
-          "quadro": "quadros/intercept-short_legenda-cinetica_0050.jpg",
-          "legenda": "Intercept: blocos de 2–4 palavras"
-        },
-        {
-          "quadro": "quadros/brut_legenda-sem-caixa_0022.jpg",
-          "legenda": "Brut: sem caixa, com sombra"
-        }
-      ]
-    },
-    {
-      "id": "cta",
-      "nome": "CTA",
-      "secao": "Ritmo e fechamento",
-      "situacao": "atualizar",
-      "ficha": "cta",
-      "no_app": false,
-      "variacoes_app": [],
-      "variacoes_estudio": [
-        "Zap",
-        "DOE (Pix)"
-      ],
-      "descricao": "Só na segunda metade; máx. 1 por Short. Mesma gramática da manchete do Canva. Família nova DOE (Pix).",
-      "variaveis": "tipo (zap, telegram, loja, membros, doe), texto, link, ligação com o assunto",
-      "referencias": [
-        {
-          "quadro": "quadros/vox-short_cartao-final-video-completo_0134.jpg",
-          "legenda": "Vox: CTA só no fim, uma frase"
-        },
-        {
-          "quadro": "quadros/intercept-short_cartao-final-leia_0111.jpg",
-          "legenda": "Intercept: 'leia a reportagem completa'"
-        },
-        {
-          "quadro": "quadros/meteoro_lowerthird-nome-arroba_0005.jpg",
-          "legenda": "Meteoro: Pix fixo no topo da live"
+          "legenda": "Vox: palavra falada destacada"
         }
       ]
     },
     {
       "id": "cartao-final-de-ponte",
+      "mudou_no_v5": "Motion novo: chapéu, linhas e logo em sequência; saída suave.",
       "nome": "Cartão final de ponte",
       "secao": "Ritmo e fechamento",
       "situacao": "nova",
@@ -849,7 +699,7 @@
         "Short",
         "16x9 com clicáveis"
       ],
-      "descricao": "~4 s nos Shorts (“veja o completo” / “leia a reportagem”); no 16x9, metade direita livre para os elementos clicáveis do YouTube.",
+      "descricao": "~4 s nos Shorts (“veja o completo”); no 16x9, metade direita livre para os clicáveis do YouTube. Entrada por linhas e logo por último.",
       "variaveis": "destino, texto",
       "referencias": [
         {
@@ -859,10 +709,6 @@
         {
           "quadro": "quadros/vox-short_cartao-final-video-completo_0134.jpg",
           "legenda": "Vox: 'watch the full video'"
-        },
-        {
-          "quadro": "quadros/nexo_tela-final-creditos_0538.jpg",
-          "legenda": "Nexo: área livre para clicáveis"
         }
       ]
     },
@@ -870,14 +716,15 @@
       "id": "pacote-360",
       "nome": "Pacote 360 nas redes",
       "secao": "Pacote 360 nas redes",
-      "situacao": "principal",
+      "situacao": "em discussão",
       "ficha": null,
       "no_app": false,
       "variacoes_app": [],
       "variacoes_estudio": [
         "Todas as saídas"
       ],
-      "descricao": "Tudo nasce da manchete central do Canva: 9x16 para Reels/TikTok/Shorts, 16x9 no vídeo longo, stories com link e thumbnail.",
+      "descricao": "Em discussão: qual é o propósito do pacote. Saídas da chamada central (9x16, 16x9) e a thumbnail no template do Thiago.",
+      "mudou_no_v5": "Logos no padrão (só a assinatura NINJA na thumbnail, como no template do Thiago); sem faixa de eleições; propósito aberto para a equipe.",
       "variaveis": "",
       "referencias": []
     }

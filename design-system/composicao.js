@@ -2,17 +2,26 @@
 // serve para o preview do app (num iframe) e para o render: o que a editora vê é o que sai.
 import { corDestaque, fontFaces } from './base.js';
 import * as credito from './pecas/credito.js';
-import * as mancheteCentral from './pecas/manchete_central.js';
+import * as chamadaCentral from './pecas/chamada_central.js';
 import * as tarjaNome from './pecas/tarja_nome.js';
 
 // Só as peças com componente aparecem no app; as outras fichas esperam o componente existir.
 export const componentes = {
-  [mancheteCentral.id]: mancheteCentral,
+  [chamadaCentral.id]: chamadaCentral,
   [tarjaNome.id]: tarjaNome,
   [credito.id]: credito,
 };
 
 export const FORMATOS = ['16x9', '9x16'];
+
+// Nomes antigos de peças (antes do NINJA Design System) que continuam abrindo em projetos salvos.
+export const APELIDOS = Object.fromEntries(
+  Object.values(componentes).flatMap((c) => (c.apelidos ?? []).map((a) => [a, c.id])),
+);
+
+export function canonico(modelo) {
+  return APELIDOS[modelo] ?? modelo;
+}
 
 function json(dados) {
   return JSON.stringify(dados).replace(/</g, '\\u003c');
@@ -21,7 +30,7 @@ function json(dados) {
 // recursos.ds(caminho) dá o endereço de um arquivo do design system; recursos.midia, o da mídia de
 // fundo ({ url, tipo: 'video' | 'imagem' }) ou null; recursos.gsap, o do GSAP.
 export function documento({ peca, formato, tokens, recursos, comuns = {} }) {
-  const componente = componentes[peca.modelo];
+  const componente = componentes[canonico(peca.modelo)];
   if (!componente) throw new Error(`A peça "${peca.modelo}" ainda não tem componente no design system.`);
   if (!FORMATOS.includes(formato)) throw new Error(`Formato inválido: ${formato}`);
   const { largura, altura } = tokens.quadro[formato];
@@ -43,6 +52,8 @@ html,body{width:${largura}px;height:${altura}px;overflow:hidden;background:trans
 #root{position:relative;width:100%;height:100%;overflow:hidden}
 #peca{position:absolute;inset:0}
 ${p.css}
+/* TipoNinja: alternativos e ligaturas desligados (fundamentos do Thiago) */
+#peca,#peca *{font-feature-settings:\"calt\" 0,\"liga\" 0,\"clig\" 0,\"dlig\" 0,\"hlig\" 0,\"salt\" 0,\"swsh\" 0,\"cswh\" 0,\"titl\" 0,\"ss01\" 0,\"ss02\" 0,\"ss03\" 0,\"ss04\" 0,\"ss05\" 0,\"ss06\" 0,\"ss07\" 0,\"ss08\" 0,\"ss09\" 0,\"ss10\" 0,\"ss11\" 0,\"ss12\" 0,\"ss13\" 0,\"ss14\" 0,\"ss15\" 0,\"ss16\" 0,\"ss17\" 0,\"ss18\" 0,\"ss19\" 0,\"ss20\" 0 !important;font-variant-ligatures:none !important}
 </style>
 </head>
 <body>
@@ -51,6 +62,7 @@ ${p.fundo}
 <div id="peca" class="clip" data-start="0" data-duration="${duracao}" data-layout-allow-overflow>${p.html}</div>
 </div>
 <script>
+${p.antes ?? ''}
 (function () {
   var animacoes = ${json(p.animacoes)};
   var tl = gsap.timeline({ paused: true });

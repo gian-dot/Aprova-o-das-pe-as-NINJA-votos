@@ -25,12 +25,13 @@
       "rotulo": "Cor de destaque da cobertura",
       "tipo": "opcao",
       "opcoes": [
-        "amarelo #FADF4B",
-        "verde #75FB4C",
-        "magenta #EA33F7"
+        "amarelo",
+        "rosa",
+        "verde_limao",
+        "ciano"
       ],
-      "padrao": "amarelo #FADF4B",
-      "ajuda": "Definida uma vez por vídeo; não por peça."
+      "padrao": "amarelo",
+      "ajuda": "Cores do NINJA Design System (Thiago). Definida uma vez por vídeo; não por peça."
     },
     {
       "id": "duracao",
@@ -48,8 +49,8 @@
   ],
   "pecas": [
     {
-      "id": "manchete_central",
-      "nome": "Manchete central (modelo de vídeo do Canva)",
+      "id": "chamada_central",
+      "nome": "Chamada central (modelo de vídeo do Canva)",
       "duracao": [
         3,
         7
@@ -64,28 +65,28 @@
             "linhas": 1,
             "car_linha": 28
           },
-          "ajuda": "Caixa alta automática."
+          "ajuda": "Opcional. Caixa branca, TipoNinja, caixa alta automática."
         },
         {
-          "id": "manchete",
-          "rotulo": "Manchete",
+          "id": "chamada",
+          "rotulo": "Chamada",
           "tipo": "texto_longo",
           "obrigatorio": true,
           "limite": {
-            "linhas": 3,
+            "linhas": 4,
             "car_linha": 15,
             "16x9": {
               "car_linha": 24
             }
           },
-          "ajuda": "TipoNinja caixa alta. Quebra de linha sugerida pelo sentido."
+          "ajuda": "TipoNinja caixa alta. O tamanho da letra se ajusta ao texto (regra do NINJA Design System: até 4 linhas, reduzindo até 15%; depois 5 linhas). Sem ponto final."
         },
         {
           "id": "palavra_destaque",
           "rotulo": "Palavra em destaque",
           "tipo": "texto",
           "obrigatorio": false,
-          "ajuda": "Uma palavra ou expressão da manchete na cor de destaque."
+          "ajuda": "Uma palavra ou expressão da chamada na cor de destaque."
         },
         {
           "id": "fundo",
@@ -123,34 +124,40 @@
           "ajuda": "Ao vivo troca o chapéu para vermelho com ●."
         },
         {
-          "id": "faixa_marcas",
-          "rotulo": "Faixa de marcas",
-          "tipo": "sim_nao",
-          "padrao": true
-        },
-        {
-          "id": "selo",
-          "rotulo": "Selo da cobertura",
+          "id": "posicao_bloco",
+          "rotulo": "Posição do bloco",
           "tipo": "opcao",
           "opcoes": [
-            "nenhum",
-            "ELEIÇÕES 26",
-            "outro (PNG)"
+            "automática",
+            "centro",
+            "base"
           ],
-          "padrao": "nenhum"
+          "padrao": "automática",
+          "ajuda": "Automática: com véu ou desfoque a chamada vai para o centro da tela; com degradê fica na base."
         },
         {
-          "id": "credito",
-          "rotulo": "Crédito",
-          "tipo": "texto",
-          "limite": {
-            "linhas": 1,
-            "car_linha": 48
-          },
-          "padrao": "VÍDEO: REPRODUÇÃO REDES SOCIAIS"
+          "id": "deslocar_x",
+          "rotulo": "Deslocar bloco na horizontal (px)",
+          "tipo": "numero",
+          "padrao": 0
+        },
+        {
+          "id": "deslocar_y",
+          "rotulo": "Deslocar bloco na vertical (px)",
+          "tipo": "numero",
+          "padrao": 0
+        },
+        {
+          "id": "deslocar_chapeu_y",
+          "rotulo": "Deslocar só o chapéu na vertical (px)",
+          "tipo": "numero",
+          "padrao": 0
         }
       ],
-      "muda_9x16": "Limite real medido (02/11): 9x16 até 3 linhas de ~15 caracteres (TipoNinja 104 px em 914 px); 16x9 até 3 linhas de ~24. O bloco cresce para cima a partir da faixa de marcas. Se não couber, avisa e sugere corte."
+      "muda_9x16": "9x16: bloco na área segura do perfil reels do Thiago (y 240–1680, laterais 70). A letra se ajusta ao texto (faixa 64–170 px). Crédito e logo são peças separadas.",
+      "apelidos": [
+        "manchete_central"
+      ]
     },
     {
       "id": "pergunta_gancho",

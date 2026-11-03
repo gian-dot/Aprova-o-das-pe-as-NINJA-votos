@@ -25,11 +25,16 @@ export function fontFaces(tokens, urlDe) {
     .join('\n');
 }
 
-// A opção da ficha vem como "amarelo #FADF4B"; o hex sempre vale o que está no tokens.json.
+// Nomes antigos da Máquina (antes do design system do Thiago) que continuam valendo em projetos salvos.
+const DESTAQUE_ANTIGO = { verde: 'verde_limao', magenta: 'rosa' };
+
+// A opção vem como o nome da cor do Thiago ("amarelo", "rosa"...) ou no formato antigo "amarelo #FADF4B";
+// o hex sempre vale o do design system do Thiago (tokens.cores.destaques).
 export function corDestaque(tokens, comuns) {
-  const escolha = String(comuns?.cor_destaque ?? '').split(' ')[0].toLowerCase();
+  const nome = String(comuns?.cor_destaque ?? '').split(' ')[0].toLowerCase();
+  const escolha = DESTAQUE_ANTIGO[nome] ?? nome;
   const destaques = tokens.cores.destaques;
-  return destaques[escolha] ?? Object.values(destaques)[0];
+  return destaques[escolha] ?? destaques.amarelo ?? Object.values(destaques)[0];
 }
 
 // Texto já escapado; quebras de linha da editora viram <br>.
