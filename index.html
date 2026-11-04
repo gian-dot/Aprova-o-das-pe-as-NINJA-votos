@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 </head>
 <body>
+<style>.ap-encerrada{background:#FFDE00;color:#000;font:600 15px/1.45 Manrope,sans-serif;padding:14px 18px;text-align:center}.ap-conversa form,.ap-decide button,.ap-nome{display:none!important}</style>
+
 <title>Aprovação das peças NINJA</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <style>
@@ -188,6 +190,7 @@ body.zon .zona{display:block}
 </style>
 
 <svg width="0" height="0" style="position:absolute"><filter id="tinta"><feTurbulence baseFrequency="0.9" numOctaves="2" result="t"/><feColorMatrix in="t" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.2 1.4" result="m"/><feComposite in="SourceGraphic" in2="m" operator="in"/></filter></svg>
+<div class="ap-encerrada" role="status">Consulta encerrada em 04/11/2026. Obrigado, Gian, Fernanda, Luiza, Mauro e Ana! Os votos e comentários continuam visíveis abaixo; as peças agora estão sendo implementadas na Máquina de Vídeos com o NINJA Design System 2.0 do Thiago.</div>
 <div class="ap-topo">
   <div class="ap-topo-in">
     <div class="ap-marca"><h1>Aprovação das peças · v5</h1><span>Mídia NINJA · NINJA Design System</span></div>
@@ -863,6 +866,7 @@ async function enviar(dados){
   const j=await r.json();if(!j.ok)throw new Error(j.erro||"recusado");
 }
 async function votarPublico(id,status,el){
+  avisar("A consulta foi encerrada em 04/11/2026: não recebe mais votos.",true);return;
   const nome=meuNome();if(!nome)return;
   const decisao=decisoes[id]?.meu===status?"nenhuma":status;
   const botoes=el.querySelectorAll("button[data-d]");botoes.forEach(b=>b.disabled=true);
@@ -871,6 +875,7 @@ async function votarPublico(id,status,el){
   finally{botoes.forEach(b=>b.disabled=false)}
 }
 async function comentarPublico(id,el){
+  avisar("A consulta foi encerrada em 04/11/2026: não recebe mais comentários.",true);return;
   const nome=meuNome();if(!nome)return;
   const campo=el.querySelector(".ap-conversa textarea"),texto=campo.value.trim();if(!texto){campo.focus();return}
   const botao=el.querySelector(".ap-conversa button");botao.disabled=true;

@@ -1,5 +1,7 @@
 # Aprovação das peças NINJA
 
+> **Consulta encerrada em 04/11/2026.** A página fica no ar só para consulta: não recebe mais votos nem comentários. O resultado e o que entrou em cada peça estão no repositório da Máquina de Vídeos (`docs/specs/2026-11-04-consulta-encerrada-e-modelos.md`).
+
 > **Página temporária**, só para os primeiros feedbacks. O design system principal da Mídia NINJA agora é o **NINJA Design System, do Thiago**, num repositório próprio. As mudanças de design são feitas lá, e não aqui.
 
 **Versão 5 (03/11/2026):** peças refeitas com o NINJA Design System do Thiago (versão 1.0.0: cores, TipoNinja + Manrope Medium, chapéu, áreas seguras) e com os comentários de 02/11. Os ids das peças não mudaram: os votos de 02/11 continuam valendo; o CTA saiu da página (vai ter um fluxo próprio).
