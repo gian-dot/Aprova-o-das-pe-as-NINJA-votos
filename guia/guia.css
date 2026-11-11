@@ -172,6 +172,9 @@ main > section, #etapas > section { padding-top: 40px; }
 .cola th { padding: 6px 10px; border-bottom: 1px solid var(--borda-forte); text-align: left; font: 500 0.75rem var(--fonte); letter-spacing: 0.08em; text-transform: uppercase; color: var(--texto-suave); }
 .cola td { padding: 8px 10px; border-bottom: 1px solid var(--borda); vertical-align: middle; }
 .cola tbody tr:hover { background: var(--superficie); }
+/* Uma peça (modelo) por bloco: a primeira linha de cada bloco tem uma linha mais forte em cima. */
+.cola tbody:not(:first-of-type) tr:first-child td { border-top: 2px solid var(--borda-forte); }
+.cola .c-variacao { width: 1%; white-space: nowrap; font-size: 0.85rem; color: var(--texto-suave); }
 .cola .c-peca { width: 1%; white-space: nowrap; }
 .cola .c-peca a { font: 400 1.15rem var(--fonte-titulo); text-decoration: none; text-transform: uppercase; color: var(--texto); }
 .cola .c-peca a:hover { color: var(--acento); }
@@ -185,20 +188,43 @@ main > section, #etapas > section { padding-top: 40px; }
 .etapa-topo { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 16px; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 3px solid var(--acento); }
 .etapa-topo h2 { margin: 0; }
 .etapa-topo p { margin: 0; color: var(--texto-suave); }
-.cartoes { display: grid; gap: 16px; }
+.cartoes { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
 
 .cartao {
-  display: grid;
-  grid-template-columns: minmax(0, 440px) minmax(0, 1fr);
-  gap: 16px 28px;
-  align-items: start;
+  min-width: 0;
   padding: 20px;
   background: var(--superficie);
   border: 1px solid var(--borda);
   border-radius: var(--raio);
 }
-.cartao:target { border-color: var(--acento); }
-.cartao-topo { grid-column: 1 / -1; display: grid; gap: 6px; }
+.cartao:target, .cartao.alvo { border-color: var(--acento); }
+.cartao-topo { display: grid; gap: 6px; margin-bottom: 16px; }
+
+/* As abas: uma por variação do modelo. Na tela estreita, a barra rola para o lado dentro dela mesma. */
+.abas { display: flex; gap: 4px; margin: 0 0 18px; overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain; scrollbar-width: thin; border-bottom: 1px solid var(--borda-forte); position: relative; }
+.abas .aba {
+  flex: none;
+  min-height: 42px;
+  padding: 0 16px;
+  margin-bottom: -1px;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  border-radius: var(--raio) var(--raio) 0 0;
+  background: transparent;
+  color: var(--texto-suave);
+  font: 500 0.95rem var(--fonte);
+  white-space: nowrap;
+}
+.abas .aba:hover { color: var(--texto); background: var(--superficie-2); border-bottom-color: var(--borda-forte); }
+.abas .aba[aria-selected='true'] { color: var(--acento); background: var(--superficie-2); border-bottom-color: var(--acento); }
+.abas .aba:focus-visible { outline: 2px solid var(--acento); outline-offset: -2px; }
+
+.painel {
+  display: grid;
+  grid-template-columns: minmax(0, 440px) minmax(0, 1fr);
+  gap: 16px 28px;
+  align-items: start;
+}
 .cartao-titulo { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
 .cartao-titulo h3 { font-size: 2rem; color: var(--acento); }
 .modelo { margin: 0; font-size: 0.85rem; color: var(--texto-suave); }
@@ -253,6 +279,9 @@ main > section, #etapas > section { padding-top: 40px; }
 .campo-exemplo q { quotes: none; color: var(--texto); font-family: var(--fonte-mono); font-size: 0.82rem; overflow-wrap: anywhere; }
 .campo-limite { color: var(--acento); }
 
+.muda { margin: 0; padding: 12px 14px; background: var(--superficie-2); border-left: 3px solid var(--borda-forte); border-radius: var(--raio); }
+.muda h4 { margin-bottom: 4px; }
+.muda p { margin: 0; color: var(--texto); font-size: 0.95rem; }
 .apelidos { margin: 0; font-size: 0.92rem; color: var(--texto-suave); }
 .apelidos code { color: var(--texto); }
 .atalhos { display: grid; gap: 6px; }
@@ -270,7 +299,7 @@ main > section, #etapas > section { padding-top: 40px; }
 @media (max-width: 960px) {
   .passos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .regras { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .cartao { grid-template-columns: minmax(0, 1fr); }
+  .painel { grid-template-columns: minmax(0, 1fr); }
   .previa { position: static; max-width: 520px; }
 }
 @media (max-width: 640px) {
@@ -294,7 +323,12 @@ main > section, #etapas > section { padding-top: 40px; }
   .cola tbody tr { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 8px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--borda); }
   .cola td { padding: 0; border: 0; }
   .cola .c-peca, .cola .c-copiar { width: auto; white-space: normal; }
-  .cola .c-escreva { grid-column: 1 / -1; grid-row: 2; }
+  .cola .c-variacao { grid-column: 1 / -1; grid-row: 2; width: auto; white-space: normal; }
+  .cola .c-variacao:empty { display: none; }
+  .cola .c-escreva { grid-column: 1 / -1; grid-row: 3; }
+  .cola tbody:not(:first-of-type) tr:first-child { border-top: 2px solid var(--borda-forte); }
+  .cola tbody:not(:first-of-type) tr:first-child td { border-top: 0; }
+  .abas .aba { padding: 0 14px; }
   .com-botao { flex-direction: column; }
   .com-botao button { align-self: flex-start; }
 }

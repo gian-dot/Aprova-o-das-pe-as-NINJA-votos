@@ -22,7 +22,6 @@ function el(tag, props = {}, ...filhos) {
 
 // "CITAÇÃO" → "citacao": a busca e os endereços não ligam para acento nem maiúscula.
 const semAcento = (t) => String(t ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
-const idDoCartao = (palavra) => `peca-${semAcento(palavra).replace(/[^a-z0-9]+/g, '-')}`;
 const escrevaAssim = (f) => `${f.palavra}: ${f.campos.join(' | ')}`;
 
 // "TARJA: nome | [cargo]" com a palavra em destaque.
@@ -210,7 +209,20 @@ function montarPrevia(p) {
   escalar(p);
 }
 
-// Os iframes só nascem quando o cartão chega perto da tela, e o loop para nos que saem: são quase 30 prévias.
+
+function desmontarPrevia(p) {
+  clearInterval(p.espera);
+  tocando.delete(p);
+  p.tl = null;
+  p.peca = null;
+  p.iframe?.remove();
+  p.iframe = null;
+  p.quadro.replaceChildren();
+}
+
+// Os iframes só nascem quando a prévia chega perto da tela, e o loop para nos que saem. Prévia de aba escondida
+// nunca está na tela (o painel fica escondido), então só a aba aberta de cada cartão toca. Quem fica longe
+// demais da tela perde o iframe (a página tem umas 50 prévias; nunca ficam todas montadas).
 const naTela = new IntersectionObserver((entradas) => {
   for (const entrada of entradas) {
     const p = previas.get(entrada.target);
@@ -220,6 +232,13 @@ const naTela = new IntersectionObserver((entradas) => {
     else atualizar(p);
   }
 }, { rootMargin: '240px 0px' });
+
+const longeDaTela = new IntersectionObserver((entradas) => {
+  for (const entrada of entradas) {
+    const p = previas.get(entrada.target);
+    if (p && !entrada.isIntersecting && p.iframe) desmontarPrevia(p);
+  }
+}, { rootMargin: '1400px 0px' });
 
 const aoRedimensionar = new ResizeObserver((entradas) => {
   for (const entrada of entradas) {
@@ -251,6 +270,7 @@ function criarPrevia(f) {
     el('p', { className: 'tempo', text: `Fica cerca de ${segundos} s na tela` }),
   );
   naTela.observe(quadro);
+  longeDaTela.observe(quadro);
   aoRedimensionar.observe(quadro);
   return el('div', { className: 'previa' }, quadro, barra);
 }
@@ -303,71 +323,176 @@ function listaDeCampos(f) {
   return el('ol', { className: 'campos' }, itens);
 }
 
-function cartao(f, atalhos) {
-  const idTitulo = `t-${idDoCartao(f.palavra)}`;
-  const topo = el('header', { className: 'cartao-topo' },
-    el('div', { className: 'cartao-titulo' },
-      el('h3', { id: idTitulo, text: f.palavra }),
-      el('p', { className: 'modelo', text: `Peça: ${f.nome}` }),
-    ),
-    el('p', { className: 'quando', text: f.quando }),
-  );
+// O conteúdo de uma aba: a prévia desta variação e, ao lado, tudo o que o redator precisa para escrever.
+function conteudoDaAba(f, comAbas) {
   const texto = el('div', { className: 'cartao-texto' },
+    f.definicao && el('div', { className: 'muda' }, el('h4', { text: comAbas ? 'O que muda nesta variação' : 'Como fica' }), el('p', { text: f.definicao })),
     el('div', {}, el('h4', { text: 'Escreva assim' }), linhaComPalavra('code', 'linha', escrevaAssim(f))),
     el('div', {}, el('h4', { text: 'Exemplo' }), el('div', { className: 'com-botao' }, linhaComPalavra('code', 'linha exemplo', f.exemplo), botaoCopiar(f.exemplo, f.palavra))),
     el('div', {}, el('h4', { text: f.campos.length === 1 ? 'O campo' : 'Os campos, na ordem' }), listaDeCampos(f)),
     f.apelidos.length > 0 && el('p', { className: 'apelidos' }, 'Também vale: ', f.apelidos.flatMap((a, i) => [i ? ', ' : '', el('code', { text: `${a}:` })])),
-    atalhos.length > 0 && el('div', { className: 'atalhos' },
+    f.atalhos.length > 0 && el('div', { className: 'atalhos' },
       el('h4', { text: 'Atalhos' }),
       el('p', { text: 'A palavra já diz o resultado: você escreve só o resto.' }),
-      atalhos.map((a) => el('div', { className: 'com-botao' }, linhaComPalavra('code', 'linha', escrevaAssim(a)), botaoCopiar(a.exemplo, a.palavra))),
+      f.atalhos.map((a) => el('div', { className: 'com-botao' }, linhaComPalavra('code', 'linha', escrevaAssim(a)), botaoCopiar(a.exemplo, a.palavra))),
     ),
     f.dica && el('div', { className: 'dica' }, el('h4', { text: 'Dica' }), el('p', { style: 'margin:0', text: f.dica })),
   );
-  return el('article', { className: 'cartao', id: idDoCartao(f.palavra), 'aria-labelledby': idTitulo }, topo, criarPrevia(f), texto);
+  return [criarPrevia(f), texto];
+}
+
+const cartoes = new Map(); // id do cartão → cartão
+const destinos = new Map(); // endereço (#peca-ranking, #peca-grafico-ranking…) → { cartao, indice }
+let marcado = null;
+
+// O endereço da página passa a apontar para a aba aberta. Trocar de aba só troca o endereço (não empilha histórico a
+// cada clique); ir a uma peça pela cola empilha, para o botão de voltar levar de volta à cola.
+function guardarEndereco(hash, empilhar = false) {
+  try { history[empilhar ? 'pushState' : 'replaceState'](null, '', `#${hash}`); } catch { /* sem history (arquivo aberto direto): o endereço só não acompanha */ }
+}
+
+function cartao(m) {
+  const comAbas = m.abas.length > 1;
+  const idTitulo = `t-${m.id}`;
+  const principal = m.abas[0];
+  const topo = el('header', { className: 'cartao-topo' },
+    el('div', { className: 'cartao-titulo' },
+      el('h3', { id: idTitulo, text: principal.palavra }),
+      el('p', { className: 'modelo', text: `Peça: ${m.nome}` }),
+    ),
+    el('p', { className: 'quando', text: m.quando }),
+  );
+  const artigo = el('article', { className: 'cartao', id: m.id, 'aria-labelledby': idTitulo }, topo);
+  const paineis = el('div', { className: 'paineis' });
+  const feito = { el: artigo, m, atual: -1, paineis: [], abas: [] };
+
+  // Os painéis nascem na primeira vez que a aba abre: a página tem umas 50 abas e quase ninguém abre todas.
+  const painel = (i) => {
+    const aba = m.abas[i];
+    const no = el('div', comAbas ? { className: 'painel', role: 'tabpanel', id: `painel-${aba.hash}`, 'aria-labelledby': `aba-${aba.hash}` } : { className: 'painel' }, conteudoDaAba(aba, comAbas));
+    paineis.append(no);
+    feito.paineis[i] = no;
+    return no;
+  };
+
+  feito.selecionar = (i, { foco = false, guardar = false } = {}) => {
+    if (!feito.paineis[i]) painel(i);
+    feito.paineis.forEach((no, j) => { if (no) no.hidden = j !== i; });
+    feito.abas.forEach((botao, j) => {
+      botao.setAttribute('aria-selected', String(j === i));
+      botao.tabIndex = j === i ? 0 : -1;
+    });
+    feito.atual = i;
+    const botao = feito.abas[i];
+    if (botao) {
+      const barra = botao.parentElement;
+      // Na barra que rola para o lado (celular), a aba aberta fica à vista, sem mexer na rolagem da página.
+      barra.scrollLeft = Math.max(0, botao.offsetLeft - (barra.clientWidth - botao.offsetWidth) / 2);
+      if (foco) botao.focus();
+    }
+    if (guardar) guardarEndereco(m.abas[i].hash);
+  };
+
+  if (comAbas) {
+    const barra = el('div', { className: 'abas', role: 'tablist', 'aria-label': `Variações de ${principal.palavra}` });
+    m.abas.forEach((aba, i) => {
+      const botao = el('button', { type: 'button', className: 'aba', role: 'tab', id: `aba-${aba.hash}`, 'aria-controls': `painel-${aba.hash}`, 'aria-selected': 'false', tabindex: '-1', text: aba.variante ?? aba.palavra });
+      botao.addEventListener('click', () => feito.selecionar(i, { guardar: true }));
+      feito.abas.push(botao);
+      barra.append(botao);
+    });
+    // Setas, Home e End trocam de aba (como em qualquer lista de abas).
+    barra.addEventListener('keydown', (e) => {
+      const n = m.abas.length;
+      const destino = { ArrowRight: (feito.atual + 1) % n, ArrowLeft: (feito.atual - 1 + n) % n, Home: 0, End: n - 1 }[e.key];
+      if (destino === undefined) return;
+      e.preventDefault();
+      feito.selecionar(destino, { foco: true, guardar: true });
+    });
+    artigo.append(barra);
+  }
+  artigo.append(paineis);
+  feito.selecionar(0);
+
+  cartoes.set(m.id, feito);
+  m.abas.forEach((aba, i) => { for (const chave of aba.chaves) destinos.set(chave, { cartao: feito, indice: i }); });
+  return artigo;
 }
 
 function desenharEtapas(dados) {
-  const principais = dados.formatos.filter((f) => !f.atalho);
   for (const etapa of dados.etapas) {
-    const daEtapa = principais.filter((f) => f.etapa === etapa.nome);
+    const daEtapa = dados.modelos.filter((m) => m.etapa === etapa.nome);
     if (!daEtapa.length) continue;
     const id = `etapa-${semAcento(etapa.nome)}`;
     $('etapas').append(el('section', { id, 'aria-labelledby': `t-${id}` },
       el('div', { className: 'etapa-topo' }, el('h2', { id: `t-${id}`, text: etapa.nome }), etapa.texto && el('p', { text: etapa.texto })),
-      el('div', { className: 'cartoes' }, daEtapa.map((f) => cartao(f, dados.formatos.filter((a) => a.atalho && a.atalho_de === f.palavra)))),
+      el('div', { className: 'cartoes' }, daEtapa.map(cartao)),
     ));
     $('indice-links').append(el('a', { href: `#${id}`, text: etapa.nome }));
   }
   $('legenda-previas').hidden = false;
 }
 
+// Abre o cartão de um endereço da página, já na aba certa, e rola até ele. Serve para #peca-checagem,
+// #peca-grafico-ranking e para os links de antes das abas, como #peca-ranking.
+function abrirEndereco(hash, { inicial = false } = {}) {
+  const destino = destinos.get(hash);
+  if (!destino) return false;
+  destino.cartao.selecionar(destino.indice);
+  marcado?.classList.remove('alvo');
+  marcado = destino.cartao.el;
+  marcado.classList.add('alvo');
+  marcado.scrollIntoView({ block: 'start', behavior: inicial ? 'instant' : 'auto' });
+  return true;
+}
+
+function enderecoDaPagina() {
+  try { return decodeURIComponent(location.hash.slice(1)); } catch { return location.hash.slice(1); }
+}
+
 // ---------- cola rápida ----------
 
 function desenharCola(dados) {
-  const linhas = dados.formatos.map((f) => {
-    const destino = idDoCartao(f.atalho ? f.atalho_de : f.palavra);
-    const nota = f.atalho ? `atalho de ${f.atalho_de}` : f.apelidos.length ? `também vale: ${f.apelidos.join(', ')}` : '';
-    const linha = el('tr', {},
-      el('td', { className: 'c-peca' }, el('a', { href: `#${destino}`, text: f.palavra }), nota && el('small', { text: nota })),
-      el('td', { className: 'c-escreva' }, linhaComPalavra('code', '', escrevaAssim(f))),
-      el('td', { className: 'c-copiar' }, botaoCopiar(f.exemplo, f.palavra, 'Copiar')),
-    );
-    // A busca olha a palavra, os apelidos e o nome da peça (e, no atalho, a peça de que ele é atalho).
-    linha.dataset.busca = semAcento([f.palavra, ...f.apelidos, f.nome, f.atalho_de ?? ''].join(' | '));
-    return linha;
+  const grupos = dados.modelos.map((m) => {
+    const linhas = m.abas.flatMap((a) => [a, ...a.atalhos]).map((f) => {
+      const nota = f.atalho ? `atalho de ${f.atalho_de}` : f.apelidos.length ? `também vale: ${f.apelidos.join(', ')}` : '';
+      const hash = f.atalho ? m.abas.find((a) => a.palavra === f.atalho_de).hash : m.abas.find((a) => a.palavra === f.palavra).hash;
+      const ir = el('a', { href: `#${hash}`, text: f.palavra });
+      ir.addEventListener('click', (e) => {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
+        e.preventDefault();
+        abrirEndereco(hash);
+        guardarEndereco(hash, true);
+      });
+      const linha = el('tr', {},
+        el('td', { className: 'c-peca' }, ir, nota && el('small', { text: nota })),
+        el('td', { className: 'c-variacao', text: f.atalho ? 'Atalho' : f.variante ?? '' }),
+        el('td', { className: 'c-escreva' }, linhaComPalavra('code', '', escrevaAssim(f))),
+        el('td', { className: 'c-copiar' }, botaoCopiar(f.exemplo, f.palavra, 'Copiar')),
+      );
+      // A busca olha a palavra, os apelidos, a variação, o que ela muda e o nome da peça (e, no atalho, a peça de que ele é atalho).
+      linha.dataset.busca = semAcento([f.palavra, ...f.apelidos, f.variante ?? '', f.definicao ?? '', m.nome, f.atalho_de ?? '', f.atalho ? 'atalho' : ''].join(' | '));
+      return linha;
+    });
+    return { corpo: el('tbody', {}, linhas), linhas };
   });
-  $('cola-linhas').append(...linhas);
+  $('cola-tabela').append(...grupos.map((g) => g.corpo));
+  const todas = grupos.flatMap((g) => g.linhas);
 
   const filtrar = () => {
     const termo = semAcento($('busca').value).trim();
     let achadas = 0;
-    for (const linha of linhas) {
-      linha.hidden = termo !== '' && !linha.dataset.busca.includes(termo);
-      if (!linha.hidden) achadas++;
+    for (const g of grupos) {
+      let noGrupo = 0;
+      for (const linha of g.linhas) {
+        linha.hidden = termo !== '' && !linha.dataset.busca.includes(termo);
+        if (!linha.hidden) noGrupo++;
+      }
+      g.corpo.hidden = noGrupo === 0;
+      achadas += noGrupo;
     }
     $('busca-vazia').hidden = achadas > 0;
-    $('busca-conta').textContent = termo === '' ? `${linhas.length} jeitos de pedir uma peça` : achadas === 0 ? 'Nenhuma peça achada' : achadas === 1 ? '1 peça achada' : `${achadas} peças achadas`;
+    $('busca-conta').textContent = termo === '' ? `${todas.length} jeitos de pedir uma peça` : achadas === 0 ? 'Nenhuma peça achada' : achadas === 1 ? '1 peça achada' : `${achadas} peças achadas`;
   };
   $('busca').addEventListener('input', filtrar);
   filtrar();
@@ -390,8 +515,12 @@ try {
   desenharEtapas(dados);
   $('versao').textContent = `Máquina de Vídeos ${dados.versao} · NINJA Design System ${dados.design_system}`;
   $('estado').hidden = true;
-  // Quem chegou por um link direto para uma peça (…#peca-tarja) vai até ela depois de a página montar.
-  if (location.hash.length > 1) document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView();
+  // Quem chegou por um link direto para uma peça (…#peca-tarja, …#peca-ranking) vai até ela, já na aba certa,
+  // depois de a página montar. Outros endereços (#cola, #etapa-provar) seguem o caminho normal.
+  const inicio = enderecoDaPagina();
+  if (inicio && !abrirEndereco(inicio, { inicial: true })) document.getElementById(inicio)?.scrollIntoView();
+  // Link para outra peça com a página já aberta (e os botões de voltar e avançar do navegador).
+  window.addEventListener('hashchange', () => abrirEndereco(enderecoDaPagina()));
 } catch (erro) {
   console.error('Guia do Lettering:', erro);
   $('estado').textContent = 'Não consegui carregar as peças. Recarregue a página. Se continuar, avise quem cuida da Máquina de Vídeos.';

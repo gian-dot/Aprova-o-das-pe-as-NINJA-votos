@@ -39,7 +39,7 @@
   <p class="abre">Você escreve uma linha na coluna <strong>Lettering</strong> do roteiro. Quando a editora abre o roteiro na Máquina de Vídeos, cada linha já vira uma peça gráfica.</p>
 
   <ol class="passos">
-    <li><span class="passo" aria-hidden="true">1</span><div><strong>Ache a peça.</strong> Use a <a href="#cola">cola rápida</a> ou procure pela parte do vídeo: abrir, situar, provar, explicar, citar, fechar.</div></li>
+    <li><span class="passo" aria-hidden="true">1</span><div><strong>Ache a peça.</strong> Use a <a href="#cola">cola rápida</a> ou procure pela parte do vídeo: abrir, situar, provar, explicar, citar, fechar. Cada peça tem abas, uma para cada variação.</div></li>
     <li><span class="passo" aria-hidden="true">2</span><div><strong>Copie o exemplo.</strong> Cada peça tem um botão <strong>Copiar</strong>.</div></li>
     <li><span class="passo" aria-hidden="true">3</span><div><strong>Cole no Notion.</strong> Na coluna Lettering, na linha do roteiro em que a peça entra.</div></li>
     <li><span class="passo" aria-hidden="true">4</span><div><strong>Troque o texto pelo seu.</strong> Mantenha a palavra do começo, os dois-pontos e as barras <code>|</code>.</div></li>
@@ -118,15 +118,15 @@
 
 <section id="cola" aria-labelledby="t-cola">
   <h2 id="t-cola">Cola rápida</h2>
-  <p class="abre">Todas as peças numa lista. O botão copia o exemplo pronto para colar no Notion.</p>
+  <p class="abre">Todas as peças e variações numa lista. O botão copia o exemplo pronto para colar no Notion. Clique no nome para ver a peça.</p>
   <div class="busca">
-    <label for="busca">Procure pelo nome da peça</label>
-    <input type="search" id="busca" autocomplete="off" spellcheck="false" placeholder="Ex.: aspas, cg, gráfico">
+    <label for="busca">Procure pela peça ou pela variação</label>
+    <input type="search" id="busca" autocomplete="off" spellcheck="false" placeholder="Ex.: aspas, cg, whatsapp, rosca">
     <p class="busca-conta" id="busca-conta" aria-live="polite"></p>
   </div>
-  <table class="cola">
+  <table class="cola" id="cola-tabela">
     <thead>
-      <tr><th scope="col">Peça</th><th scope="col">Escreva assim</th><th scope="col"><span class="so-leitor">Copiar o exemplo</span></th></tr>
+      <tr><th scope="col">Peça</th><th scope="col">Variação</th><th scope="col">Escreva assim</th><th scope="col"><span class="so-leitor">Copiar o exemplo</span></th></tr>
     </thead>
     <tbody id="cola-linhas"></tbody>
   </table>
@@ -136,7 +136,7 @@
 <p class="estado" id="estado" role="status">Carregando as peças…</p>
 
 <div id="etapas">
-  <p class="abre legenda-previas" id="legenda-previas" hidden>Em cada peça, a prévia mostra o que a linha do exemplo produz. Fundo quadriculado quer dizer que a peça é transparente e entra por cima do vídeo. As fotos são de mentira: as de verdade a editora escolhe.</p>
+  <p class="abre legenda-previas" id="legenda-previas" hidden>Em cada peça, as abas são as variações: troque de aba e a prévia muda junto. A prévia mostra o que a linha do exemplo produz. Fundo quadriculado quer dizer que a peça é transparente e entra por cima do vídeo. As fotos são de mentira: as de verdade a editora escolhe.</p>
 </div>
 
 </main>
