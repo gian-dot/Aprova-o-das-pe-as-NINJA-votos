@@ -428,7 +428,7 @@
     "[trechos grifados; separados por ponto e vírgula]",
     "[de onde é]"
    ],
-   "exemplo": "DOCUMENTO: O investigado mantinha relação com a empresa desde 2019, quando passou a receber valores mensais | valores mensais | Inquérito 4.781 · STF",
+   "exemplo": "DOCUMENTO: O investigado mantinha relação com a empresa desde 2019, quando passou a receber valores mensais | valores mensais | Relatório da polícia · página 14",
    "atalho": false,
    "atalho_de": null,
    "modelo": "documento",
@@ -448,7 +448,7 @@
     "area_grifo": "",
     "grifos": "valores mensais",
     "identificacao": "",
-    "rotulo": "Inquérito 4.781 · STF",
+    "rotulo": "Relatório da polícia · página 14",
     "tratamento": "automático",
     "posicao": "automática",
     "deslocar_x": 0,
