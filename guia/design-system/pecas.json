@@ -1,0 +1,2352 @@
+{
+  "versao": "2 — 04/11/2026 (NINJA Design System 2.0.0; consulta encerrada)",
+  "como_ler": "Cada peça lista as variáveis que a editora pode mudar. Gerado por scripts/gerar-fichas.mjs (não edite à mão). tipo: texto, texto_longo, opcao, sim_nao, numero, midia (foto ou vídeo), foto. limite: aviso de linhas e caracteres (a chamada se ajusta sozinha). status: em_espera ou fora = sem composição no app.",
+  "comuns": [
+    {
+      "id": "formato",
+      "rotulo": "Formato",
+      "tipo": "opcao",
+      "opcoes": [
+        "16x9",
+        "9x16",
+        "os dois"
+      ],
+      "padrao": "os dois"
+    },
+    {
+      "id": "derivar_9x16",
+      "rotulo": "Derivar 9x16 do 16x9",
+      "tipo": "sim_nao",
+      "padrao": true,
+      "ajuda": "Quando ligado, o 9x16 usa os mesmos textos e mídias e só reorganiza o layout."
+    },
+    {
+      "id": "cor_destaque",
+      "rotulo": "Cor de destaque da cobertura",
+      "tipo": "opcao",
+      "opcoes": [
+        "amarelo",
+        "rosa",
+        "verde_limao",
+        "ciano"
+      ],
+      "padrao": "amarelo",
+      "ajuda": "Cores do NINJA Design System (Thiago). Definida uma vez por vídeo; não por peça."
+    },
+    {
+      "id": "duracao",
+      "rotulo": "Duração na tela (s)",
+      "tipo": "numero",
+      "ajuda": "Calculada sozinha: caracteres ÷ 15 + 1 s, dentro do mínimo e máximo de cada peça; a editora pode ajustar."
+    },
+    {
+      "id": "versao",
+      "rotulo": "Versão",
+      "tipo": "numero",
+      "padrao": 1,
+      "ajuda": "Botão 'gerar versão 2': guarda o histórico e substitui o arquivo atual no Premiere."
+    }
+  ],
+  "pecas": [
+    {
+      "id": "chamada_central",
+      "nome": "Chamada central (modelo de vídeo do Canva)",
+      "duracao": [
+        3,
+        7
+      ],
+      "apelidos": [
+        "manchete_central"
+      ],
+      "descricao": "Só o chapéu (opcional) e a chamada, com posição própria. Encaixe de notícia do NINJA Design System 2.0.",
+      "variaveis": [
+        {
+          "id": "chapeu",
+          "rotulo": "Chapéu",
+          "tipo": "texto",
+          "obrigatorio": false,
+          "limite": {
+            "linhas": 1,
+            "car_linha": 28
+          },
+          "ajuda": "Opcional. Caixa branca ou na cor de destaque, texto preto (NINJA Design System, D1)."
+        },
+        {
+          "id": "cor_chapeu",
+          "rotulo": "Cor do chapéu",
+          "tipo": "opcao",
+          "opcoes": [
+            "branco",
+            "destaque"
+          ]
+        },
+        {
+          "id": "modo",
+          "rotulo": "Modo",
+          "tipo": "opcao",
+          "opcoes": [
+            "normal",
+            "ao vivo"
+          ],
+          "ajuda": "Ao vivo: chapéu vermelho com ● (estado provisório; o Thiago vai definir os estados)."
+        },
+        {
+          "id": "chamada",
+          "rotulo": "Chamada",
+          "tipo": "texto_longo",
+          "obrigatorio": true,
+          "limite": {
+            "linhas": 4,
+            "car_linha": 15,
+            "16x9": {
+              "car_linha": 24
+            }
+          },
+          "ajuda": "TipoNinja caixa alta. A letra se ajusta ao texto: até 4 linhas reduzindo ~15%, depois 5 linhas reduzindo até o piso (Reels: 64 px). O texto nunca é cortado. Sem ponto final."
+        },
+        {
+          "id": "palavra_destaque",
+          "rotulo": "Palavra em destaque",
+          "tipo": "texto",
+          "ajuda": "Uma palavra ou expressão da chamada na cor de destaque."
+        },
+        {
+          "id": "fundo",
+          "rotulo": "Vídeo ou foto de fundo",
+          "tipo": "midia",
+          "obrigatorio": true
+        },
+        {
+          "id": "tratamento",
+          "rotulo": "Tratamento do fundo",
+          "tipo": "opcao",
+          "opcoes": [
+            "degradê",
+            "véu 55%",
+            "desfoque + véu 35%",
+            "sem tratamento"
+          ],
+          "padrao": "degradê",
+          "ajuda": "Degradê: 0% a 80 px acima do chapéu e 100% no fim da foto (D5). Véu e desfoque levam a chamada para o centro (D6)."
+        },
+        {
+          "id": "posicao_bloco",
+          "rotulo": "Posição do bloco",
+          "tipo": "opcao",
+          "opcoes": [
+            "automática",
+            "centro",
+            "base"
+          ],
+          "padrao": "automática",
+          "ajuda": "Automática: com véu ou desfoque, centro; com degradê, base."
+        },
+        {
+          "id": "deslocar_x",
+          "rotulo": "Deslocar bloco na horizontal (px)",
+          "tipo": "numero",
+          "padrao": 0
+        },
+        {
+          "id": "deslocar_y",
+          "rotulo": "Deslocar bloco na vertical (px)",
+          "tipo": "numero",
+          "padrao": 0
+        },
+        {
+          "id": "deslocar_chapeu_y",
+          "rotulo": "Deslocar só o chapéu na vertical (px)",
+          "tipo": "numero",
+          "padrao": 0
+        },
+        {
+          "id": "entrada",
+          "rotulo": "Entrada",
+          "tipo": "opcao",
+          "opcoes": [
+            "animada",
+            "já na tela no 1º quadro"
+          ],
+          "ajuda": "Já na tela: gancho legível no quadro 0 (sugestão da Luiza); a saída continua animada."
+        }
+      ]
+    },
+    {
+      "id": "pergunta_gancho",
+      "nome": "Pergunta-gancho / título em tarja",
+      "duracao": [
+        3,
+        7
+      ],
+      "montar_e_sair": 2.6,
+      "descricao": "Cada linha é uma faixa que mede o próprio texto (D8); palavra-chave com grifo ou cor depois que o texto para.",
+      "variaveis": [
+        {
+          "id": "texto",
+          "rotulo": "Texto (quebre as linhas onde quiser)",
+          "tipo": "texto_longo",
+          "obrigatorio": true,
+          "limite": {
+            "linhas": 3,
+            "car_linha": 20
+          }
+        },
+        {
+          "id": "palavras_destaque",
+          "rotulo": "Palavras em destaque",
+          "tipo": "texto",
+          "ajuda": "Separadas por ponto e vírgula."
+        },
+        {
+          "id": "estilo_destaque",
+          "rotulo": "Estilo do destaque",
+          "tipo": "opcao",
+          "opcoes": [
+            "grifo",
+            "cor"
+          ]
+        },
+        {
+          "id": "cor_tarja",
+          "rotulo": "Cor da tarja",
+          "tipo": "opcao",
+          "opcoes": [
+            "preta",
+            "branca"
+          ]
+        },
+        {
+          "id": "caixa",
+          "rotulo": "Caixa",
+          "tipo": "opcao",
+          "opcoes": [
+            "faixas (uma por linha)",
+            "única"
+          ],
+          "ajuda": "NINJA Design System D8: faixas com 18 px, caixa única com 38 px."
+        },
+        {
+          "id": "chapeu",
+          "rotulo": "Chapéu (opcional)",
+          "tipo": "texto"
+        },
+        {
+          "id": "cor_chapeu",
+          "rotulo": "Cor do chapéu",
+          "tipo": "opcao",
+          "opcoes": [
+            "destaque",
+            "branco"
+          ]
+        },
+        {
+          "id": "fundo",
+          "rotulo": "Foto ou vídeo de fundo (opcional)",
+          "tipo": "midia",
+          "ajuda": "Do Drive (02 IMG). Sem mídia, a peça sai com transparência para ir por cima do vídeo no Premiere."
+        },
+        {
+          "id": "tratamento",
+          "rotulo": "Tratamento do fundo",
+          "tipo": "opcao",
+          "opcoes": [
+            "sem tratamento",
+            "véu 55%",
+            "desfoque + véu 35%"
+          ]
+        },
+        {
+          "id": "posicao",
+          "rotulo": "Posição do bloco",
+          "tipo": "opcao",
+          "opcoes": [
+            "automática",
+            "centro",
+            "centro esquerda",
+            "centro direita",
+            "base esquerda",
+            "base centro",
+            "base direita",
+            "topo esquerda",
+            "topo centro",
+            "topo direita"
+          ],
+          "ajuda": "Dentro da área útil do formato (16x9: margem 60; 9x16: área segura do Reels)."
+        },
+        {
+          "id": "deslocar_x",
+          "rotulo": "Deslocar na horizontal (px)",
+          "tipo": "numero",
+          "padrao": 0
+        },
+        {
+          "id": "deslocar_y",
+          "rotulo": "Deslocar na vertical (px)",
+          "tipo": "numero",
+          "padrao": 0
+        }
+      ]
+    },
+    {
+      "id": "manchete_veiculo",
+      "nome": "Manchete de outro veículo",
+      "duracao": [
+        3,
+        10
+      ],
+      "montar_e_sair": 3.8,
+      "descricao": "Cartão com logo do veículo, título real (e lead opcional) e trechos grifados em sequência.",
+      "variaveis": [
+        {
+          "id": "veiculo",
+          "rotulo": "Veículo (banco de logos)",
+          "tipo": "opcao",
+          "opcoes": [
+            "",
+            "Agência Brasil",
+            "Brasil de Fato",
+            "Carta Capital",
+            "CNN",
+            "Correio Braziliense",
+            "Estadão",
+            "Folha de S. Paulo",
+            "Fórum",
+            "G1",
+            "ICL",
+            "Metrópoles",
+            "O Globo",
+            "UOL",
+            "Veja"
+          ],
+          "ajuda": "Ou envie o logo no campo abaixo."
+        },
+        {
+          "id": "logo",
+          "rotulo": "Logo do veículo (PNG, se não estiver no banco)",
+          "tipo": "foto"
+        },
+        {
+          "id": "titulo",
+          "rotulo": "Título da manchete",
+          "tipo": "texto_longo",
+          "obrigatorio": true,
+          "ajuda": "O texto real. O título diminui para caber; nunca é cortado."
+        },
+        {
+          "id": "lead",
+          "rotulo": "Lead (opcional)",
+          "tipo": "texto_longo"
+        },
+        {
+          "id": "grifos",
+          "rotulo": "Trechos grifados",
+          "tipo": "texto",
+          "ajuda": "Um ou vários, separados por ponto e vírgula; podem estar em qualquer parte do texto. O grifo vem depois que o texto para."
+        },
+        {
+          "id": "data",
+          "rotulo": "Data",
+          "tipo": "texto"
+        },
+        {
+          "id": "largura",
+          "rotulo": "Largura do cartão",
+          "tipo": "opcao",
+          "opcoes": [
+            "médio",
+            "largo",
+            "compacto"
+          ]
+        },
+        {
+          "id": "fundo",
+          "rotulo": "Foto ou vídeo de fundo (opcional)",
+          "tipo": "midia",
+          "ajuda": "Do Drive (02 IMG). Sem mídia, a peça sai com transparência para ir por cima do vídeo no Premiere."
+        },
+        {
+          "id": "tratamento",
+          "rotulo": "Tratamento do fundo",
+          "tipo": "opcao",
+          "opcoes": [
+            "automático",
+            "véu 55%",
+            "desfoque + véu 35%",
+            "escuro 72% (legado)",
+            "fundo preto com grão (legado)",
+            "sem tratamento"
+          ]
+        },
+        {
+          "id": "posicao",
+          "rotulo": "Posição do bloco",
+          "tipo": "opcao",
+          "opcoes": [
+            "automática",
+            "centro",
+            "centro esquerda",
+            "centro direita",
+            "base esquerda",
+            "base centro",
+            "base direita",
+            "topo esquerda",
+            "topo centro",
+            "topo direita"
+          ],
+          "ajuda": "Dentro da área útil do formato (16x9: margem 60; 9x16: área segura do Reels)."
+        },
+        {
+          "id": "deslocar_x",
+          "rotulo": "Deslocar na horizontal (px)",
+          "tipo": "numero",
+          "padrao": 0
+        },
+        {
+          "id": "deslocar_y",
+          "rotulo": "Deslocar na vertical (px)",
+          "tipo": "numero",
+          "padrao": 0
+        }
+      ]
+    },
+    {
+      "id": "capitulo",
+      "nome": "Marcador de capítulo",
+      "duracao": [
+        3,
+        6
+      ],
+      "montar_e_sair": 2.5,
+      "descricao": "Tela de capítulo ou etiqueta permanente no canto enquanto o bloco dura.",
+      "variaveis": [
+        {
+          "id": "versao",
+          "rotulo": "Versão",
+          "tipo": "opcao",
+          "opcoes": [
+            "tela",
+            "etiqueta permanente"
+          ]
+        },
+        {
+          "id": "numero",
+          "rotulo": "Número",
+          "tipo": "texto",
+          "padrao": "01"
+        },
+        {
+          "id": "chapeu",
+          "rotulo": "Chapéu (só na tela)",
+          "tipo": "texto",
+          "padrao": "Capítulo um"
+        },
+        {
+          "id": "titulo",
+          "rotulo": "Título",
+          "tipo": "texto_longo",
+          "obrigatorio": true
+        },
+        {
+          "id": "sombra",
+          "rotulo": "Sombra (regra geral de sombra)",
+          "tipo": "sim_nao"
+        },
+        {
+          "id": "fundo",
+          "rotulo": "Foto ou vídeo de fundo (opcional)",
+          "tipo": "midia",
+          "ajuda": "Do Drive (02 IMG). Sem mídia, a peça sai com transparência para ir por cima do vídeo no Premiere."
+        },
+        {
+          "id": "tratamento",
+          "rotulo": "Tratamento do fundo",
+          "tipo": "opcao",
+          "opcoes": [
+            "automático",
+            "véu 55%",
+            "desfoque + véu 35%",
+            "escuro 72% (legado)",
+            "fundo preto com grão (legado)",
+            "sem tratamento"
+          ],
+          "ajuda": "Contraste para ler o texto (NINJA Design System: véu 55% ou desfoque 24 px + véu 35%). Automático: o da versão da peça."
+        },
+        {
+          "id": "posicao",
+          "rotulo": "Posição do bloco",
+          "tipo": "opcao",
+          "opcoes": [
+            "automática",
+            "centro",
+            "centro esquerda",
+            "centro direita",
+            "base esquerda",
+            "base centro",
+            "base direita",
+            "topo esquerda",
+            "topo centro",
+            "topo direita"
+          ],
+          "ajuda": "Dentro da área útil do formato (16x9: margem 60; 9x16: área segura do Reels)."
+        },
+        {
+          "id": "deslocar_x",
+          "rotulo": "Deslocar na horizontal (px)",
+          "tipo": "numero",
+          "padrao": 0
+        },
+        {
+          "id": "deslocar_y",
+          "rotulo": "Deslocar na vertical (px)",
+          "tipo": "numero",
+          "padrao": 0
+        }
+      ]
+    },
+    {
+      "id": "etiqueta_tema",
+      "nome": "Etiqueta de tema / série",
+      "duracao": [
+        3,
+        20
+      ],
+      "montar_e_sair": 1.9,
+      "descricao": "Rótulo da pauta no topo da área segura; pode durar o bloco inteiro.",
+      "variaveis": [
+        {
+          "id": "tema",
+          "rotulo": "Tema",
+          "tipo": "texto",
+          "obrigatorio": true
+        },
+        {
+          "id": "estilo",
+          "rotulo": "Estilo",
+          "tipo": "opcao",
+          "opcoes": [
+            "fita recortada",
+            "cabeçalho fixo"
+          ]
+        },
+        {
+          "id": "ano",
+          "rotulo": "Ano (cabeçalho fixo)",
+          "tipo": "texto"
+        },
+        {
+          "id": "posicao",
+          "rotulo": "Posição do bloco",
+          "tipo": "opcao",
+          "opcoes": [
+            "automática",
+            "centro",
+            "centro esquerda",
+            "centro direita",
+            "base esquerda",
+            "base centro",
+            "base direita",
+            "topo esquerda",
+            "topo centro",
+            "topo direita"
+          ],
+          "ajuda": "Dentro da área útil do formato (16x9: margem 60; 9x16: área segura do Reels)."
+        },
+        {
+          "id": "deslocar_x",
+          "rotulo": "Deslocar na horizontal (px)",
+          "tipo": "numero",
+          "padrao": 0
+        },
+        {
+          "id": "deslocar_y",
+          "rotulo": "Deslocar na vertical (px)",
+          "tipo": "numero",
+          "padrao": 0
+        }
+      ]
+    },
+    {
+      "id": "palavra_conceito",
+      "nome": "Palavra-conceito",
+      "duracao": [
+        2,
+        6
+      ],
+      "montar_e_sair": 3,
+      "descricao": "Uma palavra-chave sobre a cena: grifo (o fundo revela a palavra), contorno, vazada na foto ou letra a letra.",
+      "variaveis": [
+        {
+          "id": "palavra",
+          "rotulo": "Palavra",
+          "tipo": "texto",
+          "obrigatorio": true
+        },
+        {
+          "id": "subtitulo",
+          "rotulo": "Subtítulo (opcional)",
+          "tipo": "texto"
+        },
+        {
+          "id": "estilo",
+          "rotulo": "Estilo",
+          "tipo": "opcao",
+          "opcoes": [
+            "grifo",
+            "contorno",
+            "vazada na foto",
+            "letra a letra"
+          ]
+        },
+        {
+          "id": "fundo",
+          "rotulo": "Foto ou vídeo de fundo (na \"vazada\", a foto preenche as letras)",
+          "tipo": "midia",
+          "ajuda": "Do Drive (02 IMG). Sem mídia, a peça sai com transparência para ir por cima do vídeo no Premiere."
+        },
+        {
+          "id": "tratamento",
+          "rotulo": "Tratamento do fundo",
+          "tipo": "opcao",
+          "opcoes": [
+            "automático",
+            "véu 55%",
+            "desfoque + véu 35%",
+            "escuro 72% (legado)",
+            "fundo preto com grão (legado)",
+            "sem tratamento"
+          ],
+          "ajuda": "Contraste para ler o texto (NINJA Design System: véu 55% ou desfoque 24 px + véu 35%). Automático: o da versão da peça."
+        },
+        {
+          "id": "posicao",
+          "rotulo": "Posição do bloco",
+          "tipo": "opcao",
+          "opcoes": [
+            "automática",
+            "centro",
+            "centro esquerda",
+            "centro direita",
+            "base esquerda",
+            "base centro",
+            "base direita",
+            "topo esquerda",
+            "topo centro",
+            "topo direita"
+          ],
+          "ajuda": "Dentro da área útil do formato (16x9: margem 60; 9x16: área segura do Reels)."
+        },
+        {
+          "id": "deslocar_x",
+          "rotulo": "Deslocar na horizontal (px)",
+          "tipo": "numero",
+          "padrao": 0
+        },
+        {
+          "id": "deslocar_y",
+          "rotulo": "Deslocar na vertical (px)",
+          "tipo": "numero",
+          "padrao": 0
+        }
+      ]
+    },
+    {
+      "id": "tarja_nome",
+      "nome": "Tarja de nome e cargo",
+      "duracao": [
+        3,
+        5
+      ],
+      "descricao": "Nome em caixa branca (TipoNinja) + cargo ou @ em caixa preta; posição com e sem legenda (D4).",
+      "variaveis": [
+        {
+          "id": "nome",
+          "rotulo": "Nome",
+          "tipo": "texto",
+          "obrigatorio": true,
+          "limite": {
+            "linhas": 1,
+            "car_linha": 24
+          }
+        },
+        {
+          "id": "cargo",
+          "rotulo": "Cargo",
+          "tipo": "texto",
+          "limite": {
+            "linhas": 1,
+            "car_linha": 40
+          }
+        },
+        {
+          "id": "arroba",
+          "rotulo": "@ (no lugar do cargo)",
+          "tipo": "texto"
+        },
+        {
+          "id": "variacao",
+          "rotulo": "Variação",
+          "tipo": "opcao",
+          "opcoes": [
+            "padrão",
+            "fio de destaque",
+            "sem caixa"
+          ]
+        },
+        {
+          "id": "lado",
+          "rotulo": "Lado",
+          "tipo": "opcao",
+          "opcoes": [
+            "esquerda",
+            "direita"
+          ]
+        },
+        {
+          "id": "com_legenda",
+          "rotulo": "O vídeo tem legenda queimada (sobe a tarja, D4)",
+          "tipo": "sim_nao"
+        },
+        {
+          "id": "entrada",
+          "rotulo": "Entrada e saída",
+          "tipo": "opcao",
+          "opcoes": [
+            "varredura",
+            "dissolver"
+          ],
+          "ajuda": "Dissolver: mais suave e mais lento (sugestão da Luiza)."
+        },
+        {
+          "id": "deslocar_x",
+          "rotulo": "Deslocar na horizontal (px)",
+          "tipo": "numero",
+          "padrao": 0
+        },
+        {
+          "id": "deslocar_y",
+          "rotulo": "Deslocar na vertical (px)",
+          "tipo": "numero",
+          "padrao": 0
+        }
+      ]
+    },
+    {
+      "id": "localizacao",
+      "nome": "Localização",
+      "duracao": [
+        4,
+        5
+      ],
+      "descricao": "Pino + cidade, estado numa linha e a data (opcional) embaixo.",
+      "variaveis": [
+        {
+          "id": "cidade",
+          "rotulo": "Cidade",
+          "tipo": "texto",
+          "obrigatorio": true
+        },
+        {
+          "id": "estado",
+          "rotulo": "Estado ou país (opcional)",
+          "tipo": "texto"
+        },
+        {
+          "id": "data",
+          "rotulo": "Data (opcional)",
+          "tipo": "texto"
+        },
+        {
+          "id": "posicao",
+          "rotulo": "Posição do bloco",
+          "tipo": "opcao",
+          "opcoes": [
+            "automática",
+            "centro",
+            "centro esquerda",
+            "centro direita",
+            "base esquerda",
+            "base centro",
+            "base direita",
+            "topo esquerda",
+            "topo centro",
+            "topo direita"
+          ],
+          "ajuda": "Dentro da área útil do formato (16x9: margem 60; 9x16: área segura do Reels)."
+        },
+        {
+          "id": "deslocar_x",
+          "rotulo": "Deslocar na horizontal (px)",
+          "tipo": "numero",
+          "padrao": 0
+        },
+        {
+          "id": "deslocar_y",
+          "rotulo": "Deslocar na vertical (px)",
+          "tipo": "numero",
+          "padrao": 0
+        }
+      ]
+    },
+    {
+      "id": "linha_tempo",
+      "nome": "Linha do tempo",
+      "duracao": [
+        3,
+        12
+      ],
+      "montar_e_sair": 4.2,
+      "descricao": "Marcos digitados pela editora; escolha de qual começa marcado, para qual passa e quando.",
+      "variaveis": [
+        {
+          "id": "estilo",
+          "rotulo": "Estilo",
+          "tipo": "opcao",
+          "opcoes": [
+            "espinha",
+            "parada grande"
+          ]
+        },
+        {
+          "id": "titulo",
+          "rotulo": "Título (chapéu)",
+          "tipo": "texto"
+        },
+        {
+          "id": "marcos",
+          "rotulo": "Marcos (um por linha: ano | título | texto)",
+          "tipo": "texto_longo",
+          "obrigatorio": true,
+          "ajuda": "Ex.: 2019 | Denúncia | Ex-assessor procura o MP. Na parada grande, vale o marco marcado."
+        },
+        {
+          "id": "comeca_em",
+          "rotulo": "Começa marcado em (ano)",
+          "tipo": "texto"
+        },
+        {
+          "id": "passa_para",
+          "rotulo": "Passa para (ano, opcional)",
+          "tipo": "texto"
+        },
+        {
+          "id": "passa_em",
+          "rotulo": "Passa no segundo (opcional)",
+          "tipo": "numero",
+          "ajuda": "Vazio: logo depois de montar."
+        },
+        {
+          "id": "foto",
+          "rotulo": "Foto do marco (parada grande)",
+          "tipo": "foto"
+        },
+        {
+          "id": "deslocar_x",
+          "rotulo": "Deslocar na horizontal (px)",
+          "tipo": "numero",
+          "padrao": 0
+        },
+        {
+          "id": "deslocar_y",
+          "rotulo": "Deslocar na vertical (px)",
+          "tipo": "numero",
+          "padrao": 0
+        }
+      ]
+    },
+    {
+      "id": "documento",
+      "nome": "Documento com grifo",
+      "duracao": [
+        4,
+        14
+      ],
+      "montar_e_sair": 4.4,
+      "descricao": "Texto do documento por linha, grifos depois; opção de o grifo vir à frente com o resto desfocado.",
+      "variaveis": [
+        {
+          "id": "moldura",
+          "rotulo": "Moldura",
+          "tipo": "opcao",
+          "opcoes": [
+            "página",
+            "flutuante"
+          ]
+        },
+        {
+          "id": "texto",
+          "rotulo": "Texto do documento (quebre como no original)",
+          "tipo": "texto_longo",
+          "ajuda": "O texto diminui para caber."
+        },
+        {
+          "id": "imagem",
+          "rotulo": "Ou a foto do documento",
+          "tipo": "foto"
+        },
+        {
+          "id": "area_grifo",
+          "rotulo": "Área do grifo na foto (% x, y, largura, altura)",
+          "tipo": "texto",
+          "ajuda": "Ex.: 10 40 35 8. A marca fica presa à foto."
+        },
+        {
+          "id": "grifos",
+          "rotulo": "Trechos grifados",
+          "tipo": "texto",
+          "ajuda": "Um ou vários, separados por ponto e vírgula; podem estar em qualquer parte do texto. O grifo vem depois que o texto para."
+        },
+        {
+          "id": "destacar_grifo",
+          "rotulo": "Trazer o grifo para a frente (o resto desfoca)",
+          "tipo": "sim_nao"
+        },
+        {
+          "id": "identificacao",
+          "rotulo": "Identificação oficial (opcional: órgão | setor)",
+          "tipo": "texto"
+        },
+        {
+          "id": "rotulo",
+          "rotulo": "Rótulo (ex.: Inquérito 4.781 · STF)",
+          "tipo": "texto"
+        },
+        {
+          "id": "fundo",
+          "rotulo": "Foto ou vídeo atrás (moldura flutuante)",
+          "tipo": "midia",
+          "ajuda": "Do Drive (02 IMG). Sem mídia, a peça sai com transparência para ir por cima do vídeo no Premiere."
+        },
+        {
+          "id": "tratamento",
+          "rotulo": "Tratamento do fundo",
+          "tipo": "opcao",
+          "opcoes": [
+            "automático",
+            "véu 55%",
+            "desfoque + véu 35%",
+            "escuro 72% (legado)",
+            "fundo preto com grão (legado)",
+            "sem tratamento"
+          ],
+          "ajuda": "Contraste para ler o texto (NINJA Design System: véu 55% ou desfoque 24 px + véu 35%). Automático: o da versão da peça."
+        },
+        {
+          "id": "posicao",
+          "rotulo": "Posição do bloco",
+          "tipo": "opcao",
+          "opcoes": [
+            "automática",
+            "centro",
+            "centro esquerda",
+            "centro direita",
+            "base esquerda",
+            "base centro",
+            "base direita",
+            "topo esquerda",
+            "topo centro",
+            "topo direita"
+          ],
+          "ajuda": "Dentro da área útil do formato (16x9: margem 60; 9x16: área segura do Reels)."
+        },
+        {
+          "id": "deslocar_x",
+          "rotulo": "Deslocar na horizontal (px)",
+          "tipo": "numero",
+          "padrao": 0
+        },
+        {
+          "id": "deslocar_y",
+          "rotulo": "Deslocar na vertical (px)",
+          "tipo": "numero",
+          "padrao": 0
+        }
+      ]
+    },
+    {
+      "id": "post_rede",
+      "nome": "Post de rede social",
+      "duracao": [
+        3,
+        12
+      ],
+      "montar_e_sair": 3.1,
+      "descricao": "Cartão de post legível, para texto longo, com foto opcional e números ligados por caixa de seleção.",
+      "variaveis": [
+        {
+          "id": "rede",
+          "rotulo": "Rede",
+          "tipo": "opcao",
+          "opcoes": [
+            "X",
+            "Instagram",
+            "TikTok"
+          ]
+        },
+        {
+          "id": "foto_perfil",
+          "rotulo": "Foto de perfil",
+          "tipo": "foto"
+        },
+        {
+          "id": "nome",
+          "rotulo": "Nome",
+          "tipo": "texto",
+          "obrigatorio": true
+        },
+        {
+          "id": "arroba",
+          "rotulo": "@",
+          "tipo": "texto"
+        },
+        {
+          "id": "verificado",
+          "rotulo": "Verificado",
+          "tipo": "sim_nao"
+        },
+        {
+          "id": "local",
+          "rotulo": "Local (Instagram)",
+          "tipo": "texto"
+        },
+        {
+          "id": "data",
+          "rotulo": "Data",
+          "tipo": "texto"
+        },
+        {
+          "id": "texto",
+          "rotulo": "Texto do post",
+          "tipo": "texto_longo",
+          "obrigatorio": true
+        },
+        {
+          "id": "grifos",
+          "rotulo": "Trechos grifados",
+          "tipo": "texto",
+          "ajuda": "Um ou vários, separados por ponto e vírgula; podem estar em qualquer parte do texto. O grifo vem depois que o texto para."
+        },
+        {
+          "id": "imagem",
+          "rotulo": "Imagem do post (opcional)",
+          "tipo": "foto"
+        },
+        {
+          "id": "mostrar_numeros",
+          "rotulo": "Mostrar números (comentários, compartilhamentos, curtidas)",
+          "tipo": "sim_nao"
+        },
+        {
+          "id": "numeros",
+          "rotulo": "Números (comentários | compartilhamentos | curtidas)",
+          "tipo": "texto"
+        },
+        {
+          "id": "fundo",
+          "rotulo": "Foto ou vídeo de fundo (opcional)",
+          "tipo": "midia",
+          "ajuda": "Do Drive (02 IMG). Sem mídia, a peça sai com transparência para ir por cima do vídeo no Premiere."
+        },
+        {
+          "id": "tratamento",
+          "rotulo": "Tratamento do fundo",
+          "tipo": "opcao",
+          "opcoes": [
+            "automático",
+            "véu 55%",
+            "desfoque + véu 35%",
+            "escuro 72% (legado)",
+            "fundo preto com grão (legado)",
+            "sem tratamento"
+          ],
+          "ajuda": "Contraste para ler o texto (NINJA Design System: véu 55% ou desfoque 24 px + véu 35%). Automático: o da versão da peça."
+        },
+        {
+          "id": "posicao",
+          "rotulo": "Posição do bloco",
+          "tipo": "opcao",
+          "opcoes": [
+            "automática",
+            "centro",
+            "centro esquerda",
+            "centro direita",
+            "base esquerda",
+            "base centro",
+            "base direita",
+            "topo esquerda",
+            "topo centro",
+            "topo direita"
+          ],
+          "ajuda": "Dentro da área útil do formato (16x9: margem 60; 9x16: área segura do Reels)."
+        },
+        {
+          "id": "deslocar_x",
+          "rotulo": "Deslocar na horizontal (px)",
+          "tipo": "numero",
+          "padrao": 0
+        },
+        {
+          "id": "deslocar_y",
+          "rotulo": "Deslocar na vertical (px)",
+          "tipo": "numero",
+          "padrao": 0
+        }
+      ]
+    },
+    {
+      "id": "audio_obtido",
+      "nome": "Áudio obtido",
+      "duracao": [
+        4,
+        15
+      ],
+      "montar_e_sair": 2.5,
+      "descricao": "Cinco encaixes pelo tipo de imagem; onda em loop; selo, onda, fala e identificação opcionais.",
+      "variaveis": [
+        {
+          "id": "encaixe",
+          "rotulo": "Encaixe",
+          "tipo": "opcao",
+          "opcoes": [
+            "foto da pessoa",
+            "foto desfocada",
+            "print de WhatsApp",
+            "sem imagem",
+            "tela dividida"
+          ]
+        },
+        {
+          "id": "imagem",
+          "rotulo": "Foto ou vídeo da pessoa / de apoio",
+          "tipo": "midia"
+        },
+        {
+          "id": "selo",
+          "rotulo": "Selo",
+          "tipo": "texto",
+          "padrao": "Áudio obtido pela NINJA"
+        },
+        {
+          "id": "onda",
+          "rotulo": "Mostrar onda de áudio",
+          "tipo": "sim_nao",
+          "padrao": true
+        },
+        {
+          "id": "transcricao",
+          "rotulo": "Transcrição (quebre as linhas)",
+          "tipo": "texto_longo",
+          "obrigatorio": true
+        },
+        {
+          "id": "quem",
+          "rotulo": "Quem fala (identificação)",
+          "tipo": "texto"
+        },
+        {
+          "id": "contato",
+          "rotulo": "Nome do contato (WhatsApp)",
+          "tipo": "texto"
+        },
+        {
+          "id": "tempo_audio",
+          "rotulo": "Duração do áudio (WhatsApp)",
+          "tipo": "texto"
+        },
+        {
+          "id": "posicao",
+          "rotulo": "Posição do bloco",
+          "tipo": "opcao",
+          "opcoes": [
+            "automática",
+            "centro",
+            "centro esquerda",
+            "centro direita",
+            "base esquerda",
+            "base centro",
+            "base direita",
+            "topo esquerda",
+            "topo centro",
+            "topo direita"
+          ],
+          "ajuda": "Dentro da área útil do formato (16x9: margem 60; 9x16: área segura do Reels)."
+        },
+        {
+          "id": "deslocar_x",
+          "rotulo": "Deslocar na horizontal (px)",
+          "tipo": "numero",
+          "padrao": 0
+        },
+        {
+          "id": "deslocar_y",
+          "rotulo": "Deslocar na vertical (px)",
+          "tipo": "numero",
+          "padrao": 0
+        }
+      ]
+    },
+    {
+      "id": "print_tela",
+      "nome": "Print / gravação de tela",
+      "duracao": [
+        3,
+        10
+      ],
+      "montar_e_sair": 3,
+      "descricao": "Captura no tamanho dela, entorno preenchido pela própria imagem desfocada; grifo e zoom no trecho.",
+      "variaveis": [
+        {
+          "id": "moldura",
+          "rotulo": "Moldura",
+          "tipo": "opcao",
+          "opcoes": [
+            "logo do site",
+            "navegador",
+            "celular"
+          ]
+        },
+        {
+          "id": "midia",
+          "rotulo": "Print ou gravação de tela",
+          "tipo": "midia",
+          "obrigatorio": true
+        },
+        {
+          "id": "logo_site",
+          "rotulo": "Logo do site (banco)",
+          "tipo": "opcao",
+          "opcoes": [
+            "",
+            "Agência Brasil",
+            "Brasil de Fato",
+            "Carta Capital",
+            "CNN",
+            "Correio Braziliense",
+            "Estadão",
+            "Folha de S. Paulo",
+            "Fórum",
+            "G1",
+            "ICL",
+            "Metrópoles",
+            "O Globo",
+            "UOL",
+            "Veja"
+          ]
+        },
+        {
+          "id": "nome_site",
+          "rotulo": "Nome do site (se não houver logo)",
+          "tipo": "texto"
+        },
+        {
+          "id": "endereco",
+          "rotulo": "Endereço (moldura navegador)",
+          "tipo": "texto"
+        },
+        {
+          "id": "area_grifo",
+          "rotulo": "Área do grifo (% x, y, largura, altura)",
+          "tipo": "texto",
+          "ajuda": "Ex.: 6 8 70 12. A marca fica presa à captura."
+        },
+        {
+          "id": "zoom",
+          "rotulo": "Zoom no trecho grifado",
+          "tipo": "sim_nao"
+        },
+        {
+          "id": "credito",
+          "rotulo": "Crédito (ex.: Reprodução: gov.br)",
+          "tipo": "texto"
+        },
+        {
+          "id": "posicao",
+          "rotulo": "Posição do bloco",
+          "tipo": "opcao",
+          "opcoes": [
+            "automática",
+            "centro",
+            "centro esquerda",
+            "centro direita",
+            "base esquerda",
+            "base centro",
+            "base direita",
+            "topo esquerda",
+            "topo centro",
+            "topo direita"
+          ],
+          "ajuda": "Dentro da área útil do formato (16x9: margem 60; 9x16: área segura do Reels)."
+        },
+        {
+          "id": "deslocar_x",
+          "rotulo": "Deslocar na horizontal (px)",
+          "tipo": "numero",
+          "padrao": 0
+        },
+        {
+          "id": "deslocar_y",
+          "rotulo": "Deslocar na vertical (px)",
+          "tipo": "numero",
+          "padrao": 0
+        }
+      ]
+    },
+    {
+      "id": "tela_dividida",
+      "nome": "Tela dividida (2, 3, 4) e grid de fotos",
+      "duracao": [
+        3,
+        11
+      ],
+      "montar_e_sair": 2.2,
+      "apelidos": [
+        "grid_fotos"
+      ],
+      "descricao": "Grade com crop e crédito presos a cada imagem; entrada em cascata.",
+      "variaveis": [
+        {
+          "id": "divisao",
+          "rotulo": "Divisão",
+          "tipo": "opcao",
+          "opcoes": [
+            "2",
+            "3",
+            "1 + 2",
+            "4 (grade 2 × 2)"
+          ]
+        },
+        {
+          "id": "midia1",
+          "rotulo": "Imagem 1",
+          "tipo": "midia",
+          "obrigatorio": true
+        },
+        {
+          "id": "credito1",
+          "rotulo": "Crédito da imagem 1",
+          "tipo": "texto"
+        },
+        {
+          "id": "midia2",
+          "rotulo": "Imagem 2",
+          "tipo": "midia",
+          "obrigatorio": true
+        },
+        {
+          "id": "credito2",
+          "rotulo": "Crédito da imagem 2",
+          "tipo": "texto"
+        },
+        {
+          "id": "midia3",
+          "rotulo": "Imagem 3",
+          "tipo": "midia"
+        },
+        {
+          "id": "credito3",
+          "rotulo": "Crédito da imagem 3",
+          "tipo": "texto"
+        },
+        {
+          "id": "midia4",
+          "rotulo": "Imagem 4",
+          "tipo": "midia"
+        },
+        {
+          "id": "credito4",
+          "rotulo": "Crédito da imagem 4",
+          "tipo": "texto"
+        },
+        {
+          "id": "fio",
+          "rotulo": "Fio na cor de destaque entre as imagens",
+          "tipo": "sim_nao",
+          "padrao": true
+        }
+      ]
+    },
+    {
+      "id": "numero",
+      "nome": "Número em destaque",
+      "duracao": [
+        3,
+        8
+      ],
+      "montar_e_sair": 3.2,
+      "descricao": "Número gigante com contagem, comparação com o momento da troca ou sobre a foto.",
+      "variaveis": [
+        {
+          "id": "versao",
+          "rotulo": "Versão",
+          "tipo": "opcao",
+          "opcoes": [
+            "gigante",
+            "comparação",
+            "sobre a foto"
+          ]
+        },
+        {
+          "id": "numero",
+          "rotulo": "Número (gigante / sobre a foto)",
+          "tipo": "texto",
+          "ajuda": "Ex.: 33 ou 2,3. Conta até o valor. % e º usam a fonte de apoio."
+        },
+        {
+          "id": "unidade",
+          "rotulo": "Unidade",
+          "tipo": "texto"
+        },
+        {
+          "id": "frase",
+          "rotulo": "Frase",
+          "tipo": "texto_longo"
+        },
+        {
+          "id": "fonte",
+          "rotulo": "Fonte do dado",
+          "tipo": "texto"
+        },
+        {
+          "id": "titulo",
+          "rotulo": "Título (comparação)",
+          "tipo": "texto"
+        },
+        {
+          "id": "rotulo1",
+          "rotulo": "Rótulo 1",
+          "tipo": "texto"
+        },
+        {
+          "id": "numero1",
+          "rotulo": "Número 1",
+          "tipo": "texto"
+        },
+        {
+          "id": "rotulo2",
+          "rotulo": "Rótulo 2",
+          "tipo": "texto"
+        },
+        {
+          "id": "numero2",
+          "rotulo": "Número 2",
+          "tipo": "texto"
+        },
+        {
+          "id": "variacao",
+          "rotulo": "Variação (ex.: −50%)",
+          "tipo": "texto"
+        },
+        {
+          "id": "troca_em",
+          "rotulo": "Trocar o destaque no segundo",
+          "tipo": "numero",
+          "ajuda": "Acompanhe a locução. Vazio: 1,4 s depois de montar."
+        },
+        {
+          "id": "fundo",
+          "rotulo": "Foto ou vídeo de fundo (opcional)",
+          "tipo": "midia",
+          "ajuda": "Do Drive (02 IMG). Sem mídia, a peça sai com transparência para ir por cima do vídeo no Premiere."
+        },
+        {
+          "id": "tratamento",
+          "rotulo": "Tratamento do fundo",
+          "tipo": "opcao",
+          "opcoes": [
+            "automático",
+            "véu 55%",
+            "desfoque + véu 35%",
+            "escuro 72% (legado)",
+            "fundo preto com grão (legado)",
+            "sem tratamento"
+          ],
+          "ajuda": "Contraste para ler o texto (NINJA Design System: véu 55% ou desfoque 24 px + véu 35%). Automático: o da versão da peça."
+        },
+        {
+          "id": "posicao",
+          "rotulo": "Posição do bloco",
+          "tipo": "opcao",
+          "opcoes": [
+            "automática",
+            "centro",
+            "centro esquerda",
+            "centro direita",
+            "base esquerda",
+            "base centro",
+            "base direita",
+            "topo esquerda",
+            "topo centro",
+            "topo direita"
+          ],
+          "ajuda": "Dentro da área útil do formato (16x9: margem 60; 9x16: área segura do Reels)."
+        },
+        {
+          "id": "deslocar_x",
+          "rotulo": "Deslocar na horizontal (px)",
+          "tipo": "numero",
+          "padrao": 0
+        },
+        {
+          "id": "deslocar_y",
+          "rotulo": "Deslocar na vertical (px)",
+          "tipo": "numero",
+          "padrao": 0
+        }
+      ]
+    },
+    {
+      "id": "numero_video",
+      "nome": "Número sobre o vídeo",
+      "duracao": [
+        2,
+        6
+      ],
+      "montar_e_sair": 2.1,
+      "descricao": "O número pertence a algo na imagem: pessoa, objeto (seta) ou o plano (contador).",
+      "variaveis": [
+        {
+          "id": "ligacao",
+          "rotulo": "Ligado a",
+          "tipo": "opcao",
+          "opcoes": [
+            "pessoa",
+            "objeto",
+            "canto"
+          ]
+        },
+        {
+          "id": "rotulo",
+          "rotulo": "Rótulo",
+          "tipo": "texto"
+        },
+        {
+          "id": "numero",
+          "rotulo": "Número",
+          "tipo": "texto",
+          "obrigatorio": true
+        },
+        {
+          "id": "posicao_x",
+          "rotulo": "Posição horizontal (% da área útil)",
+          "tipo": "numero",
+          "ajuda": "0 = esquerda, 100 = direita."
+        },
+        {
+          "id": "posicao_y",
+          "rotulo": "Posição vertical (% da área útil)",
+          "tipo": "numero",
+          "ajuda": "0 = topo, 100 = base."
+        },
+        {
+          "id": "direcao_seta",
+          "rotulo": "Direção da seta",
+          "tipo": "opcao",
+          "opcoes": [
+            "baixo direita",
+            "baixo",
+            "baixo esquerda",
+            "esquerda",
+            "cima esquerda",
+            "cima",
+            "cima direita",
+            "direita"
+          ]
+        },
+        {
+          "id": "tamanho",
+          "rotulo": "Tamanho",
+          "tipo": "opcao",
+          "opcoes": [
+            "normal",
+            "grande",
+            "gigante"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "grafico",
+      "nome": "Sistema de gráficos",
+      "duracao": [
+        4,
+        11
+      ],
+      "montar_e_sair": 2.7,
+      "descricao": "Gerado dos dados digitados: linha de base, barras uma a uma, valores depois.",
+      "variaveis": [
+        {
+          "id": "tipo",
+          "rotulo": "Tipo",
+          "tipo": "opcao",
+          "opcoes": [
+            "colunas",
+            "ranking",
+            "comparação com fotos",
+            "rosca"
+          ]
+        },
+        {
+          "id": "titulo",
+          "rotulo": "Título",
+          "tipo": "texto_longo",
+          "obrigatorio": true
+        },
+        {
+          "id": "dados",
+          "rotulo": "Dados (um por linha: rótulo | valor)",
+          "tipo": "texto_longo",
+          "obrigatorio": true,
+          "ajuda": "Ex.: 2026 | 19,2"
+        },
+        {
+          "id": "destaque",
+          "rotulo": "Item em destaque (rótulo)",
+          "tipo": "texto"
+        },
+        {
+          "id": "unidade",
+          "rotulo": "Unidade",
+          "tipo": "texto"
+        },
+        {
+          "id": "casas",
+          "rotulo": "Casas decimais",
+          "tipo": "numero"
+        },
+        {
+          "id": "fonte",
+          "rotulo": "Fonte",
+          "tipo": "texto"
+        },
+        {
+          "id": "foto1",
+          "rotulo": "Foto 1 (comparação com fotos)",
+          "tipo": "foto"
+        },
+        {
+          "id": "foto2",
+          "rotulo": "Foto 2 (comparação com fotos)",
+          "tipo": "foto"
+        },
+        {
+          "id": "foto3",
+          "rotulo": "Foto 3 (comparação com fotos)",
+          "tipo": "foto"
+        },
+        {
+          "id": "foto4",
+          "rotulo": "Foto 4 (comparação com fotos)",
+          "tipo": "foto"
+        },
+        {
+          "id": "tratamento",
+          "rotulo": "Fundo",
+          "tipo": "opcao",
+          "opcoes": [
+            "automático",
+            "véu 55%",
+            "desfoque + véu 35%",
+            "escuro 72% (legado)",
+            "fundo preto com grão (legado)",
+            "sem tratamento"
+          ]
+        },
+        {
+          "id": "posicao",
+          "rotulo": "Posição do bloco",
+          "tipo": "opcao",
+          "opcoes": [
+            "automática",
+            "centro",
+            "centro esquerda",
+            "centro direita",
+            "base esquerda",
+            "base centro",
+            "base direita",
+            "topo esquerda",
+            "topo centro",
+            "topo direita"
+          ],
+          "ajuda": "Dentro da área útil do formato (16x9: margem 60; 9x16: área segura do Reels)."
+        },
+        {
+          "id": "deslocar_x",
+          "rotulo": "Deslocar na horizontal (px)",
+          "tipo": "numero",
+          "padrao": 0
+        },
+        {
+          "id": "deslocar_y",
+          "rotulo": "Deslocar na vertical (px)",
+          "tipo": "numero",
+          "padrao": 0
+        }
+      ]
+    },
+    {
+      "id": "comparacao",
+      "nome": "Comparação",
+      "duracao": [
+        4,
+        12
+      ],
+      "montar_e_sair": 2.5,
+      "descricao": "Fala contra fala, antes e depois, versus.",
+      "variaveis": [
+        {
+          "id": "modo",
+          "rotulo": "Modo",
+          "tipo": "opcao",
+          "opcoes": [
+            "fala contra fala",
+            "antes e depois",
+            "versus"
+          ]
+        },
+        {
+          "id": "lado1",
+          "rotulo": "Lado 1",
+          "tipo": "midia",
+          "obrigatorio": true
+        },
+        {
+          "id": "rotulo1",
+          "rotulo": "Rótulo 1 (data, local ou nome)",
+          "tipo": "texto"
+        },
+        {
+          "id": "frase1",
+          "rotulo": "Frase 1 (fala contra fala)",
+          "tipo": "texto"
+        },
+        {
+          "id": "dado1",
+          "rotulo": "Dado 1 (versus)",
+          "tipo": "texto"
+        },
+        {
+          "id": "lado2",
+          "rotulo": "Lado 2",
+          "tipo": "midia",
+          "obrigatorio": true
+        },
+        {
+          "id": "rotulo2",
+          "rotulo": "Rótulo 2",
+          "tipo": "texto"
+        },
+        {
+          "id": "frase2",
+          "rotulo": "Frase 2",
+          "tipo": "texto"
+        },
+        {
+          "id": "dado2",
+          "rotulo": "Dado 2",
+          "tipo": "texto"
+        },
+        {
+          "id": "alterna_s",
+          "rotulo": "Trocar de lado a cada (s)",
+          "tipo": "numero",
+          "ajuda": "Fala contra fala. Padrão 3,5 s."
+        }
+      ]
+    },
+    {
+      "id": "sabe_nao_sabe",
+      "nome": "O que se sabe / o que não se sabe",
+      "duracao": [
+        5,
+        16
+      ],
+      "montar_e_sair": 3.2,
+      "descricao": "Duas colunas, lista longa ou um item por vez; itens em sequência.",
+      "variaveis": [
+        {
+          "id": "versao",
+          "rotulo": "Versão",
+          "tipo": "opcao",
+          "opcoes": [
+            "duas colunas",
+            "lista longa",
+            "um por vez"
+          ]
+        },
+        {
+          "id": "titulo_sabe",
+          "rotulo": "Título da coluna confirmada",
+          "tipo": "texto",
+          "padrao": "O que se sabe"
+        },
+        {
+          "id": "sabe",
+          "rotulo": "O que se sabe (um por linha, até 3)",
+          "tipo": "texto_longo"
+        },
+        {
+          "id": "titulo_nao",
+          "rotulo": "Título da coluna em aberto",
+          "tipo": "texto",
+          "padrao": "O que não se sabe"
+        },
+        {
+          "id": "nao_sabe",
+          "rotulo": "O que não se sabe (um por linha; lista longa até 6)",
+          "tipo": "texto_longo",
+          "obrigatorio": true,
+          "ajuda": "No \"um por vez\", use / para quebrar a linha."
+        },
+        {
+          "id": "item",
+          "rotulo": "Item mostrado (um por vez)",
+          "tipo": "numero",
+          "padrao": 1
+        },
+        {
+          "id": "fundo",
+          "rotulo": "Foto ou vídeo de fundo (opcional)",
+          "tipo": "midia",
+          "ajuda": "Do Drive (02 IMG). Sem mídia, a peça sai com transparência para ir por cima do vídeo no Premiere."
+        },
+        {
+          "id": "tratamento",
+          "rotulo": "Tratamento do fundo",
+          "tipo": "opcao",
+          "opcoes": [
+            "automático",
+            "véu 55%",
+            "desfoque + véu 35%",
+            "escuro 72% (legado)",
+            "fundo preto com grão (legado)",
+            "sem tratamento"
+          ],
+          "ajuda": "Contraste para ler o texto (NINJA Design System: véu 55% ou desfoque 24 px + véu 35%). Automático: o da versão da peça."
+        },
+        {
+          "id": "posicao",
+          "rotulo": "Posição do bloco",
+          "tipo": "opcao",
+          "opcoes": [
+            "automática",
+            "centro",
+            "centro esquerda",
+            "centro direita",
+            "base esquerda",
+            "base centro",
+            "base direita",
+            "topo esquerda",
+            "topo centro",
+            "topo direita"
+          ],
+          "ajuda": "Dentro da área útil do formato (16x9: margem 60; 9x16: área segura do Reels)."
+        },
+        {
+          "id": "deslocar_x",
+          "rotulo": "Deslocar na horizontal (px)",
+          "tipo": "numero",
+          "padrao": 0
+        },
+        {
+          "id": "deslocar_y",
+          "rotulo": "Deslocar na vertical (px)",
+          "tipo": "numero",
+          "padrao": 0
+        }
+      ]
+    },
+    {
+      "id": "checagem",
+      "nome": "Selo de checagem",
+      "duracao": [
+        3,
+        8
+      ],
+      "montar_e_sair": 3.5,
+      "descricao": "Frase → risco (se falsa) → carimbo que bate e assenta.",
+      "variaveis": [
+        {
+          "id": "versao",
+          "rotulo": "Versão",
+          "tipo": "opcao",
+          "opcoes": [
+            "frase",
+            "sobre o post"
+          ]
+        },
+        {
+          "id": "veredito",
+          "rotulo": "Veredito",
+          "tipo": "opcao",
+          "opcoes": [
+            "Falso",
+            "Enganoso",
+            "Sem provas",
+            "Verdadeiro"
+          ]
+        },
+        {
+          "id": "frase",
+          "rotulo": "Frase checada",
+          "tipo": "texto_longo",
+          "obrigatorio": true
+        },
+        {
+          "id": "riscar",
+          "rotulo": "Riscar a frase",
+          "tipo": "sim_nao"
+        },
+        {
+          "id": "trecho_riscado",
+          "rotulo": "Trecho riscado (sobre o post)",
+          "tipo": "texto"
+        },
+        {
+          "id": "autor",
+          "rotulo": "Autor do post",
+          "tipo": "texto"
+        },
+        {
+          "id": "fonte",
+          "rotulo": "Fonte da checagem",
+          "tipo": "texto"
+        },
+        {
+          "id": "fundo",
+          "rotulo": "Foto ou vídeo de fundo (opcional)",
+          "tipo": "midia",
+          "ajuda": "Do Drive (02 IMG). Sem mídia, a peça sai com transparência para ir por cima do vídeo no Premiere."
+        },
+        {
+          "id": "tratamento",
+          "rotulo": "Tratamento do fundo",
+          "tipo": "opcao",
+          "opcoes": [
+            "automático",
+            "véu 55%",
+            "desfoque + véu 35%",
+            "escuro 72% (legado)",
+            "fundo preto com grão (legado)",
+            "sem tratamento"
+          ],
+          "ajuda": "Contraste para ler o texto (NINJA Design System: véu 55% ou desfoque 24 px + véu 35%). Automático: o da versão da peça."
+        },
+        {
+          "id": "posicao",
+          "rotulo": "Posição do bloco",
+          "tipo": "opcao",
+          "opcoes": [
+            "automática",
+            "centro",
+            "centro esquerda",
+            "centro direita",
+            "base esquerda",
+            "base centro",
+            "base direita",
+            "topo esquerda",
+            "topo centro",
+            "topo direita"
+          ],
+          "ajuda": "Dentro da área útil do formato (16x9: margem 60; 9x16: área segura do Reels)."
+        },
+        {
+          "id": "deslocar_x",
+          "rotulo": "Deslocar na horizontal (px)",
+          "tipo": "numero",
+          "padrao": 0
+        },
+        {
+          "id": "deslocar_y",
+          "rotulo": "Deslocar na vertical (px)",
+          "tipo": "numero",
+          "padrao": 0
+        }
+      ]
+    },
+    {
+      "id": "citacao",
+      "nome": "Citação",
+      "duracao": [
+        2,
+        8
+      ],
+      "montar_e_sair": 2.9,
+      "descricao": "Com foto (faixas e identificação), fragmento palavra a palavra ou citação-documento com grifo.",
+      "variaveis": [
+        {
+          "id": "estilo",
+          "rotulo": "Estilo",
+          "tipo": "opcao",
+          "opcoes": [
+            "com foto",
+            "fragmento",
+            "documento"
+          ]
+        },
+        {
+          "id": "frase",
+          "rotulo": "Frase (quebre as linhas)",
+          "tipo": "texto_longo",
+          "obrigatorio": true
+        },
+        {
+          "id": "autor",
+          "rotulo": "Autor",
+          "tipo": "texto"
+        },
+        {
+          "id": "cargo",
+          "rotulo": "Cargo",
+          "tipo": "texto"
+        },
+        {
+          "id": "data",
+          "rotulo": "Data",
+          "tipo": "texto"
+        },
+        {
+          "id": "palavras_destaque",
+          "rotulo": "Palavras em destaque (cor)",
+          "tipo": "texto"
+        },
+        {
+          "id": "grifos",
+          "rotulo": "Trechos grifados (documento)",
+          "tipo": "texto",
+          "ajuda": "Um ou vários, separados por ponto e vírgula; podem estar em qualquer parte do texto. O grifo vem depois que o texto para."
+        },
+        {
+          "id": "foto",
+          "rotulo": "Foto ou vídeo da pessoa / de fundo",
+          "tipo": "midia"
+        },
+        {
+          "id": "tratamento",
+          "rotulo": "Tratamento do fundo",
+          "tipo": "opcao",
+          "opcoes": [
+            "automático",
+            "véu 55%",
+            "desfoque + véu 35%",
+            "escuro 72% (legado)",
+            "fundo preto com grão (legado)",
+            "sem tratamento"
+          ],
+          "ajuda": "Contraste para ler o texto (NINJA Design System: véu 55% ou desfoque 24 px + véu 35%). Automático: o da versão da peça."
+        },
+        {
+          "id": "posicao",
+          "rotulo": "Posição do bloco",
+          "tipo": "opcao",
+          "opcoes": [
+            "automática",
+            "centro",
+            "centro esquerda",
+            "centro direita",
+            "base esquerda",
+            "base centro",
+            "base direita",
+            "topo esquerda",
+            "topo centro",
+            "topo direita"
+          ],
+          "ajuda": "Dentro da área útil do formato (16x9: margem 60; 9x16: área segura do Reels)."
+        },
+        {
+          "id": "deslocar_x",
+          "rotulo": "Deslocar na horizontal (px)",
+          "tipo": "numero",
+          "padrao": 0
+        },
+        {
+          "id": "deslocar_y",
+          "rotulo": "Deslocar na vertical (px)",
+          "tipo": "numero",
+          "padrao": 0
+        }
+      ]
+    },
+    {
+      "id": "credito",
+      "nome": "Crédito",
+      "duracao": [
+        null,
+        null
+      ],
+      "descricao": "Pequeno, colado na borda e sem animação: entra e sai com o corte.",
+      "variaveis": [
+        {
+          "id": "texto",
+          "rotulo": "Texto",
+          "tipo": "texto",
+          "obrigatorio": true,
+          "limite": {
+            "linhas": 1,
+            "car_linha": 40
+          }
+        },
+        {
+          "id": "posicao",
+          "rotulo": "Posição",
+          "tipo": "opcao",
+          "opcoes": [
+            "vertical na borda",
+            "mini no topo"
+          ]
+        }
+      ],
+      "muda_9x16": "Dura o plano inteiro."
+    },
+    {
+      "id": "cartao_final",
+      "nome": "Cartão final de ponte",
+      "duracao": [
+        4,
+        20
+      ],
+      "montar_e_sair": 2.4,
+      "descricao": "Short: vídeo completo no canal. 16x9: assista também, com as áreas dos vídeos recomendados.",
+      "variaveis": [
+        {
+          "id": "versao",
+          "rotulo": "Versão",
+          "tipo": "opcao",
+          "opcoes": [
+            "short: vídeo completo",
+            "assista também"
+          ]
+        },
+        {
+          "id": "chapeu",
+          "rotulo": "Chapéu",
+          "tipo": "texto"
+        },
+        {
+          "id": "texto",
+          "rotulo": "Texto",
+          "tipo": "texto_longo",
+          "obrigatorio": true
+        },
+        {
+          "id": "assinatura",
+          "rotulo": "Logo da NINJA",
+          "tipo": "sim_nao",
+          "padrao": true
+        },
+        {
+          "id": "mostrar_areas",
+          "rotulo": "Mostrar as áreas dos vídeos (só para conferir)",
+          "tipo": "sim_nao"
+        },
+        {
+          "id": "fundo",
+          "rotulo": "Foto ou vídeo de fundo (opcional)",
+          "tipo": "midia",
+          "ajuda": "Do Drive (02 IMG). Sem mídia, a peça sai com transparência para ir por cima do vídeo no Premiere."
+        },
+        {
+          "id": "tratamento",
+          "rotulo": "Tratamento do fundo",
+          "tipo": "opcao",
+          "opcoes": [
+            "automático",
+            "véu 55%",
+            "desfoque + véu 35%",
+            "escuro 72% (legado)",
+            "fundo preto com grão (legado)",
+            "sem tratamento"
+          ],
+          "ajuda": "Contraste para ler o texto (NINJA Design System: véu 55% ou desfoque 24 px + véu 35%). Automático: o da versão da peça."
+        },
+        {
+          "id": "posicao",
+          "rotulo": "Posição do bloco",
+          "tipo": "opcao",
+          "opcoes": [
+            "automática",
+            "centro",
+            "centro esquerda",
+            "centro direita",
+            "base esquerda",
+            "base centro",
+            "base direita",
+            "topo esquerda",
+            "topo centro",
+            "topo direita"
+          ],
+          "ajuda": "Dentro da área útil do formato (16x9: margem 60; 9x16: área segura do Reels)."
+        },
+        {
+          "id": "deslocar_x",
+          "rotulo": "Deslocar na horizontal (px)",
+          "tipo": "numero",
+          "padrao": 0
+        },
+        {
+          "id": "deslocar_y",
+          "rotulo": "Deslocar na vertical (px)",
+          "tipo": "numero",
+          "padrao": 0
+        }
+      ]
+    },
+    {
+      "id": "transicao",
+      "nome": "Transição — fita NINJA",
+      "duracao": [
+        0.4,
+        0.6
+      ],
+      "variaveis": [
+        {
+          "id": "fita",
+          "rotulo": "Fita",
+          "tipo": "opcao",
+          "opcoes": [
+            "diagonal tipográfica",
+            "código de barras",
+            "estrelas",
+            "cortina com olhos"
+          ],
+          "padrao": "diagonal tipográfica"
+        },
+        {
+          "id": "direcao",
+          "rotulo": "Direção",
+          "tipo": "opcao",
+          "opcoes": [
+            "esquerda→direita",
+            "direita→esquerda",
+            "baixo→cima"
+          ],
+          "padrao": "esquerda→direita"
+        }
+      ],
+      "status": "em_espera"
+    },
+    {
+      "id": "fundo",
+      "nome": "Fundos",
+      "duracao": [
+        null,
+        null
+      ],
+      "variaveis": [
+        {
+          "id": "estilo",
+          "rotulo": "Estilo",
+          "tipo": "opcao",
+          "opcoes": [
+            "neutro",
+            "letras fluidas",
+            "tipografia correndo",
+            "estrela respirando"
+          ],
+          "padrao": "neutro"
+        },
+        {
+          "id": "velocidade",
+          "rotulo": "Velocidade",
+          "tipo": "opcao",
+          "opcoes": [
+            "lenta",
+            "média"
+          ],
+          "padrao": "lenta"
+        }
+      ],
+      "status": "em_espera"
+    },
+    {
+      "id": "legenda",
+      "nome": "Legenda",
+      "duracao": [
+        null,
+        null
+      ],
+      "variaveis": [
+        {
+          "id": "srt",
+          "rotulo": "Legenda",
+          "tipo": "srt",
+          "obrigatorio": true
+        },
+        {
+          "id": "estilo",
+          "rotulo": "Estilo",
+          "tipo": "opcao",
+          "opcoes": [
+            "frase em caixa",
+            "palavra destacada"
+          ],
+          "padrao": "frase em caixa"
+        },
+        {
+          "id": "falantes",
+          "rotulo": "Falas de terceiros",
+          "tipo": "lista",
+          "campos": [
+            "trecho",
+            "estilo terceiro (itálico + cor)"
+          ]
+        }
+      ],
+      "muda_9x16": "Faixa de legenda em y 1190–1500; sobe para a emenda na tela dividida.",
+      "status": "fora"
+    },
+    {
+      "id": "cta",
+      "nome": "CTA",
+      "duracao": [
+        4,
+        7
+      ],
+      "variaveis": [
+        {
+          "id": "tipo_cta",
+          "rotulo": "Tipo",
+          "tipo": "opcao",
+          "opcoes": [
+            "zap",
+            "telegram",
+            "loja",
+            "membros",
+            "inscreva-se",
+            "doe (Pix)"
+          ],
+          "obrigatorio": true
+        },
+        {
+          "id": "chapeu",
+          "rotulo": "Chapéu",
+          "tipo": "texto",
+          "limite": {
+            "linhas": 1,
+            "car_linha": 28
+          }
+        },
+        {
+          "id": "texto",
+          "rotulo": "Texto",
+          "tipo": "texto_longo",
+          "limite": {
+            "linhas": 3,
+            "car_linha": 15
+          }
+        },
+        {
+          "id": "ligacao_assunto",
+          "rotulo": "Ligação com o assunto do vídeo",
+          "tipo": "texto",
+          "ajuda": "Opcional."
+        },
+        {
+          "id": "posicao",
+          "rotulo": "Momento no vídeo",
+          "tipo": "numero",
+          "ajuda": "Só na segunda metade; no máximo 1 por Short."
+        }
+      ],
+      "status": "fora"
+    }
+  ]
+}

@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Guia do Lettering · Mídia NINJA</title>
+<meta name="description" content="Como pedir as peças gráficas no roteiro, do jeito que a Máquina de Vídeos entende.">
+<!--
+  Fonte da página dos redatores. Ela só funciona dentro do site montado por `npm run guia:redatores`
+  (scripts/gerar-guia-redatores.mjs), que põe ao lado dela o dados.json e os módulos do design system.
+  Os caminhos são todos relativos: o site mora numa subpasta do GitHub Pages.
+  As peças, os exemplos e os limites vêm de src/acabamento/letering.ts; os textos de "quando usar" e "dica",
+  de textos.json. Aqui ficam só o cabeçalho, o "Como funciona" e o rodapé.
+-->
+<link rel="stylesheet" href="guia.css">
+</head>
+<body>
+<a class="pular" href="#cola">Pular para a cola rápida</a>
+
+<header class="capa">
+  <p class="selo">Mídia NINJA · YouTube</p>
+  <h1>Guia do Lettering</h1>
+  <p class="frase">Como pedir as peças gráficas no roteiro, do jeito que a Máquina de Vídeos entende.</p>
+</header>
+
+<nav class="indice" aria-label="Seções do guia">
+  <div class="indice-links" id="indice-links">
+    <a href="#como-funciona">Como funciona</a>
+    <a href="#cola">Cola rápida</a>
+  </div>
+  <button type="button" class="pequeno" id="pausar" aria-label="Pausar animações"><span id="pausar-verbo">Pausar</span><span class="so-largo"> animações</span></button>
+</nav>
+
+<main id="conteudo">
+
+<section id="como-funciona" aria-labelledby="t-como">
+  <h2 id="t-como">Como funciona</h2>
+  <p class="abre">Você escreve uma linha na coluna <strong>Lettering</strong> do roteiro. Quando a editora abre o roteiro na Máquina de Vídeos, cada linha já vira uma peça gráfica.</p>
+
+  <ol class="passos">
+    <li><span class="passo" aria-hidden="true">1</span><div><strong>Ache a peça.</strong> Use a <a href="#cola">cola rápida</a> ou procure pela parte do vídeo: abrir, situar, provar, explicar, citar, fechar.</div></li>
+    <li><span class="passo" aria-hidden="true">2</span><div><strong>Copie o exemplo.</strong> Cada peça tem um botão <strong>Copiar</strong>.</div></li>
+    <li><span class="passo" aria-hidden="true">3</span><div><strong>Cole no Notion.</strong> Na coluna Lettering, na linha do roteiro em que a peça entra.</div></li>
+    <li><span class="passo" aria-hidden="true">4</span><div><strong>Troque o texto pelo seu.</strong> Mantenha a palavra do começo, os dois-pontos e as barras <code>|</code>.</div></li>
+  </ol>
+
+  <figure class="notion">
+    <table>
+      <caption>Um pedaço do roteiro no Notion</caption>
+      <thead>
+        <tr><th scope="col">Locução</th><th scope="col">Imagem</th><th scope="col" class="alvo">Lettering</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>A liderança comunitária Maria Souza criticou o corte.</td>
+          <td>vídeo da sonora</td>
+          <td class="alvo">
+            <span class="linha-peca">TARJA: Maria Souza | Liderança comunitária</span>
+            <span class="marca-linha">vira peça</span>
+          </td>
+        </tr>
+        <tr>
+          <td>Hoje, um em cada três moradores do bairro vive sem coleta de lixo.</td>
+          <td>imagens do bairro</td>
+          <td class="alvo">
+            <span class="linha-peca">NÚMERO: 33% | dos moradores do bairro / não têm coleta de lixo | Fonte: nome da pesquisa · 2026</span>
+            <span class="marca-linha">vira peça</span>
+            <span class="linha-nota">dar zoom no cartaz do fundo</span>
+            <span class="marca-linha nota">vira nota para a editora</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <figcaption>A linha entra na coluna <strong>Lettering</strong>, na mesma linha da locução em que a peça aparece. Uma peça em cada linha da célula.</figcaption>
+  </figure>
+
+  <h3 id="regras">As regras, iguais para todas as peças</h3>
+  <dl class="regras">
+    <div>
+      <dt><code>PALAVRA:</code></dt>
+      <dd>A linha começa com a palavra da peça e dois-pontos. Maiúscula, minúscula e acento não fazem diferença: <code>TARJA:</code>, <code>tarja:</code> e <code>Tarja:</code> dão no mesmo.</dd>
+    </div>
+    <div>
+      <dt>Uma por linha</dt>
+      <dd>Cada peça ocupa uma linha da célula. Duas peças no mesmo trecho? Uma embaixo da outra.</dd>
+    </div>
+    <div>
+      <dt><code>|</code></dt>
+      <dd>A barra em pé separa os campos. No teclado: <kbd>Shift</kbd> + <kbd>\</kbd>. Se não achar a tecla, copie a barra de um exemplo.</dd>
+    </div>
+    <div>
+      <dt><code>;</code></dt>
+      <dd>O ponto e vírgula separa os itens de uma lista: os marcos da linha do tempo, os dados do gráfico, os itens do que se sabe.</dd>
+    </div>
+    <div>
+      <dt><code>=</code></dt>
+      <dd>O sinal de igual liga um rótulo ao valor dele: <code>2019 = Compra do jato</code>, <code>Goiás = 9,28</code>.</dd>
+    </div>
+    <div>
+      <dt><code>&nbsp;/&nbsp;</code></dt>
+      <dd>Espaço, barra, espaço quebra a linha dentro de um texto: <code>Quem paga / a conta da seca?</code>. Sem os espaços, como em 14/10, a barra continua sendo só uma barra.</dd>
+    </div>
+    <div>
+      <dt><code>[ ]</code></dt>
+      <dd>Campo entre colchetes é opcional. Não digite os colchetes. Os campos do fim da linha podem faltar.</dd>
+    </div>
+    <div>
+      <dt>Fora do formato</dt>
+      <dd>O que você escrever fora do formato não se perde: vira nota para a editora.</dd>
+    </div>
+    <div>
+      <dt>Fica com a editora</dt>
+      <dd>Foto, vídeo, cor e posição a editora resolve. O crédito é sempre da editora.</dd>
+    </div>
+  </dl>
+</section>
+
+<section id="cola" aria-labelledby="t-cola">
+  <h2 id="t-cola">Cola rápida</h2>
+  <p class="abre">Todas as peças numa lista. O botão copia o exemplo pronto para colar no Notion.</p>
+  <div class="busca">
+    <label for="busca">Procure pelo nome da peça</label>
+    <input type="search" id="busca" autocomplete="off" spellcheck="false" placeholder="Ex.: aspas, cg, gráfico">
+    <p class="busca-conta" id="busca-conta" aria-live="polite"></p>
+  </div>
+  <table class="cola">
+    <thead>
+      <tr><th scope="col">Peça</th><th scope="col">Escreva assim</th><th scope="col"><span class="so-leitor">Copiar o exemplo</span></th></tr>
+    </thead>
+    <tbody id="cola-linhas"></tbody>
+  </table>
+  <p class="vazio" id="busca-vazia" hidden>Nenhuma peça com esse nome. Se a peça que você quer não existe, escreva por extenso na coluna Lettering: vira nota e a editora resolve.</p>
+</section>
+
+<p class="estado" id="estado" role="status">Carregando as peças…</p>
+
+<div id="etapas">
+  <p class="abre legenda-previas" id="legenda-previas" hidden>Em cada peça, a prévia mostra o que a linha do exemplo produz. Fundo quadriculado quer dizer que a peça é transparente e entra por cima do vídeo. As fotos são de mentira: as de verdade a editora escolhe.</p>
+</div>
+
+</main>
+
+<footer class="rodape">
+  <h2>A peça que você quer não está aqui?</h2>
+  <p>Escreva por extenso na coluna Lettering o que você imagina, com as suas palavras. Vira nota e a editora resolve.</p>
+  <p class="versao" id="versao"></p>
+</footer>
+
+<p class="so-leitor" id="avisos" aria-live="polite"></p>
+<noscript><p class="estado">Esta página precisa de JavaScript para mostrar as peças.</p></noscript>
+<script type="module" src="guia.js"></script>
+</body>
+</html>

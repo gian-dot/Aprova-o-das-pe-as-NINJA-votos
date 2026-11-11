@@ -1,0 +1,312 @@
+/* Guia do Lettering — visual NINJA, igual ao app (app/estilo.css): preto, branco, o amarelo de destaque,
+   TipoNinja nos títulos e Manrope no texto. Só tema escuro. As fontes vêm do site gerado
+   (design-system/ninja/recursos/), por caminho relativo a este arquivo. */
+
+@font-face { font-family: 'TipoNinja'; src: url('design-system/ninja/recursos/f1ccaf163da75dea.otf'); font-display: swap; }
+@font-face { font-family: 'Manrope'; font-weight: 500; src: url('design-system/ninja/recursos/88d3f8ef004b5348.ttf'); font-display: swap; }
+
+:root {
+  --fundo: #0c0c0c;
+  --superficie: #151515;
+  --superficie-2: #1e1e1e;
+  --campo: #0e0e0e;
+  --texto: #f2f2f2;
+  --texto-suave: #a6a6a6;
+  --borda: #2c2c2c;
+  --borda-forte: #4a4a4a;
+  --acento: #FFDE00;
+  --sobre-acento: #000;
+  --acento-suave: rgba(255, 222, 0, 0.13);
+  --ok: #2BD35A;
+  --raio: 6px;
+  --indice-h: 49px;
+  --fonte: 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --fonte-titulo: 'TipoNinja', 'Manrope', Impact, 'Arial Narrow', sans-serif;
+  --fonte-mono: ui-monospace, 'Cascadia Mono', Consolas, 'Liberation Mono', monospace;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+html { font-size: 16px; scroll-padding-top: calc(var(--indice-h) + 16px); scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: var(--fonte);
+  font-weight: 500;
+  line-height: 1.55;
+  overflow-wrap: break-word;
+}
+
+[hidden] { display: none !important; }
+
+h1, h2, h3 { font-family: var(--fonte-titulo); font-weight: 400; text-transform: uppercase; line-height: 1.05; margin: 0; }
+h1 { font-size: clamp(2.6rem, 9vw, 5rem); }
+h2 { font-size: clamp(1.7rem, 5vw, 2.4rem); margin-bottom: 12px; }
+h3 { font-size: 1.5rem; }
+h4 { margin: 0 0 6px; font: 500 0.75rem var(--fonte); letter-spacing: 0.08em; text-transform: uppercase; color: var(--texto-suave); }
+p { margin: 0 0 12px; }
+strong { font-weight: 500; color: #fff; }
+a { color: var(--acento); text-underline-offset: 3px; }
+code { font-family: var(--fonte-mono); font-size: 0.92em; }
+
+kbd {
+  display: inline-block;
+  min-width: 1.6em;
+  padding: 0 6px;
+  border: 1px solid var(--borda-forte);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  background: var(--superficie-2);
+  font: 500 0.82rem var(--fonte-mono);
+  text-align: center;
+}
+
+:focus-visible { outline: 2px solid var(--acento); outline-offset: 2px; }
+
+.so-leitor { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+.pular { position: absolute; left: -9999px; top: 0; z-index: 50; padding: 8px 12px; background: var(--acento); color: var(--sobre-acento); }
+.pular:focus { left: 8px; top: 8px; }
+
+/* ---------- botões ---------- */
+button {
+  font: 500 0.92rem var(--fonte);
+  min-height: 40px;
+  padding: 0 16px;
+  border-radius: var(--raio);
+  border: 1px solid var(--borda-forte);
+  background: var(--superficie-2);
+  color: var(--texto);
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+}
+button:hover { border-color: var(--texto); }
+button:active { transform: translateY(1px); }
+button.principal { background: var(--acento); border-color: var(--acento); color: var(--sobre-acento); }
+button.principal:hover { filter: brightness(1.08); border-color: var(--acento); }
+button.pequeno { min-height: 32px; padding: 0 12px; font-size: 0.82rem; }
+button.copiar { flex: none; min-width: 6.4em; }
+button.copiar.feito { background: var(--ok); border-color: var(--ok); color: #000; }
+button.copiar.falhou { border-color: #ff7a7a; color: #ff7a7a; background: transparent; }
+.formatos button[aria-pressed='true'] { background: var(--acento); border-color: var(--acento); color: var(--sobre-acento); }
+
+/* ---------- capa e índice ---------- */
+.capa { max-width: 1120px; margin: 0 auto; padding: 40px 16px 28px; }
+.selo { display: inline-block; margin: 0 0 14px; padding: 2px 10px; background: var(--acento); color: var(--sobre-acento); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.frase { margin: 14px 0 0; max-width: 34em; font-size: 1.15rem; color: var(--texto-suave); }
+
+.indice {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: var(--indice-h);
+  padding: 0 max(16px, calc((100vw - 1120px) / 2 + 16px));
+  background: var(--superficie);
+  border-top: 1px solid var(--borda);
+  border-bottom: 1px solid var(--borda);
+}
+.indice-links { display: flex; flex: 1; min-width: 0; gap: 2px; overflow-x: auto; scrollbar-width: thin; }
+.indice-links a { flex: none; padding: 13px 10px; color: var(--texto-suave); font-size: 0.9rem; text-decoration: none; white-space: nowrap; border-bottom: 3px solid transparent; }
+.indice-links a:hover { color: var(--texto); border-bottom-color: var(--acento); }
+.indice button { flex: none; }
+
+main { max-width: 1120px; margin: 0 auto; padding: 0 16px 48px; }
+main > section, #etapas > section { padding-top: 40px; }
+.abre { max-width: 46em; font-size: 1.05rem; color: var(--texto-suave); }
+.estado { margin: 32px 0 0; padding: 20px 16px; border: 1px dashed var(--borda-forte); border-radius: var(--raio); color: var(--texto-suave); text-align: center; }
+.estado.erro { border-color: #ff7a7a; color: #ffb3b3; }
+.legenda-previas { margin: 40px 0 0; padding: 12px 16px; max-width: none; background: var(--superficie); border-left: 3px solid var(--acento); border-radius: var(--raio); font-size: 0.95rem; }
+
+/* ---------- como funciona ---------- */
+.passos { list-style: none; margin: 20px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.passos li { display: flex; gap: 12px; align-items: flex-start; padding: 16px; background: var(--superficie); border: 1px solid var(--borda); border-radius: var(--raio); color: var(--texto-suave); }
+.passo { display: inline-grid; place-items: center; flex: none; width: 32px; height: 32px; background: var(--acento); color: var(--sobre-acento); font: 400 1.25rem var(--fonte-titulo); line-height: 1; }
+
+/* O desenho da tabela do Notion: fundo claro de papel, para ler como "isto é o Notion", não como o guia. */
+.notion { margin: 24px 0 0; }
+.notion table { width: 100%; table-layout: fixed; border-collapse: collapse; background: #fbfaf7; color: #1b1b1b; border-radius: var(--raio); overflow: hidden; font-size: 0.86rem; line-height: 1.45; }
+.notion caption { caption-side: top; padding: 0 0 8px; text-align: left; color: var(--texto-suave); font-size: 0.82rem; }
+.notion th, .notion td { padding: 10px 12px; border: 1px solid #d9d6cd; text-align: left; vertical-align: top; }
+.notion th { background: #efede6; font: 500 0.75rem var(--fonte); letter-spacing: 0.06em; text-transform: uppercase; color: #55534c; }
+.notion th:nth-child(1) { width: 30%; }
+.notion th:nth-child(2) { width: 20%; }
+.notion .alvo { background: #fff6b8; }
+.notion th.alvo { background: var(--acento); color: #000; }
+.notion .linha-peca, .notion .linha-nota { display: block; font-family: var(--fonte-mono); font-size: 0.8rem; overflow-wrap: anywhere; }
+.notion .linha-nota { margin-top: 10px; }
+.marca-linha { display: inline-block; margin-top: 4px; padding: 0 6px; background: #000; color: var(--acento); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; }
+.marca-linha.nota { background: #55534c; color: #fff; }
+.notion figcaption { margin-top: 10px; color: var(--texto-suave); font-size: 0.92rem; }
+
+#regras { margin: 36px 0 14px; }
+.regras { margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.regras > div { padding: 14px 16px; background: var(--superficie); border: 1px solid var(--borda); border-radius: var(--raio); }
+.regras dt { margin-bottom: 6px; color: var(--acento); font-size: 1.05rem; }
+.regras dt code { font-size: 1.15rem; }
+.regras dd { margin: 0; color: var(--texto-suave); font-size: 0.93rem; }
+.regras dd code { color: var(--texto); }
+
+/* ---------- cola rápida ---------- */
+.busca { display: grid; gap: 6px; max-width: 420px; margin: 16px 0; }
+.busca label { font-size: 0.85rem; color: var(--texto-suave); }
+.busca input {
+  font: inherit;
+  width: 100%;
+  min-height: 44px;
+  padding: 8px 12px;
+  color: var(--texto);
+  background: var(--campo);
+  border: 1px solid var(--borda-forte);
+  border-radius: var(--raio);
+}
+.busca input::placeholder { color: var(--texto-suave); opacity: 0.75; }
+.busca input:hover { border-color: var(--texto-suave); }
+.busca-conta { margin: 0; min-height: 1.3em; font-size: 0.82rem; color: var(--texto-suave); }
+
+.cola { width: 100%; border-collapse: collapse; }
+.cola th { padding: 6px 10px; border-bottom: 1px solid var(--borda-forte); text-align: left; font: 500 0.75rem var(--fonte); letter-spacing: 0.08em; text-transform: uppercase; color: var(--texto-suave); }
+.cola td { padding: 8px 10px; border-bottom: 1px solid var(--borda); vertical-align: middle; }
+.cola tbody tr:hover { background: var(--superficie); }
+.cola .c-peca { width: 1%; white-space: nowrap; }
+.cola .c-peca a { font: 400 1.15rem var(--fonte-titulo); text-decoration: none; text-transform: uppercase; color: var(--texto); }
+.cola .c-peca a:hover { color: var(--acento); }
+.cola .c-peca small { display: block; font-size: 0.74rem; color: var(--texto-suave); white-space: normal; }
+.cola .c-escreva code { color: var(--texto-suave); overflow-wrap: anywhere; }
+.cola .c-escreva code b { font-weight: 500; color: var(--acento); }
+.cola .c-copiar { width: 1%; text-align: right; }
+.vazio { margin: 16px 0 0; padding: 20px 16px; border: 1px dashed var(--borda-forte); border-radius: var(--raio); color: var(--texto-suave); }
+
+/* ---------- etapas e cartões ---------- */
+.etapa-topo { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 16px; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 3px solid var(--acento); }
+.etapa-topo h2 { margin: 0; }
+.etapa-topo p { margin: 0; color: var(--texto-suave); }
+.cartoes { display: grid; gap: 16px; }
+
+.cartao {
+  display: grid;
+  grid-template-columns: minmax(0, 440px) minmax(0, 1fr);
+  gap: 16px 28px;
+  align-items: start;
+  padding: 20px;
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+}
+.cartao:target { border-color: var(--acento); }
+.cartao-topo { grid-column: 1 / -1; display: grid; gap: 6px; }
+.cartao-titulo { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
+.cartao-titulo h3 { font-size: 2rem; color: var(--acento); }
+.modelo { margin: 0; font-size: 0.85rem; color: var(--texto-suave); }
+.quando { margin: 0; max-width: 44em; font-size: 1.1rem; color: #fff; }
+
+/* No computador, a prévia acompanha a leitura do cartão (fica presa embaixo do índice). */
+.previa { display: grid; gap: 8px; min-width: 0; position: sticky; top: calc(var(--indice-h) + 16px); }
+.quadro {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #101010 repeating-conic-gradient(#1d1d1d 0% 25%, #101010 0% 50%) 0 0 / 24px 24px;
+}
+.quadro.vertical { aspect-ratio: 9 / 16; width: min(100%, 248px); margin: 0 auto; }
+/* color-scheme igual ao do documento da peça (claro): sem isso, no tema escuro o navegador pinta um fundo
+   branco atrás da peça e a transparência some (mesma regra de app/estilo.css). */
+.quadro iframe { position: absolute; left: 0; top: 0; border: 0; transform-origin: 0 0; pointer-events: none; color-scheme: light; }
+.quadro-aviso { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; padding: 12px; font-size: 0.82rem; color: var(--texto-suave); text-align: center; }
+.previa-barra { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 12px; }
+.formatos { display: flex; gap: 6px; }
+.tempo { margin: 0; font-size: 0.8rem; color: var(--texto-suave); }
+
+.cartao-texto { display: grid; gap: 16px; min-width: 0; }
+.linha {
+  display: block;
+  margin: 0;
+  padding: 10px 12px;
+  background: var(--campo);
+  border: 1px solid var(--borda);
+  border-left: 3px solid var(--borda-forte);
+  border-radius: var(--raio);
+  font-family: var(--fonte-mono);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  color: var(--texto-suave);
+}
+.linha b { font-weight: 500; color: var(--acento); }
+.linha.exemplo { border-left-color: var(--acento); color: var(--texto); user-select: all; }
+.com-botao { display: flex; gap: 8px; align-items: stretch; }
+.com-botao .linha { flex: 1; min-width: 0; }
+
+.campos { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; counter-reset: campo; }
+.campos li { counter-increment: campo; display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 2px 10px; padding: 8px 10px; background: var(--superficie-2); border-radius: var(--raio); font-size: 0.92rem; }
+.campos li::before { content: counter(campo); grid-row: 1 / span 3; display: grid; place-items: center; width: 24px; height: 24px; border: 1px solid var(--borda-forte); border-radius: 4px; font-size: 0.75rem; color: var(--texto-suave); }
+.campo-nome { color: #fff; }
+.etiqueta { display: inline-block; margin-left: 6px; padding: 0 6px; border: 1px solid var(--borda-forte); border-radius: 99px; font-size: 0.7rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--texto-suave); vertical-align: 1px; }
+.campo-exemplo, .campo-limite { grid-column: 2; color: var(--texto-suave); font-size: 0.85rem; }
+.campo-exemplo q { quotes: none; color: var(--texto); font-family: var(--fonte-mono); font-size: 0.82rem; overflow-wrap: anywhere; }
+.campo-limite { color: var(--acento); }
+
+.apelidos { margin: 0; font-size: 0.92rem; color: var(--texto-suave); }
+.apelidos code { color: var(--texto); }
+.atalhos { display: grid; gap: 6px; }
+.atalhos p { margin: 0; font-size: 0.92rem; color: var(--texto-suave); }
+.dica { margin: 0; padding: 12px 14px; background: var(--acento-suave); border-left: 3px solid var(--acento); border-radius: var(--raio); font-size: 0.95rem; }
+.dica h4 { color: var(--acento); }
+
+/* ---------- rodapé ---------- */
+.rodape { max-width: 1120px; margin: 0 auto; padding: 32px 16px 56px; border-top: 1px solid var(--borda); }
+.rodape h2 { font-size: 1.6rem; }
+.rodape p { max-width: 44em; color: var(--texto-suave); }
+.versao { margin-top: 24px; font-size: 0.8rem; }
+
+/* ---------- telas menores ---------- */
+@media (max-width: 960px) {
+  .passos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .regras { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cartao { grid-template-columns: minmax(0, 1fr); }
+  .previa { position: static; max-width: 520px; }
+}
+@media (max-width: 640px) {
+  .capa { padding-top: 28px; }
+  .passos, .regras { grid-template-columns: minmax(0, 1fr); }
+  .cartao { padding: 16px; }
+  .cartao-titulo h3 { font-size: 1.7rem; }
+  .notion table { font-size: 0.78rem; }
+  .notion th, .notion td { padding: 8px 6px; }
+  .notion th { font-size: 0.64rem; letter-spacing: 0.02em; }
+  .notion th:nth-child(1) { width: 27%; }
+  .notion th:nth-child(2) { width: 21%; }
+  .notion .linha-peca, .notion .linha-nota { font-size: 0.72rem; }
+  .indice { gap: 8px; }
+  .so-largo { display: none; }
+  /* O índice rola para o lado: a ponta some aos poucos para mostrar que tem mais. */
+  .indice-links { padding-right: 20px; -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent); }
+  .indice-links a { padding: 13px 8px; }
+  /* A cola vira uma lista: palavra e botão em cima, a linha de escrever embaixo. */
+  .cola thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .cola tbody tr { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 8px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--borda); }
+  .cola td { padding: 0; border: 0; }
+  .cola .c-peca, .cola .c-copiar { width: auto; white-space: normal; }
+  .cola .c-escreva { grid-column: 1 / -1; grid-row: 2; }
+  .com-botao { flex-direction: column; }
+  .com-botao button { align-self: flex-start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation: none !important; transition: none !important; }
+}
+
+/* TipoNinja: alternativos e ligaturas desligados (fundamentos do Thiago), como nas peças e no app.
+   Fica no fim do arquivo: o atalho `font:` usado acima zera estas duas propriedades. */
+h1, h2, h3, .passo, .cola .c-peca a {
+  font-feature-settings: "calt" 0, "liga" 0, "clig" 0, "dlig" 0, "hlig" 0, "salt" 0, "swsh" 0, "cswh" 0, "titl" 0, "ss01" 0, "ss02" 0, "ss03" 0, "ss04" 0, "ss05" 0, "ss06" 0, "ss07" 0, "ss08" 0, "ss09" 0, "ss10" 0, "ss11" 0, "ss12" 0, "ss13" 0, "ss14" 0, "ss15" 0, "ss16" 0, "ss17" 0, "ss18" 0, "ss19" 0, "ss20" 0;
+  font-variant-ligatures: none;
+}

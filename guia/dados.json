@@ -1,0 +1,1315 @@
+{
+ "como_ler": "Gerado por scripts/gerar-guia-redatores.mjs a partir de src/acabamento/letering.ts (FORMATOS). Não edite à mão.",
+ "versao": "1.5.0",
+ "design_system": "4.0.0-rc.1",
+ "etapas": [
+  {
+   "nome": "Abrir",
+   "texto": "Peças que abrem o vídeo ou um bloco: título, pergunta, capítulo, tema."
+  },
+  {
+   "nome": "Situar",
+   "texto": "Peças que dizem quem fala, onde e quando."
+  },
+  {
+   "nome": "Provar",
+   "texto": "Peças que mostram a prova: documento, post, áudio, print, imagens lado a lado."
+  },
+  {
+   "nome": "Explicar",
+   "texto": "Peças que explicam com números, gráficos, comparações e checagem."
+  },
+  {
+   "nome": "Citar",
+   "texto": "Peças que mostram a fala de alguém e o crédito de uma imagem."
+  },
+  {
+   "nome": "Fechar",
+   "texto": "A peça que encerra o vídeo."
+  }
+ ],
+ "formatos": [
+  {
+   "palavra": "CHAMADA",
+   "apelidos": [
+    "MANCHETE"
+   ],
+   "campos": [
+    "[chapéu]",
+    "chamada"
+   ],
+   "exemplo": "CHAMADA: Brasil com S | Estudantes ocupam as ruas de São Paulo",
+   "atalho": false,
+   "atalho_de": null,
+   "modelo": "chamada_central",
+   "nome": "Chamada central (modelo de vídeo do Canva)",
+   "descricao": "Só o chapéu (opcional) e a chamada, com posição própria. Encaixe de notícia do NINJA Design System 2.0.",
+   "etapa": "Abrir",
+   "duracao": [
+    3,
+    7
+   ],
+   "limites": [
+    {
+     "variavel": "chapeu",
+     "rotulo": "Chapéu",
+     "campo": 0,
+     "16x9": {
+      "linhas": 1,
+      "car_linha": 28
+     },
+     "9x16": {
+      "linhas": 1,
+      "car_linha": 28
+     }
+    },
+    {
+     "variavel": "chamada",
+     "rotulo": "Chamada",
+     "campo": 1,
+     "16x9": {
+      "linhas": 4,
+      "car_linha": 24
+     },
+     "9x16": {
+      "linhas": 4,
+      "car_linha": 15
+     }
+    }
+   ],
+   "quando": "Para abrir o vídeo com o título da notícia por cima da imagem.",
+   "dica": "O chapéu é a linha pequena que vem antes da chamada. Ele é opcional: sem chapéu, escreva só a chamada. A letra diminui sozinha para o título caber, então título curto fica maior na tela.",
+   "valores": {
+    "chapeu": "Brasil com S",
+    "cor_chapeu": "branco",
+    "modo": "normal",
+    "chamada": "Estudantes ocupam as ruas de São Paulo",
+    "palavra_destaque": "",
+    "tratamento": "degradê",
+    "posicao_bloco": "automática",
+    "deslocar_x": 0,
+    "deslocar_y": 0,
+    "deslocar_chapeu_y": 0,
+    "entrada": "animada",
+    "fundo": {
+     "arquivo": "exemplo-1"
+    }
+   }
+  },
+  {
+   "palavra": "PERGUNTA",
+   "apelidos": [
+    "GANCHO",
+    "PERGUNTA-GANCHO"
+   ],
+   "campos": [
+    "texto (use \" / \" para quebrar a linha)",
+    "[palavras em destaque]"
+   ],
+   "exemplo": "PERGUNTA: Quem paga / a conta da seca? | seca",
+   "atalho": false,
+   "atalho_de": null,
+   "modelo": "pergunta_gancho",
+   "nome": "Pergunta-gancho / título em tarja",
+   "descricao": "Cada linha é uma faixa que mede o próprio texto (D8); palavra-chave com grifo ou cor depois que o texto para.",
+   "etapa": "Abrir",
+   "duracao": [
+    3,
+    7
+   ],
+   "limites": [
+    {
+     "variavel": "texto",
+     "rotulo": "Texto (quebre as linhas onde quiser)",
+     "campo": 0,
+     "16x9": {
+      "linhas": 3,
+      "car_linha": 20
+     },
+     "9x16": {
+      "linhas": 3,
+      "car_linha": 20
+     }
+    }
+   ],
+   "quando": "Para prender a atenção com uma pergunta ou uma frase curta, no começo do vídeo ou na virada de um bloco.",
+   "dica": "Cada linha vira uma faixa. Use \" / \" (espaço, barra, espaço) para escolher onde a linha quebra. Depois do |, repita a palavra que ganha destaque, escrita igual.",
+   "valores": {
+    "texto": "Quem paga\na conta da seca?",
+    "palavras_destaque": "seca",
+    "estilo_destaque": "grifo",
+    "cor_tarja": "preta",
+    "caixa": "faixas (uma por linha)",
+    "chapeu": "",
+    "cor_chapeu": "destaque",
+    "tratamento": "sem tratamento",
+    "posicao": "automática",
+    "deslocar_x": 0,
+    "deslocar_y": 0,
+    "fundo": {
+     "arquivo": "exemplo-2"
+    }
+   }
+  },
+  {
+   "palavra": "MATÉRIA",
+   "apelidos": [],
+   "campos": [
+    "veículo",
+    "título da matéria"
+   ],
+   "exemplo": "MATÉRIA: G1 | Aqui vai o título da matéria, igual ao do site",
+   "atalho": false,
+   "atalho_de": null,
+   "modelo": "manchete_veiculo",
+   "nome": "Manchete de outro veículo",
+   "descricao": "Cartão com logo do veículo, título real (e lead opcional) e trechos grifados em sequência.",
+   "etapa": "Abrir",
+   "duracao": [
+    3,
+    10
+   ],
+   "limites": [],
+   "quando": "Quando o roteiro cita uma matéria de outro veículo: mostra o logo do veículo e o título.",
+   "dica": "Copie o título igual ao da matéria. Se o link da matéria estiver na coluna Imagem, pode escrever só o veículo: a Máquina busca o título. O logo entra sozinho quando o nome do veículo é escrito assim: Agência Brasil, Brasil de Fato, Carta Capital, CNN, Correio Braziliense, Estadão, Folha de S. Paulo, Fórum, G1, ICL, Metrópoles, O Globo, UOL, Veja. Para outro veículo, a editora coloca o logo.",
+   "valores": {
+    "veiculo": "G1",
+    "titulo": "Aqui vai o título da matéria, igual ao do site",
+    "lead": "",
+    "grifos": "",
+    "data": "",
+    "largura": "médio",
+    "tratamento": "automático",
+    "posicao": "automática",
+    "deslocar_x": 0,
+    "deslocar_y": 0,
+    "fundo": {
+     "arquivo": "exemplo-2"
+    }
+   }
+  },
+  {
+   "palavra": "CAPÍTULO",
+   "apelidos": [],
+   "campos": [
+    "[número]",
+    "título (use \" / \" para quebrar a linha)"
+   ],
+   "exemplo": "CAPÍTULO: 01 | O que aconteceu na madrugada",
+   "atalho": false,
+   "atalho_de": null,
+   "modelo": "capitulo",
+   "nome": "Marcador de capítulo",
+   "descricao": "Tela de capítulo ou etiqueta permanente no canto enquanto o bloco dura.",
+   "etapa": "Abrir",
+   "duracao": [
+    3,
+    6
+   ],
+   "limites": [],
+   "quando": "Quando o vídeo muda de parte: marca o começo de um capítulo.",
+   "dica": "O número é opcional: sem ele, entra 01 e a editora ajusta. Use \" / \" para quebrar o título em duas linhas. A linha pequena de cima (\"Capítulo um\") é a editora que ajusta.",
+   "valores": {
+    "versao": "tela",
+    "numero": "01",
+    "chapeu": "Capítulo um",
+    "titulo": "O que aconteceu na madrugada",
+    "tratamento": "automático",
+    "posicao": "automática",
+    "deslocar_x": 0,
+    "deslocar_y": 0,
+    "fundo": {
+     "arquivo": "exemplo-3"
+    }
+   }
+  },
+  {
+   "palavra": "TEMA",
+   "apelidos": [
+    "ETIQUETA",
+    "SÉRIE"
+   ],
+   "campos": [
+    "tema",
+    "[ano]"
+   ],
+   "exemplo": "TEMA: Eleições 26",
+   "atalho": false,
+   "atalho_de": null,
+   "modelo": "etiqueta_tema",
+   "nome": "Etiqueta de tema / série",
+   "descricao": "Rótulo da pauta no topo da área segura; pode durar o bloco inteiro.",
+   "etapa": "Abrir",
+   "duracao": [
+    3,
+    20
+   ],
+   "limites": [],
+   "quando": "Para deixar o assunto ou o nome da série no alto da tela durante um bloco do vídeo.",
+   "dica": "Texto bem curto, como o nome de uma editoria. O ano é opcional e só aparece em um dos estilos, que a editora escolhe.",
+   "valores": {
+    "tema": "Eleições 26",
+    "estilo": "fita recortada",
+    "ano": "",
+    "posicao": "automática",
+    "deslocar_x": 0,
+    "deslocar_y": 0
+   }
+  },
+  {
+   "palavra": "PALAVRA",
+   "apelidos": [
+    "CONCEITO",
+    "PALAVRA-CONCEITO"
+   ],
+   "campos": [
+    "palavra",
+    "[subtítulo]"
+   ],
+   "exemplo": "PALAVRA: Gerrymandering | o desenho que decide a eleição",
+   "atalho": false,
+   "atalho_de": null,
+   "modelo": "palavra_conceito",
+   "nome": "Palavra-conceito",
+   "descricao": "Uma palavra-chave sobre a cena: grifo (o fundo revela a palavra), contorno, vazada na foto ou letra a letra.",
+   "etapa": "Abrir",
+   "duracao": [
+    2,
+    6
+   ],
+   "limites": [],
+   "quando": "Quando uma palavra resume a ideia e merece a tela toda, como um termo que o vídeo vai explicar.",
+   "dica": "Uma palavra só, ou um nome bem curto. O subtítulo é opcional e explica a palavra em poucas palavras.",
+   "valores": {
+    "palavra": "Gerrymandering",
+    "subtitulo": "o desenho que decide a eleição",
+    "estilo": "grifo",
+    "tratamento": "automático",
+    "posicao": "automática",
+    "deslocar_x": 0,
+    "deslocar_y": 0,
+    "fundo": {
+     "arquivo": "exemplo-2"
+    }
+   }
+  },
+  {
+   "palavra": "TARJA",
+   "apelidos": [
+    "CG",
+    "GC"
+   ],
+   "campos": [
+    "nome",
+    "[cargo ou @perfil]"
+   ],
+   "exemplo": "TARJA: Maria Souza | Liderança comunitária",
+   "atalho": false,
+   "atalho_de": null,
+   "modelo": "tarja_nome",
+   "nome": "Tarja de nome e cargo",
+   "descricao": "Nome em caixa branca (TipoNinja) + cargo ou @ em caixa preta; posição com e sem legenda (D4).",
+   "etapa": "Situar",
+   "duracao": [
+    3,
+    5
+   ],
+   "limites": [
+    {
+     "variavel": "nome",
+     "rotulo": "Nome",
+     "campo": 0,
+     "16x9": {
+      "linhas": 1,
+      "car_linha": 24
+     },
+     "9x16": {
+      "linhas": 1,
+      "car_linha": 24
+     }
+    },
+    {
+     "variavel": "cargo",
+     "rotulo": "Cargo",
+     "campo": 1,
+     "16x9": {
+      "linhas": 1,
+      "car_linha": 40
+     },
+     "9x16": {
+      "linhas": 1,
+      "car_linha": 40
+     }
+    }
+   ],
+   "quando": "Quando alguém fala em sonora: põe o nome e o cargo na tela.",
+   "dica": "Só para quem fala no vídeo: quem é apenas citado não ganha tarja. Escreva na linha do roteiro em que a sonora entra. No lugar do cargo, você pode pôr o perfil da pessoa, começando com @.",
+   "valores": {
+    "nome": "Maria Souza",
+    "cargo": "Liderança comunitária",
+    "arroba": "",
+    "variacao": "padrão",
+    "lado": "esquerda",
+    "entrada": "varredura",
+    "deslocar_x": 0,
+    "deslocar_y": 0
+   }
+  },
+  {
+   "palavra": "LOCAL",
+   "apelidos": [
+    "LOCALIZAÇÃO"
+   ],
+   "campos": [
+    "cidade, estado",
+    "[data]"
+   ],
+   "exemplo": "LOCAL: Belém, Pará | 02 nov 2026",
+   "atalho": false,
+   "atalho_de": null,
+   "modelo": "localizacao",
+   "nome": "Localização",
+   "descricao": "Pino + cidade, estado numa linha e a data (opcional) embaixo.",
+   "etapa": "Situar",
+   "duracao": [
+    4,
+    5
+   ],
+   "limites": [],
+   "quando": "Para dizer onde a cena acontece e, se importar, em que dia.",
+   "dica": "Escreva a cidade, uma vírgula e o estado ou o país. Só a cidade também vale. A data é opcional.",
+   "valores": {
+    "cidade": "Belém",
+    "estado": "Pará",
+    "data": "02 nov 2026",
+    "posicao": "automática",
+    "deslocar_x": 0,
+    "deslocar_y": 0
+   }
+  },
+  {
+   "palavra": "LINHA DO TEMPO",
+   "apelidos": [
+    "CRONOLOGIA"
+   ],
+   "campos": [
+    "[título]",
+    "ano = o que aconteceu; ano = o que aconteceu"
+   ],
+   "exemplo": "LINHA DO TEMPO: Caso do jato | 2019 = Compra do jato; 2021 = Primeira denúncia; 2023 = Inquérito aberto",
+   "atalho": false,
+   "atalho_de": null,
+   "modelo": "linha_tempo",
+   "nome": "Linha do tempo",
+   "descricao": "Marcos digitados pela editora; escolha de qual começa marcado, para qual passa e quando.",
+   "etapa": "Situar",
+   "duracao": [
+    3,
+    12
+   ],
+   "limites": [],
+   "quando": "Para contar um caso em datas: o que aconteceu em cada ano.",
+   "dica": "Cada marco é o ano, o sinal de igual e o que aconteceu, em poucas palavras. Separe os marcos com ponto e vírgula. O título é opcional.",
+   "valores": {
+    "estilo": "espinha",
+    "titulo": "Caso do jato",
+    "marcos": "2019 | Compra do jato\n2021 | Primeira denúncia\n2023 | Inquérito aberto",
+    "comeca_em": "",
+    "passa_para": "",
+    "deslocar_x": 0,
+    "deslocar_y": 0
+   }
+  },
+  {
+   "palavra": "DOCUMENTO",
+   "apelidos": [],
+   "campos": [
+    "trecho do documento",
+    "[trechos grifados; separados por ponto e vírgula]",
+    "[de onde é]"
+   ],
+   "exemplo": "DOCUMENTO: O investigado mantinha relação com a empresa desde 2019, quando passou a receber valores mensais | valores mensais | Inquérito 4.781 · STF",
+   "atalho": false,
+   "atalho_de": null,
+   "modelo": "documento",
+   "nome": "Documento com grifo",
+   "descricao": "Texto do documento por linha, grifos depois; opção de o grifo vir à frente com o resto desfocado.",
+   "etapa": "Provar",
+   "duracao": [
+    4,
+    14
+   ],
+   "limites": [],
+   "quando": "Para provar com um documento: mostra o trecho na tela e grifa o que importa.",
+   "dica": "Copie o trecho igual ao do documento. Cada grifo precisa ser um pedaço desse trecho, escrito igual. Para mais de um grifo, separe com ponto e vírgula. O último campo diz de onde é o documento.",
+   "valores": {
+    "moldura": "página",
+    "texto": "O investigado mantinha relação com a empresa desde 2019, quando passou a receber valores mensais",
+    "area_grifo": "",
+    "grifos": "valores mensais",
+    "identificacao": "",
+    "rotulo": "Inquérito 4.781 · STF",
+    "tratamento": "automático",
+    "posicao": "automática",
+    "deslocar_x": 0,
+    "deslocar_y": 0
+   }
+  },
+  {
+   "palavra": "POST",
+   "apelidos": [],
+   "campos": [
+    "rede (X, Instagram ou TikTok)",
+    "@perfil",
+    "[texto do post]"
+   ],
+   "exemplo": "POST: X | @midianinja | Aqui vai o texto do post, igual ao original",
+   "atalho": false,
+   "atalho_de": null,
+   "modelo": "post_rede",
+   "nome": "Post de rede social",
+   "descricao": "Cartão de post legível, para texto longo, com foto opcional e números ligados por caixa de seleção.",
+   "etapa": "Provar",
+   "duracao": [
+    3,
+    12
+   ],
+   "limites": [],
+   "quando": "Quando o roteiro mostra um post do X, do Instagram ou do TikTok.",
+   "dica": "Comece pela rede. Ponha o link do post na coluna Imagem: quando é do X, a Máquina busca o nome de quem postou e o texto no link. Se você escrever o texto, vale o que você escreveu.",
+   "valores": {
+    "rede": "X",
+    "nome": "",
+    "arroba": "@midianinja",
+    "local": "",
+    "data": "",
+    "texto": "Aqui vai o texto do post, igual ao original",
+    "grifos": "",
+    "numeros": "",
+    "tratamento": "automático",
+    "posicao": "automática",
+    "deslocar_x": 0,
+    "deslocar_y": 0,
+    "fundo": {
+     "arquivo": "exemplo-2"
+    }
+   }
+  },
+  {
+   "palavra": "ÁUDIO",
+   "apelidos": [
+    "ÁUDIO OBTIDO"
+   ],
+   "campos": [
+    "o que a pessoa diz",
+    "[quem fala]"
+   ],
+   "exemplo": "ÁUDIO: “Ninguém pode / saber disso” | Ex-assessor · ligação de 14/10",
+   "atalho": false,
+   "atalho_de": null,
+   "modelo": "audio_obtido",
+   "nome": "Áudio obtido",
+   "descricao": "Cinco encaixes pelo tipo de imagem; onda em loop; selo, onda, fala e identificação opcionais.",
+   "etapa": "Provar",
+   "duracao": [
+    4,
+    15
+   ],
+   "limites": [],
+   "quando": "Quando o vídeo toca um áudio obtido pela NINJA: mostra na tela o que a pessoa diz.",
+   "dica": "Escreva a fala com as aspas, como no exemplo. Use \" / \" para quebrar a linha. Depois do |, diga quem fala. A peça já vem com o selo \"Áudio obtido pela NINJA\".",
+   "valores": {
+    "encaixe": "foto da pessoa",
+    "selo": "Áudio obtido pela NINJA",
+    "onda": true,
+    "transcricao": "“Ninguém pode\nsaber disso”",
+    "quem": "Ex-assessor · ligação de 14/10",
+    "contato": "",
+    "tempo_audio": "",
+    "posicao": "automática",
+    "deslocar_x": 0,
+    "deslocar_y": 0,
+    "imagem": {
+     "arquivo": "exemplo-pessoa"
+    }
+   }
+  },
+  {
+   "palavra": "CELULAR",
+   "apelidos": [],
+   "campos": [
+    "o que aparece na tela do celular"
+   ],
+   "exemplo": "CELULAR: vídeo da Folha no Instagram",
+   "atalho": false,
+   "atalho_de": null,
+   "modelo": "print_tela",
+   "nome": "Print / gravação de tela",
+   "descricao": "Captura no tamanho dela, entorno preenchido pela própria imagem desfocada; grifo e zoom no trecho.",
+   "etapa": "Provar",
+   "duracao": [
+    3,
+    10
+   ],
+   "limites": [],
+   "quando": "Quando a imagem é um vídeo ou um post visto no celular, como um Reels ou um TikTok.",
+   "dica": "Descreva o que aparece na tela e ponha o link na coluna Imagem. A editora coloca o vídeo ou o print dentro do celular.",
+   "valores": {
+    "moldura": "celular",
+    "logo_site": "",
+    "nome_site": "vídeo da Folha no Instagram",
+    "endereco": "",
+    "area_grifo": "",
+    "credito": "",
+    "posicao": "automática",
+    "deslocar_x": 0,
+    "deslocar_y": 0,
+    "midia": {
+     "arquivo": "exemplo-3"
+    }
+   }
+  },
+  {
+   "palavra": "PRINT",
+   "apelidos": [],
+   "campos": [
+    "site ou o que aparece no print"
+   ],
+   "exemplo": "PRINT: Portal da Transparência, página do contrato",
+   "atalho": false,
+   "atalho_de": null,
+   "modelo": "print_tela",
+   "nome": "Print / gravação de tela",
+   "descricao": "Captura no tamanho dela, entorno preenchido pela própria imagem desfocada; grifo e zoom no trecho.",
+   "etapa": "Provar",
+   "duracao": [
+    3,
+    10
+   ],
+   "limites": [],
+   "quando": "Quando a prova é a tela de um site: uma página, um contrato, uma notícia.",
+   "dica": "Comece pelo nome do site: o que você escrever aparece numa faixa em cima do print. Ponha o link na coluna Imagem. A editora faz o print e pode grifar o trecho.",
+   "valores": {
+    "moldura": "logo do site",
+    "logo_site": "",
+    "nome_site": "Portal da Transparência, página do contrato",
+    "endereco": "",
+    "area_grifo": "",
+    "credito": "",
+    "posicao": "automática",
+    "deslocar_x": 0,
+    "deslocar_y": 0,
+    "midia": {
+     "arquivo": "exemplo-print"
+    }
+   }
+  },
+  {
+   "palavra": "TELA DIVIDIDA",
+   "apelidos": [
+    "GRID"
+   ],
+   "campos": [
+    "quantas imagens (2, 3, 1+2 ou 4)",
+    "[crédito de cada imagem, separados por |]"
+   ],
+   "exemplo": "TELA DIVIDIDA: 2 | Foto: Mídia NINJA | Reprodução: G1",
+   "atalho": false,
+   "atalho_de": null,
+   "modelo": "tela_dividida",
+   "nome": "Tela dividida (2, 3, 4) e grid de fotos",
+   "descricao": "Grade com crop e crédito presos a cada imagem; entrada em cascata.",
+   "etapa": "Provar",
+   "duracao": [
+    3,
+    11
+   ],
+   "limites": [],
+   "quando": "Para mostrar duas, três ou quatro imagens ao mesmo tempo.",
+   "dica": "Diga quantas imagens: 2, 3, 1+2 (uma grande e duas menores) ou 4. As imagens a editora escolhe. Os créditos são opcionais: um para cada imagem, na ordem, separados por |.",
+   "valores": {
+    "divisao": "2",
+    "credito1": "Foto: Mídia NINJA",
+    "credito2": "Reprodução: G1",
+    "credito3": "",
+    "credito4": "",
+    "fio": true,
+    "midia1": {
+     "arquivo": "exemplo-1"
+    },
+    "midia2": {
+     "arquivo": "exemplo-2"
+    }
+   }
+  },
+  {
+   "palavra": "NÚMERO",
+   "apelidos": [],
+   "campos": [
+    "número com a unidade",
+    "[frase de apoio]",
+    "[fonte]"
+   ],
+   "exemplo": "NÚMERO: 33% | dos moradores do bairro / não têm coleta de lixo | Fonte: nome da pesquisa · 2026",
+   "atalho": false,
+   "atalho_de": null,
+   "modelo": "numero",
+   "nome": "Número em destaque",
+   "descricao": "Número gigante com contagem, comparação com o momento da troca ou sobre a foto.",
+   "etapa": "Explicar",
+   "duracao": [
+    3,
+    8
+   ],
+   "limites": [],
+   "quando": "Quando um número é a notícia: ele aparece gigante, com uma frase que explica.",
+   "dica": "Escreva o número junto com a unidade, como 33% ou 2,3 mil hectares. A frase de apoio completa o número. Use \" / \" para quebrar a frase. Sempre que tiver, ponha a fonte do dado.",
+   "valores": {
+    "versao": "gigante",
+    "numero": "33",
+    "unidade": "%",
+    "frase": "dos moradores do bairro\nnão têm coleta de lixo",
+    "fonte": "Fonte: nome da pesquisa · 2026",
+    "titulo": "",
+    "rotulo1": "",
+    "numero1": "",
+    "rotulo2": "",
+    "numero2": "",
+    "variacao": "",
+    "tratamento": "automático",
+    "posicao": "automática",
+    "deslocar_x": 0,
+    "deslocar_y": 0,
+    "fundo": {
+     "arquivo": "exemplo-3"
+    }
+   }
+  },
+  {
+   "palavra": "NÚMERO NO VÍDEO",
+   "apelidos": [],
+   "campos": [
+    "número",
+    "[a quem ou a que ele se refere]"
+   ],
+   "exemplo": "NÚMERO NO VÍDEO: 2,3 mil hectares | área queimada",
+   "atalho": false,
+   "atalho_de": null,
+   "modelo": "numero_video",
+   "nome": "Número sobre o vídeo",
+   "descricao": "O número pertence a algo na imagem: pessoa, objeto (seta) ou o plano (contador).",
+   "etapa": "Explicar",
+   "duracao": [
+    2,
+    6
+   ],
+   "limites": [],
+   "quando": "Quando o número é de alguém ou de algo que aparece na imagem: ele entra por cima do vídeo, perto da pessoa ou do objeto.",
+   "dica": "Depois do |, diga de quem ou do que é o número. O lugar na tela a editora ajusta.",
+   "valores": {
+    "ligacao": "pessoa",
+    "rotulo": "área queimada",
+    "numero": "2,3 mil hectares",
+    "direcao_seta": "baixo direita",
+    "tamanho": "normal"
+   }
+  },
+  {
+   "palavra": "GRÁFICO",
+   "apelidos": [],
+   "campos": [
+    "título",
+    "rótulo = valor; rótulo = valor",
+    "[fonte]"
+   ],
+   "exemplo": "GRÁFICO: Público do festival (mil pessoas) | 2023 = 12,5; 2024 = 15; 2025 = 18,2; 2026 = 21 | Fonte: organização do festival",
+   "atalho": false,
+   "atalho_de": null,
+   "modelo": "grafico",
+   "nome": "Sistema de gráficos",
+   "descricao": "Gerado dos dados digitados: linha de base, barras uma a uma, valores depois.",
+   "etapa": "Explicar",
+   "duracao": [
+    4,
+    11
+   ],
+   "limites": [],
+   "quando": "Para comparar valores em colunas, como a mudança de um número ao longo dos anos.",
+   "dica": "Cada dado é o rótulo, o sinal de igual e o número. Separe os dados com ponto e vírgula. Escreva só o número, sem % nem R$: dado com letra ou símbolo fica fora do gráfico. Decimal é com vírgula (21,3), porque o ponto é lido como separador de milhar. A unidade vai no título, como (%).",
+   "valores": {
+    "tipo": "colunas",
+    "titulo": "Público do festival (mil pessoas)",
+    "dados": "2023 | 12,5\n2024 | 15\n2025 | 18,2\n2026 | 21",
+    "destaque": "",
+    "unidade": "",
+    "fonte": "Fonte: organização do festival",
+    "tratamento": "automático",
+    "posicao": "automática",
+    "deslocar_x": 0,
+    "deslocar_y": 0
+   }
+  },
+  {
+   "palavra": "RANKING",
+   "apelidos": [],
+   "campos": [
+    "título",
+    "rótulo = valor; rótulo = valor",
+    "[fonte]"
+   ],
+   "exemplo": "RANKING: Bairros com mais hortas comunitárias | Zona Norte = 14; Centro = 9; Zona Leste = 7 | Fonte: nome da pesquisa",
+   "atalho": false,
+   "atalho_de": null,
+   "modelo": "grafico",
+   "nome": "Sistema de gráficos",
+   "descricao": "Gerado dos dados digitados: linha de base, barras uma a uma, valores depois.",
+   "etapa": "Explicar",
+   "duracao": [
+    4,
+    11
+   ],
+   "limites": [],
+   "quando": "Para mostrar quem está na frente: uma lista em barras, do maior para o menor.",
+   "dica": "Escreva os itens já na ordem em que devem aparecer: a peça não reordena. As regras dos dados são as mesmas do GRÁFICO.",
+   "valores": {
+    "tipo": "ranking",
+    "titulo": "Bairros com mais hortas comunitárias",
+    "dados": "Zona Norte | 14\nCentro | 9\nZona Leste | 7",
+    "destaque": "",
+    "unidade": "",
+    "fonte": "Fonte: nome da pesquisa",
+    "tratamento": "automático",
+    "posicao": "automática",
+    "deslocar_x": 0,
+    "deslocar_y": 0
+   }
+  },
+  {
+   "palavra": "ROSCA",
+   "apelidos": [
+    "PIZZA"
+   ],
+   "campos": [
+    "título",
+    "rótulo = valor; rótulo = valor",
+    "[fonte]"
+   ],
+   "exemplo": "ROSCA: De onde vem a verba do projeto | Doações = 61; Editais = 24; Outros = 15 | Fonte: balanço de 2026",
+   "atalho": false,
+   "atalho_de": null,
+   "modelo": "grafico",
+   "nome": "Sistema de gráficos",
+   "descricao": "Gerado dos dados digitados: linha de base, barras uma a uma, valores depois.",
+   "etapa": "Explicar",
+   "duracao": [
+    4,
+    11
+   ],
+   "limites": [],
+   "quando": "Para mostrar as partes de um todo, como a divisão de um orçamento.",
+   "dica": "Poucas fatias funcionam melhor. A peça calcula a porcentagem de cada parte sozinha. As regras dos dados são as mesmas do GRÁFICO.",
+   "valores": {
+    "tipo": "rosca",
+    "titulo": "De onde vem a verba do projeto",
+    "dados": "Doações | 61\nEditais | 24\nOutros | 15",
+    "destaque": "",
+    "unidade": "",
+    "fonte": "Fonte: balanço de 2026",
+    "tratamento": "automático",
+    "posicao": "automática",
+    "deslocar_x": 0,
+    "deslocar_y": 0
+   }
+  },
+  {
+   "palavra": "COMPARAÇÃO",
+   "apelidos": [
+    "FALA CONTRA FALA"
+   ],
+   "campos": [
+    "quem e quando = “fala”",
+    "quem e quando = “fala”"
+   ],
+   "exemplo": "COMPARAÇÃO: Prefeito · 2022 = “A tarifa não sobe” | Prefeito · 2026 = “O reajuste é inevitável”",
+   "atalho": false,
+   "atalho_de": null,
+   "modelo": "comparacao",
+   "nome": "Comparação",
+   "descricao": "Fala contra fala, antes e depois, versus.",
+   "etapa": "Explicar",
+   "duracao": [
+    4,
+    12
+   ],
+   "limites": [],
+   "quando": "Quando duas falas se chocam: o que a pessoa disse antes e o que diz agora, lado a lado.",
+   "dica": "De cada lado: quem falou e quando, o sinal de igual e a fala com aspas. A foto ou o vídeo de cada lado a editora escolhe.",
+   "valores": {
+    "modo": "fala contra fala",
+    "rotulo1": "Prefeito · 2022",
+    "frase1": "“A tarifa não sobe”",
+    "dado1": "",
+    "rotulo2": "Prefeito · 2026",
+    "frase2": "“O reajuste é inevitável”",
+    "dado2": "",
+    "lado1": {
+     "arquivo": "exemplo-pessoa"
+    },
+    "lado2": {
+     "arquivo": "exemplo-pessoa"
+    }
+   }
+  },
+  {
+   "palavra": "ANTES E DEPOIS",
+   "apelidos": [],
+   "campos": [
+    "rótulo do antes",
+    "rótulo do depois"
+   ],
+   "exemplo": "ANTES E DEPOIS: 2019 | 2026",
+   "atalho": false,
+   "atalho_de": null,
+   "modelo": "comparacao",
+   "nome": "Comparação",
+   "descricao": "Fala contra fala, antes e depois, versus.",
+   "etapa": "Explicar",
+   "duracao": [
+    4,
+    12
+   ],
+   "limites": [],
+   "quando": "Para comparar duas imagens do mesmo lugar ou da mesma coisa em momentos diferentes.",
+   "dica": "Escreva só o rótulo de cada lado, como o ano. As duas imagens a editora escolhe.",
+   "valores": {
+    "modo": "antes e depois",
+    "rotulo1": "2019",
+    "frase1": "",
+    "dado1": "",
+    "rotulo2": "2026",
+    "frase2": "",
+    "dado2": "",
+    "lado1": {
+     "arquivo": "exemplo-3"
+    },
+    "lado2": {
+     "arquivo": "exemplo-3"
+    }
+   }
+  },
+  {
+   "palavra": "VERSUS",
+   "apelidos": [],
+   "campos": [
+    "lado 1 = dado",
+    "lado 2 = dado"
+   ],
+   "exemplo": "VERSUS: Candidata A = 48% | Candidato B = 45%",
+   "atalho": false,
+   "atalho_de": null,
+   "modelo": "comparacao",
+   "nome": "Comparação",
+   "descricao": "Fala contra fala, antes e depois, versus.",
+   "etapa": "Explicar",
+   "duracao": [
+    4,
+    12
+   ],
+   "limites": [],
+   "quando": "Para pôr dois lados frente a frente, cada um com o seu dado, como numa pesquisa eleitoral.",
+   "dica": "De cada lado: o nome, o sinal de igual e o dado. A foto de cada lado a editora escolhe.",
+   "valores": {
+    "modo": "versus",
+    "rotulo1": "Candidata A",
+    "frase1": "",
+    "dado1": "48%",
+    "rotulo2": "Candidato B",
+    "frase2": "",
+    "dado2": "45%",
+    "lado1": {
+     "arquivo": "exemplo-pessoa"
+    },
+    "lado2": {
+     "arquivo": "exemplo-pessoa"
+    }
+   }
+  },
+  {
+   "palavra": "O QUE SE SABE",
+   "apelidos": [
+    "SABE"
+   ],
+   "campos": [
+    "o que se sabe; item; item",
+    "o que não se sabe; item; item"
+   ],
+   "exemplo": "O QUE SE SABE: O contrato foi assinado em março; O valor é de R$ 2 milhões | Quem autorizou o repasse; Para onde foi o dinheiro",
+   "atalho": false,
+   "atalho_de": null,
+   "modelo": "sabe_nao_sabe",
+   "nome": "O que se sabe / o que não se sabe",
+   "descricao": "Duas colunas, lista longa ou um item por vez; itens em sequência.",
+   "etapa": "Explicar",
+   "duracao": [
+    5,
+    16
+   ],
+   "limites": [],
+   "quando": "Quando o caso ainda está em aberto: separa o que está confirmado do que falta responder.",
+   "dica": "Antes do |, o que se sabe. Depois, o que não se sabe. Separe os itens com ponto e vírgula. Cabem até 3 itens de cada lado: o quarto não aparece.",
+   "valores": {
+    "versao": "duas colunas",
+    "titulo_sabe": "O que se sabe",
+    "sabe": "O contrato foi assinado em março\nO valor é de R$ 2 milhões",
+    "titulo_nao": "O que não se sabe",
+    "nao_sabe": "Quem autorizou o repasse\nPara onde foi o dinheiro",
+    "item": 1,
+    "tratamento": "automático",
+    "posicao": "automática",
+    "deslocar_x": 0,
+    "deslocar_y": 0,
+    "fundo": {
+     "arquivo": "exemplo-2"
+    }
+   }
+  },
+  {
+   "palavra": "NÃO SE SABE",
+   "apelidos": [
+    "O QUE NÃO SE SABE"
+   ],
+   "campos": [
+    "item; item; item"
+   ],
+   "exemplo": "NÃO SE SABE: Quem autorizou o repasse; Para onde foi o dinheiro; Se outros deputados sabiam do contrato",
+   "atalho": false,
+   "atalho_de": null,
+   "modelo": "sabe_nao_sabe",
+   "nome": "O que se sabe / o que não se sabe",
+   "descricao": "Duas colunas, lista longa ou um item por vez; itens em sequência.",
+   "etapa": "Explicar",
+   "duracao": [
+    5,
+    16
+   ],
+   "limites": [],
+   "quando": "Quando só restam perguntas: uma lista do que ainda não tem resposta.",
+   "dica": "Separe os itens com ponto e vírgula. Cabem até 6 itens: o sétimo não aparece.",
+   "valores": {
+    "versao": "lista longa",
+    "titulo_sabe": "O que se sabe",
+    "sabe": "",
+    "titulo_nao": "O que não se sabe",
+    "nao_sabe": "Quem autorizou o repasse\nPara onde foi o dinheiro\nSe outros deputados sabiam do contrato",
+    "item": 1,
+    "tratamento": "automático",
+    "posicao": "automática",
+    "deslocar_x": 0,
+    "deslocar_y": 0
+   }
+  },
+  {
+   "palavra": "CHECAGEM",
+   "apelidos": [],
+   "campos": [
+    "veredito (Falso, Enganoso, Sem provas ou Verdadeiro)",
+    "frase checada",
+    "[fonte]"
+   ],
+   "exemplo": "CHECAGEM: Falso | A vacina altera o DNA de quem toma | Checagem NINJA · fonte: Ministério da Saúde",
+   "atalho": false,
+   "atalho_de": null,
+   "modelo": "checagem",
+   "nome": "Selo de checagem",
+   "descricao": "Frase → risco (se falsa) → carimbo que bate e assenta.",
+   "etapa": "Explicar",
+   "duracao": [
+    3,
+    8
+   ],
+   "limites": [],
+   "quando": "Quando o vídeo checa uma frase que está circulando: mostra a frase e carimba o veredito.",
+   "dica": "Escreva sempre o veredito na frente: Falso, Enganoso, Sem provas ou Verdadeiro. Sem o veredito a linha não vira peça: fica como nota, e a editora monta a checagem. Escreva a frase do jeito que ela circula.",
+   "valores": {
+    "versao": "frase",
+    "veredito": "Falso",
+    "frase": "A vacina altera o DNA de quem toma",
+    "trecho_riscado": "",
+    "autor": "",
+    "fonte": "Checagem NINJA · fonte: Ministério da Saúde",
+    "tratamento": "automático",
+    "posicao": "automática",
+    "deslocar_x": 0,
+    "deslocar_y": 0,
+    "fundo": {
+     "arquivo": "exemplo-2"
+    }
+   }
+  },
+  {
+   "palavra": "FALSO",
+   "apelidos": [],
+   "campos": [
+    "frase checada",
+    "[fonte]"
+   ],
+   "exemplo": "FALSO: A frase que está circulando | Checagem NINJA · fonte: órgão oficial",
+   "atalho": true,
+   "atalho_de": "CHECAGEM",
+   "modelo": "checagem",
+   "nome": "Selo de checagem",
+   "descricao": "Frase → risco (se falsa) → carimbo que bate e assenta.",
+   "etapa": "Explicar",
+   "duracao": [
+    3,
+    8
+   ],
+   "limites": [],
+   "quando": null,
+   "dica": null,
+   "valores": {
+    "versao": "frase",
+    "veredito": "Falso",
+    "frase": "A frase que está circulando",
+    "trecho_riscado": "",
+    "autor": "",
+    "fonte": "Checagem NINJA · fonte: órgão oficial",
+    "tratamento": "automático",
+    "posicao": "automática",
+    "deslocar_x": 0,
+    "deslocar_y": 0,
+    "fundo": {
+     "arquivo": "exemplo-2"
+    }
+   }
+  },
+  {
+   "palavra": "ENGANOSO",
+   "apelidos": [],
+   "campos": [
+    "frase checada",
+    "[fonte]"
+   ],
+   "exemplo": "ENGANOSO: A frase que está circulando | Checagem NINJA · fonte: órgão oficial",
+   "atalho": true,
+   "atalho_de": "CHECAGEM",
+   "modelo": "checagem",
+   "nome": "Selo de checagem",
+   "descricao": "Frase → risco (se falsa) → carimbo que bate e assenta.",
+   "etapa": "Explicar",
+   "duracao": [
+    3,
+    8
+   ],
+   "limites": [],
+   "quando": null,
+   "dica": null,
+   "valores": {
+    "versao": "frase",
+    "veredito": "Enganoso",
+    "frase": "A frase que está circulando",
+    "trecho_riscado": "",
+    "autor": "",
+    "fonte": "Checagem NINJA · fonte: órgão oficial",
+    "tratamento": "automático",
+    "posicao": "automática",
+    "deslocar_x": 0,
+    "deslocar_y": 0,
+    "fundo": {
+     "arquivo": "exemplo-2"
+    }
+   }
+  },
+  {
+   "palavra": "SEM PROVAS",
+   "apelidos": [],
+   "campos": [
+    "frase checada",
+    "[fonte]"
+   ],
+   "exemplo": "SEM PROVAS: A frase que está circulando | Checagem NINJA · fonte: órgão oficial",
+   "atalho": true,
+   "atalho_de": "CHECAGEM",
+   "modelo": "checagem",
+   "nome": "Selo de checagem",
+   "descricao": "Frase → risco (se falsa) → carimbo que bate e assenta.",
+   "etapa": "Explicar",
+   "duracao": [
+    3,
+    8
+   ],
+   "limites": [],
+   "quando": null,
+   "dica": null,
+   "valores": {
+    "versao": "frase",
+    "veredito": "Sem provas",
+    "frase": "A frase que está circulando",
+    "trecho_riscado": "",
+    "autor": "",
+    "fonte": "Checagem NINJA · fonte: órgão oficial",
+    "tratamento": "automático",
+    "posicao": "automática",
+    "deslocar_x": 0,
+    "deslocar_y": 0,
+    "fundo": {
+     "arquivo": "exemplo-2"
+    }
+   }
+  },
+  {
+   "palavra": "VERDADEIRO",
+   "apelidos": [],
+   "campos": [
+    "frase checada",
+    "[fonte]"
+   ],
+   "exemplo": "VERDADEIRO: A frase que está circulando | Checagem NINJA · fonte: órgão oficial",
+   "atalho": true,
+   "atalho_de": "CHECAGEM",
+   "modelo": "checagem",
+   "nome": "Selo de checagem",
+   "descricao": "Frase → risco (se falsa) → carimbo que bate e assenta.",
+   "etapa": "Explicar",
+   "duracao": [
+    3,
+    8
+   ],
+   "limites": [],
+   "quando": null,
+   "dica": null,
+   "valores": {
+    "versao": "frase",
+    "veredito": "Verdadeiro",
+    "frase": "A frase que está circulando",
+    "trecho_riscado": "",
+    "autor": "",
+    "fonte": "Checagem NINJA · fonte: órgão oficial",
+    "tratamento": "automático",
+    "posicao": "automática",
+    "deslocar_x": 0,
+    "deslocar_y": 0,
+    "fundo": {
+     "arquivo": "exemplo-2"
+    }
+   }
+  },
+  {
+   "palavra": "CITAÇÃO",
+   "apelidos": [
+    "ASPAS"
+   ],
+   "campos": [
+    "frase",
+    "[autor]",
+    "[cargo]"
+   ],
+   "exemplo": "CITAÇÃO: Não vamos aceitar retrocesso | Maria Souza | Liderança comunitária",
+   "atalho": false,
+   "atalho_de": null,
+   "modelo": "citacao",
+   "nome": "Citação",
+   "descricao": "Com foto (faixas e identificação), fragmento palavra a palavra ou citação-documento com grifo.",
+   "etapa": "Citar",
+   "duracao": [
+    2,
+    8
+   ],
+   "limites": [],
+   "quando": "Quando uma frase forte de alguém merece ir para a tela, com o nome de quem disse.",
+   "dica": "Não precisa pôr aspas: a peça coloca. Autor e cargo são opcionais, mas ajudam quem assiste. A foto da pessoa a editora escolhe.",
+   "valores": {
+    "estilo": "com foto",
+    "frase": "Não vamos aceitar retrocesso",
+    "autor": "Maria Souza",
+    "cargo": "Liderança comunitária",
+    "data": "",
+    "palavras_destaque": "",
+    "grifos": "",
+    "tratamento": "automático",
+    "posicao": "automática",
+    "deslocar_x": 0,
+    "deslocar_y": 0,
+    "foto": {
+     "arquivo": "exemplo-pessoa"
+    }
+   }
+  },
+  {
+   "palavra": "CRÉDITO",
+   "apelidos": [],
+   "campos": [
+    "texto do crédito"
+   ],
+   "exemplo": "CRÉDITO: Foto: Mídia NINJA",
+   "atalho": false,
+   "atalho_de": null,
+   "modelo": "credito",
+   "nome": "Crédito",
+   "descricao": "Pequeno, colado na borda e sem animação: entra e sai com o corte.",
+   "etapa": "Citar",
+   "duracao": [
+    null,
+    null
+   ],
+   "limites": [
+    {
+     "variavel": "texto",
+     "rotulo": "Texto",
+     "campo": 0,
+     "16x9": {
+      "linhas": 1,
+      "car_linha": 40
+     },
+     "9x16": {
+      "linhas": 1,
+      "car_linha": 40
+     }
+    }
+   ],
+   "quando": "Para deixar anotado de quem é uma foto ou um vídeo. No dia a dia, quem põe o crédito é a editora.",
+   "dica": "Escreva só se você já souber o crédito certo, como \"Foto: Mídia NINJA\" ou \"Reprodução: G1\".",
+   "valores": {
+    "texto": "Foto: Mídia NINJA",
+    "posicao": "vertical na borda"
+   }
+  },
+  {
+   "palavra": "CARTÃO FINAL",
+   "apelidos": [
+    "ENCERRAMENTO"
+   ],
+   "campos": [
+    "texto",
+    "[chapéu]"
+   ],
+   "exemplo": "CARTÃO FINAL: Assista à / investigação inteira | Vídeo completo no canal",
+   "atalho": false,
+   "atalho_de": null,
+   "modelo": "cartao_final",
+   "nome": "Cartão final de ponte",
+   "descricao": "Short: vídeo completo no canal. 16x9: assista também, com as áreas dos vídeos recomendados.",
+   "etapa": "Fechar",
+   "duracao": [
+    4,
+    20
+   ],
+   "limites": [],
+   "quando": "No fim do vídeo: convida a ver o vídeo completo ou outro vídeo do canal.",
+   "dica": "Use \" / \" para quebrar o texto em duas linhas. O chapéu é a linha pequena de cima e é opcional. A peça já vem com o logo da NINJA.",
+   "valores": {
+    "versao": "short: vídeo completo",
+    "chapeu": "Vídeo completo no canal",
+    "texto": "Assista à\ninvestigação inteira",
+    "assinatura": true,
+    "tratamento": "automático",
+    "posicao": "automática",
+    "deslocar_x": 0,
+    "deslocar_y": 0,
+    "fundo": {
+     "arquivo": "exemplo-2"
+    }
+   }
+  }
+ ]
+}
